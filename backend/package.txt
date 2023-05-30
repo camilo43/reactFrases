@@ -1,7 +1,7 @@
 {
   "type": "module",
-  "scripts": {
-    "dev": "node index.js"
+  "scripts": {    
+    "dev":"nodemon index.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -14,12 +14,5 @@
     "mongoose": "^7.1.1",
     "nodemon": "^2.0.22",
     "universal-cookie": "^4.0.4"
-  },
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "backend",
-  "main": "index.js",
-  "devDependencies": {},
-  "author": "Camilo",
-  "license": "ISC"
+  }
 }
