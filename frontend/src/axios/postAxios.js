@@ -1,13 +1,14 @@
 import axios from "axios" 
 import { PagEjemplo } from "../components/PagEjemplo.jsx"
 
-const url = "https://backendfrases.onrender.com/"
+const url = "http://localohost:3002/"
 
 const postUserInput = async (object) => {
     try{ 
         // const token = await cookies.get("tokenBearer")        
         // console.log("POST>>TOKEN RECEIVED", token)       
         const userData = await axios.post(`${url}`, object) 
+        console.log("USER DATA_POST", userData)
         return userData.data
     }
     catch (error){
@@ -16,9 +17,9 @@ const postUserInput = async (object) => {
 }
 
 const getUserInput = async () => {
-    try{      
-        
+    try{
         const userData = await axios.get(`${url}auth`) 
+        console.log(">>USER_DATA GET", userData)
         return userData.data
     }
     catch (error){
