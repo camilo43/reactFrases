@@ -17,6 +17,7 @@ const postUserInput = async (object) => {
 
 const getUserInput = async () => {
     try{      
+        console.log("URL", URL);
         const userData = await axios.get(`${url}auth`) 
         return userData.data
     }
