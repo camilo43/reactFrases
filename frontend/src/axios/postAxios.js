@@ -17,11 +17,12 @@ const postUserInput = async (object) => {
 
 const getUserInput = async () => {
     try{      
-        console.log("URL", URL);
+        
         const userData = await axios.get(`${url}auth`) 
         return userData.data
     }
     catch (error){
+        console.log("URL", URL);
         console.error(`The process can not be completed. Error description: ${error}`)
     }
 }
