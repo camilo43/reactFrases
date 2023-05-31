@@ -38,8 +38,8 @@ SignUp_router.post("/", async(req, res) => {
 })
 
 SignUp_router.get("/auth", async(req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    // res.setHeader('Access-Control-Allow-Credentials', 'true');
     console.log("======> ENTRA PagEjemplo_router");  
     const verificado = await req.cookies
     console.log("REQ TEST", req);
