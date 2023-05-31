@@ -13,7 +13,7 @@ const app = express()
 app.use(cookieParser())
 //app.use(cors())
 app.use(express.json())
- app.use(cors({ origin: 'https://localhost:500', credentials: true }));
+ app.use(cors());
 
 mongoose.connect(config.MONGODB_URI)
   .then(()=> logger.info("// Connected to mongoDB"))
