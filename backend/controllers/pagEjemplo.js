@@ -6,8 +6,8 @@ const PagEjemplo_router = express.Router()
 
 PagEjemplo_router.get("/", async(req, res) => {
     console.log("******>> ENTRA PagEjemplo_router");  
-    const verificado =  req.cookies
-    console.log("PRUEBA REQ",  req.cookies);
+    // const verificado =  req.cookies
+    // console.log("PRUEBA REQ",  req.cookies);
     // jwt.verify(verificado, process.env.KEY, (err, decodedToken) => {
     //     if (err) {
     //       // El token no es válido

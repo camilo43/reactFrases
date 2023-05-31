@@ -6,10 +6,9 @@ import https from 'https';
 
 app.use(cors())
 
-https
-  .createServer(app)
-  .listen(config.PORT, () => {
-      logger.info(`SERVER running on port ${config.PORT}`)});
+app.listen(3002, () => {
+  console.log('Servidor iniciado en el puerto 3002');
+});
 
 //   server.listen(config.PORT, () => {
 //   logger.info(`SERVER running on port ${config.PORT}`)
