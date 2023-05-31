@@ -5,8 +5,6 @@ import jwt from 'jsonwebtoken'
 const PagEjemplo_router = express.Router()
 
 PagEjemplo_router.get("/", async(req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://localhost:3000');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');  
     console.log("******>> ENTRA PagEjemplo_router");  
     const verificado =  req.cookies
     console.log("PRUEBA REQ",  req.cookies);

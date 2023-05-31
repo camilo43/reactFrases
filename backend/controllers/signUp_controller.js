@@ -6,8 +6,6 @@ import jwt from 'jsonwebtoken'
 const SignUp_router = express.Router()
 
 SignUp_router.post("/", async(req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://localhost:500');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
     console.log(">>>>>>ENTRA Signup_Router");
     const dataUser = await req.body
     const toSign = {
