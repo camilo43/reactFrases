@@ -1,7 +1,7 @@
 import axios from "axios" 
 import { PagEjemplo } from "../components/PagEjemplo.jsx"
 
-const url = "https://backendfrases.onrender.com"
+const url = "https://backendfrases.onrender.com/"
 
 const postUserInput = async (object) => {
     try{ 
