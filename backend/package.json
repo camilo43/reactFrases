@@ -166,5 +166,8 @@
     "dev": "node index.js"
   },
   "author": "Camilo",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": ">=14 <15"
+  }
 }
