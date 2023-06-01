@@ -5,6 +5,7 @@ import config from '../backend/utils/config.js'
 import { logger } from './utils/logger.js'
 import { SignUp_router } from './controllers/signUp_controller.js'
 import { PagEjemplo_router } from './controllers/pagEjemplo.js'
+import { Auth } from './controllers/auth.js'
 import cookieParser from 'cookie-parser'
 
 mongoose.set('strictQuery', false)
@@ -20,7 +21,7 @@ mongoose.connect(config.MONGODB_URI)
 
 app.use("/", SignUp_router)
 app.use("/api/pagejemplo", PagEjemplo_router)
-app.use("/auth", auth)
+app.use("/auth", Auth)
 
 // app.use('/api/login', loginRouter)
 
