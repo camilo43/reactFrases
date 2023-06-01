@@ -14,8 +14,6 @@ app.use(cors())
 app.use(cookieParser())
 app.use(express.json())
 
-
-
 mongoose.connect(config.MONGODB_URI)
   .then(()=> logger.info("// Connected to mongoDB"))
   .catch((error)=> logger.error("* Error connecting mongoDB", error.message))
