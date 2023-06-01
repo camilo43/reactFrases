@@ -5,7 +5,6 @@ import config from '../backend/utils/config.js'
 import { logger } from './utils/logger.js'
 import { SignUp_router } from './controllers/signUp_controller.js'
 import { PagEjemplo_router } from './controllers/pagEjemplo.js'
-import { PagEjemplo_router } from './controllers/pagEjemplo.js'
 import cookieParser from 'cookie-parser'
 
 mongoose.set('strictQuery', false)
