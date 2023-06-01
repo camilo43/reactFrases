@@ -1,4 +1,4 @@
-import { React, useState } from "react"
+import { React, useEffect } from "react"
 import { getUserInput } from "../axios/postAxios.js"
 import { useNavigate } from "react-router-dom"
 
