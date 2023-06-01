@@ -164,7 +164,7 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "dev": "nodemon app.js",
+    "dev": "node index.js",
     "build": "react-scripts build"
   },
   "author": "Camilo",
