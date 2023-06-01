@@ -16,4 +16,4 @@ function Auth () {
     )
 }
 
-export{ Signup }
+export{ Auth }
