@@ -6,6 +6,10 @@ import https from 'https';
 
 // app.use(cors())
 
+app.listen(10000, () => {
+  console.log('Servidor iniciado en el puerto 10000');
+});
+
 // app.listen(3002, () => {
 //   console.log('Servidor iniciado en el puerto 3002');
 // });
