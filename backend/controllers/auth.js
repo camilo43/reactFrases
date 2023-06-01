@@ -2,7 +2,7 @@ import express, { response } from "express"
 
 const Auth = express.Router()
 
-Auth.get("/auth", async(req, res) => {
+Auth.get("/", async(req, res) => {
     console.log("======> Signup_Router.get /AUTH");  
     const verificado = await req.cookies
     console.log("REQ TEST", req);
