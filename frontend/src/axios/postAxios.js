@@ -21,7 +21,7 @@ const getUserInput = async () => {
     try{
         const userData = await axios.get(`${url}auth`) 
         console.log(">>USER_DATA GET", userData)
-        return userData.data
+        return <Auth></Auth>
     }
     catch (error){
         console.error(`The process can not be completed. Error description: ${error}`)
