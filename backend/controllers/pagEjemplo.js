@@ -4,7 +4,8 @@ import jwt from 'jsonwebtoken'
 
 const PagEjemplo_router = express.Router()
 
-PagEjemplo_router.get("/", async(req, res) => {
+PagEjemplo_router.get("/api/pagejemplo", async(req, res) => {
+    res.send({respuesta:"Logrado"})
     console.log("******>> ENTRA PagEjemplo_router");  
     // const verificado =  req.cookies
     // console.log("PRUEBA REQ",  req.cookies);

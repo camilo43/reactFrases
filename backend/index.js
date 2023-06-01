@@ -4,12 +4,7 @@ import config from './utils/config.js'
 import { logger } from './utils/logger.js'
 import https from 'https';
 
-app.use(cors())
-
-app.listen(10000, '0.0.0.0', err => {
-  if (err) throw err
-  console.log(`Listening on port ${port}`)
-})
+// app.use(cors())
 
 // app.listen(3002, () => {
 //   console.log('Servidor iniciado en el puerto 3002');

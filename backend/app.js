@@ -15,7 +15,7 @@ app.use(cookieParser())
 app.use(express.json())
 
 mongoose.connect(config.MONGODB_URI)
-  .then(()=> logger.info("// Connected to mongoDB"))
+  .then(()=> logger.info("// Connected to mongoDB el servidor"))
   .catch((error)=> logger.error("* Error connecting mongoDB", error.message))
 
 app.use("/", SignUp_router)
