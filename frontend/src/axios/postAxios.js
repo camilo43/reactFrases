@@ -24,7 +24,6 @@ const getUserInput = async () => {
         return userData.data
     }
     catch (error){
-        console.log("URL", URL);
         console.error(`The process can not be completed. Error description: ${error}`)
     }
 }
