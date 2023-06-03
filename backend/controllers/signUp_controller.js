@@ -26,13 +26,17 @@ SignUp_router.post("/", async(req, res) => {
             const newUser = new SignUp_model(userData_HashedPassword);
             newUser.save()
             
-            const token = jwt.sign(toSign, process.env.KEY, {expiresIn:900})
+            const token = jwt.sign(toSign, process.env.KEY, {expiresIn:"30m"})
             const tokenBearer = `${token}`
-            console.log("TOKEN BEARER", tokenBearer)
-            res.cookie("tokenBearer", tokenBearer ,{
-                sameSite:"none", 
-                secure:true
-            }).status(200).send("COOKIE sent")        
+            console.log(".....TOKEN BEARER", tokenBearer)
+            const cookieToken = res.cookie("tokenBearer", tokenBearer).status(200).send("COOKIE sent") 
+          
+            //  >>>>THIS IS TO BE USED ONLY IN PRODUCTION<<<
+            // res.cookie("tokenBearer", tokenBearer ,{
+            //     sameSite:"none", 
+            //     secure:true
+            // }   
+                   
         }
     })
 })

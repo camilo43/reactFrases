@@ -44,8 +44,7 @@ function Signup () {
        
         if(password && password==confirmedPassword){;
             await postUserInput(userInput_signUp)   
-            navigate("/auth")        
-            await getUserInput()
+            navigate("/auth")
             
         }else if(!password){
             console.log("NO PASSWORD", "Please type a password", password)
