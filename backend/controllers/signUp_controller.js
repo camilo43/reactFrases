@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
 const SignUp_router = express.Router()
 
 SignUp_router.post("/", async(req, res) => {
-    console.log(">>>>>>ENTRA Signup_Router");
+    console.log("RENDERIZADO 1");
     const dataUser = await req.body
     const toSign = {
         userName:dataUser.userName,
@@ -29,7 +29,7 @@ SignUp_router.post("/", async(req, res) => {
             const token = jwt.sign(toSign, process.env.KEY, {expiresIn:"30m"})
             const tokenBearer = `${token}`
             console.log(".....TOKEN BEARER", tokenBearer)
-            const cookieToken = res.cookie("tokenBearer", tokenBearer).status(200).send("COOKIE sent") 
+            return res.cookie("tokenBearer", tokenBearer).status(200).send("COOKIE sent") 
           
             //  >>>>THIS IS TO BE USED ONLY IN PRODUCTION<<<
             // res.cookie("tokenBearer", tokenBearer ,{
@@ -41,22 +41,24 @@ SignUp_router.post("/", async(req, res) => {
     })
 })
 
-// SignUp_router.get("/auth", async(req, res) => {
-//     console.log("======> Signup_Router.get /AUTH");  
-//     const verificado = await req.cookies
-//     console.log("REQ TEST", req);
-//     jwt.verify(verificado, process.env.KEY, (err, decodedToken) => {
-//         if (err) {
-//           // El token no es válido
-//           console.error('Error al verificar el token:', err);
-//         } else {
-//           // El token es válido
-//           console.log('Token verificado:', decodedToken);
-//           // Puedes acceder a los datos del token decodificado en decodedToken
-//           res.status(200).json({token: "accepted"})
-//         }
-//     })
-// })
+SignUp_router.get("/auth", async(req, res) => {
+    console.log("======> RENDERIZADO 2");  
+    //const verificado = await req.cookies.tokenBearer 
+    const verificado = req.cookies.tokenBearer
+    console.log("REQ TEST", verificado);
+    res.status(200).send({token:"Entregado"})
+    // return jwt.verify(verificado, process.env.KEY, (err, decodedToken) => {
+    //     if (err) {
+    //       // El token no es válido
+    //       console.error('Error al verificar el token:', err);
+    //     } else {
+    //       // El token es válido
+    //       console.log('Token verificado:', decodedToken);
+    //       // Puedes acceder a los datos del token decodificado en decodedToken
+    //       res.status(200).json({token: "accepted"})
+    //     }
+    // })
+})
 
 export { SignUp_router }
 

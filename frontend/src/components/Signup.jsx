@@ -1,4 +1,4 @@
-import { React, useState } from "react"
+import { React, useEffect, useState } from "react"
 import { postUserInput, getPagejemplo, getUserInput } from "../axios/postAxios.js"
 import { useNavigate } from "react-router-dom"
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
@@ -8,6 +8,7 @@ function Signup () {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmedPassword, setConfirmedPassword] = useState("")
+    const [controlBoolean, setControlBoolean] = useState(false)
 
     const navigate = useNavigate()
    
@@ -35,25 +36,33 @@ function Signup () {
         email: email,
         password: password
     }
-
+    
     //Navigate has to be used inside a BrowserRouter.
     //onSubmitForm now writes the URL in the browser and also returns values
-    const onSubmitForm = async (event) => {
-        console.log("ENTRA SUBMIT")
+    const onSubmitForm = async (event) => {        
         event.preventDefault()
-       
-        if(password && password==confirmedPassword){;
-            await postUserInput(userInput_signUp)   
-            navigate("/auth")
-            
-        }else if(!password){
+
+        if(password && password==confirmedPassword){     
+            console.log("INSIDE -> USER INPUT FALSO O VERDADEDRo", userInput_signUp); // V PASSED
+            console.log("ON SUBMIT FORM", password && password==confirmedPassword ); // V PASSED   
+            try{
+                await postUserInput(userInput_signUp)
+                console.log("PASSWORD CONFIRMED---> 1");
+                navigate("/auth")
+               console.log("CONROL BOOLEAN", controlBoolean)
+            }catch (error){
+                console.log(`THERE HAS BEEN AN ERROR, DETAILS: ${error}`);
+            }
+           
+        }
+        else if(!password){
             console.log("NO PASSWORD", "Please type a password", password)
         }else if(password!=confirmedPassword){
             console.log("NO MATCH PASSWORD", "The confirmation is wrong", password,confirmedPassword);
-        }else{
-            navigate("/")
         }
     }
+      //.............................REVISAR LOS ERRORES, SI EL BACKEND EST[A FALLLAND] NO CORRE EL RESTO DEL CODIGO.......
+    
     return(
         <div>
             <p>Join our comunity for free</p>

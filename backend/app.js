@@ -21,7 +21,7 @@ mongoose.connect(config.MONGODB_URI)
 
 app.use("/", SignUp_router)
 app.use("/api/pagejemplo", PagEjemplo_router)
-app.use("/auth", Auth)
+// app.use("/auth", Auth)
 
 // app.use('/api/login', loginRouter)
 
