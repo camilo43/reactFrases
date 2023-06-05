@@ -13,7 +13,7 @@ mongoose.set('strictQuery', false)
 const app = express()
 //app.use(cors())
 const corsOptions = {
-  origin: "/^https:\/\/backendfrases\.onrender\.com\//", // Cambia '*' por el dominio o dominios permitidos
+  origin: "/^https:\/\/backendfrases\.onrender\.com\/", // Cambia '*' por el dominio o dominios permitidos
   methods: 'GET, POST, PUT, DELETE', // Métodos HTTP permitidos
   allowedHeaders: 'Content-Type, Authorization', // Encabezados permitidos
 };
