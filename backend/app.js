@@ -11,7 +11,14 @@ import cookieParser from 'cookie-parser'
 mongoose.set('strictQuery', false)
 
 const app = express()
-app.use(cors())
+//app.use(cors())
+const corsOptions = {
+  origin: '*', // Cambia '*' por el dominio o dominios permitidos
+  methods: 'GET, POST, PUT, DELETE', // Métodos HTTP permitidos
+  allowedHeaders: 'Content-Type, Authorization', // Encabezados permitidos
+};
+// Aplicar middleware CORS a todas las rutas
+app.use(cors(corsOptions));
 app.use(cookieParser())
 app.use(express.json())
 
