@@ -6,6 +6,8 @@ import jwt from 'jsonwebtoken'
 const SignUp_router = express.Router()
 
 SignUp_router.post("/", async(req, res) => {
+    res.header("Access-Control-Allow-Origin", "https://backendfrases.onrender.com/auth");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
     console.log("RENDERIZADO 1");
     const dataUser = await req.body
     const toSign = {
@@ -42,6 +44,8 @@ SignUp_router.post("/", async(req, res) => {
 })
 
 SignUp_router.get("/auth", async(req, res) => {
+    res.header("Access-Control-Allow-Origin", "https://backendfrases.onrender.com/auth");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
     console.log("======> RENDERIZADO 2");  
     //const verificado = await req.cookies.tokenBearer 
     const verificado = req.cookies.tokenBearer

@@ -22,6 +22,7 @@ const corsOptions = {
     } else {
       callback(new Error("CORS not allowed"));
     } // Cambia '*' por el dominio o dominios permitidos
+ 
 }
 }
 
