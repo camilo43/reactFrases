@@ -13,12 +13,20 @@ mongoose.set('strictQuery', false)
 const app = express()
 //app.use(cors())
 const corsOptions = {
-  origin: "https://backendfrases.onrender.com/auth", // Cambia '*' por el dominio o dominios permitidos
   methods: 'GET, POST, PUT, DELETE', // Métodos HTTP permitidos
   allowedHeaders: 'Content-Type, Authorization', // Encabezados permitidos
-};
+  origin: function (origin, callback) {
+    // Verificar si la URL coincide con el patrón esperado
+    if (origin === "https://backendfrases.onrender.com" || /^https:\/\/backendfrases\.onrender\.com\//.test(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS not allowed"));
+    } // Cambia '*' por el dominio o dominios permitidos
+}
+}
+
 // Aplicar middleware CORS a todas las rutas
-app.use(cors(corsOptions));
+app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(express.json())
 
