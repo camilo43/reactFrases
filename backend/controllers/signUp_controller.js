@@ -5,25 +5,9 @@ import jwt from 'jsonwebtoken'
 
 const SignUp_router = express.Router()
 
-SignUp_router.post("/", async(req, res) => {
-   
-    // res.header("Access-Control-Allow-Origin", "*");
-    const allowedOrigins = ["http://localhost:3000", "http://localhost:3002", "https://backendfrases.onrender.com", "https://frontendfrases.onrender.com"];
-    const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-         res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    res.header("Access-Control-Allow-credentials", true);
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
-    next();
-    console.log("RENDERIZADO 1");
-    const dataUser = await req.body
-    const toSign = {
-        userName:dataUser.userName,
-        email:dataUser.email
-    }
-    
+SignUp_router.post("/", async(req, res, next) => {
+    const dataUser = await req.body   
+    //console.log("DATA_USER IN POST", dataUser);
     bcrypt.hash(dataUser.password, 10, (err, hashedPassword) => {
         if(err){
             console.error("Something has gone wrong, please try again")
@@ -36,12 +20,7 @@ SignUp_router.post("/", async(req, res) => {
             }
             const newUser = new SignUp_model(userData_HashedPassword);
             newUser.save()
-            
-            const token = jwt.sign(toSign, process.env.KEY, {expiresIn:"30m"})
-            const tokenBearer = `${token}`
-            console.log(".....TOKEN BEARER", tokenBearer)
-            return res.cookie("tokenBearer", tokenBearer).status(200).send("COOKIE sent") 
-          
+            res.status(200).send({post: "completed"})
             //  >>>>THIS IS TO BE USED ONLY IN PRODUCTION<<<
             // res.cookie("tokenBearer", tokenBearer ,{
             //     sameSite:"none", 
@@ -52,15 +31,28 @@ SignUp_router.post("/", async(req, res) => {
     })
 })
 
-SignUp_router.get("/auth", async(req, res) => {
-    res.header("Access-Control-Allow-Origin", "https://backendfrases.onrender.com/auth");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    console.log("======> RENDERIZADO 2");  
-    //const verificado = await req.cookies.tokenBearer 
-    const verificado = req.cookies.tokenBearer
-    console.log("REQ TEST", verificado);
-    res.status(200).send({token:"Entregado"})
-    // return jwt.verify(verificado, process.env.KEY, (err, decodedToken) => {
+SignUp_router.post("/auth", async(req, res) => {
+   
+    //............THATS HOW A COOKIE HAS TO BE STRUCTURED WHEN SENT....................
+    // res.cookie(">>>My example number 2", {
+    //    SameSite: 'none',
+    //     secure: true
+    //   })
+    //...................................................................................
+    const dataUser = await req.body
+    console.log("DATA USER IN GET", dataUser);
+    // const token = jwt.sign({userName:"PEPE CODORNICA"}, process.env.KEY, {expiresIn:"50m"})
+    // res.cookie("tokenBearer", token, {
+    //        SameSite: 'none',
+    //         secure: true
+    //       }).status(200).send("COOKIE sent") 
+    res.status(200).send("COOKIE sent") 
+})
+
+SignUp_router.get("/auth/autenticado", async(req,res)=>{
+    // const verificando = req.cookies.tokenBearer
+    // console.log("VERIFICANDO COOKIES", verificando);
+    // return jwt.verify(verificando, process.env.KEY, (err, decodedToken) => {
     //     if (err) {
     //       // El token no es válido
     //       console.error('Error al verificar el token:', err);
@@ -68,8 +60,8 @@ SignUp_router.get("/auth", async(req, res) => {
     //       // El token es válido
     //       console.log('Token verificado:', decodedToken);
     //       // Puedes acceder a los datos del token decodificado en decodedToken
-    //       res.status(200).json({token: "accepted"})
-    //     }
+          res.status(200).json({response: "THE USER HAS BEEN AUTHENTICATED"})
+        // }
     // })
 })
 

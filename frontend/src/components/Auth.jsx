@@ -1,13 +1,19 @@
 import { React, useEffect } from "react"
 import { getUserInput } from "../axios/postAxios.js"
 import { useNavigate } from "react-router-dom"
-
+import { getUserAuthenticated } from "../axios/postAxios.js"
 
 function Auth () {
-    useEffect(() => {
-        getUserInput()
-    }, []);
-   
+    const navigate = useNavigate()
+    // useEffect(() => {
+    //     getUserInput()
+    // }, []);
+    
+    setTimeout(() => {
+        getUserAuthenticated()
+        navigate("/auth/autenticado")
+    }, 5000);
+    
     console.log("PASSWORD CONFIRMED---> 4");
 
     return(

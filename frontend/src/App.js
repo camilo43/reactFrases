@@ -11,6 +11,7 @@ function App() {
        <Route path="/" element={<Signup/>}></Route>
        <Route path="/api/pagejemplo" element={<PagEjemplo/>}></Route>
        <Route path="/auth" element={<Auth/>}></Route>
+       <Route path="/auth/autenticado" element={<h1>BIENVENIDO!</h1>}></Route>
       </Routes>
    </BrowserRouter>
   )

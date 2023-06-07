@@ -12,9 +12,6 @@ function Signup () {
 
     const navigate = useNavigate()
    
-    // console.log('React version:', React.version);
-    // console.log('ReactDOM version:', ReactDOM.version);
-
     const nameOnChange = (event) => {
         setName(event.target.value)
     }
@@ -42,14 +39,13 @@ function Signup () {
     const onSubmitForm = async (event) => {        
         event.preventDefault()
 
-        if(password && password==confirmedPassword){     
-            console.log("INSIDE -> USER INPUT FALSO O VERDADEDRo", userInput_signUp); // V PASSED
-            console.log("ON SUBMIT FORM", password && password==confirmedPassword ); // V PASSED   
+        if(password && password==confirmedPassword){            
             try{
+                console.count("SignUp POST")
                 await postUserInput(userInput_signUp)
-                console.log("PASSWORD CONFIRMED---> 1");
+                await getUserInput(userInput_signUp)
                 navigate("/auth")
-               console.log("CONROL BOOLEAN", controlBoolean)
+             
             }catch (error){
                 console.log(`THERE HAS BEEN AN ERROR, DETAILS: ${error}`);
             }
