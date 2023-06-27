@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+const { Schema } = mongoose;
+import { Quote_model } from "./quote.js";
+
 
 const newSignUp = new mongoose.Schema({
     userName:{
@@ -6,7 +9,7 @@ const newSignUp = new mongoose.Schema({
         // required:true,
         // unique:true
     },
-     email:{
+    email:{
          type:String,
          required:true,
          unique:true,
@@ -16,13 +19,26 @@ const newSignUp = new mongoose.Schema({
              }
          }
      },
-     password:{
+    password:{
          type:String,
          required:true,
          unique:true
-     }
+     },
+    quotes:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Quote_model'
+    }]
 })
 
-const SignUp_model = mongoose.model("Signup", newSignUp)
+newSignUp.set('toJSON', {
+    transform: (document, returnedObject) => {
+      returnedObject.id = returnedObject._id.toString()
+      delete returnedObject._id
+      delete returnedObject.__v
+      // the passwordHash should not be revealed
+      delete returnedObject.passwordHash
+    }
+  })
 
+const SignUp_model = mongoose.model("SignUp_model", newSignUp)
 export { SignUp_model }

@@ -1,13 +1,16 @@
 import axios from "axios" 
 import { PagEjemplo } from "../components/PagEjemplo.jsx"
-
+axios.defaults.withCredentials = true;
 const url = "http://localhost:3002/"
 // const url = "https://backendfrases.onrender.com/"
 
 const postUserInput = async (object) => {
-    console.log("POSTUSERINPUT ENTRA");    
     // try{ 
-        const userData = await axios.post(`${url}`, object)
+        const userData = await axios.post(`${url}signup`, object, {
+            params:object,
+            withCredentials: true,
+            // credentials: 'include'
+          }) 
         console.log("USER DATA_POST", userData.data)        
         return userData.data
     // }
@@ -15,6 +18,26 @@ const postUserInput = async (object) => {
     //     console.error(`The process can not be completed. Error description: ${error}`)
     // }
 }
+// const testCookiesGet = async () => { 
+//     //try{
+//         const response = await axios.get(`${url}test`)
+//         // , {
+//         //     withCredentials: true,
+//         //     // credentials: 'include'
+//         // })
+//         console.log("TEST COOKIES", response.data); 
+// }
+
+// const testCookiesPost = async () => { 
+//     //try{
+//         const response = await axios.post(`${url}testPost`)
+//         // , {
+//         //     withCredentials: true,
+//             // credentials: 'include'
+//         // })
+//         console.log("TEST COOKIES", response.data); 
+// }
+
 const getUserInput = async (object) => { 
     //try{
         const response = await axios.post(`${url}auth`, {
@@ -24,6 +47,8 @@ const getUserInput = async (object) => {
           }) 
 
         console.log("RESPONSE NEW POST AXIOS", response.data);
+        return response
+
         // const cookies = response.headers['set-cookie'];
         // console.log("Cookies:", cookies);
 
@@ -41,13 +66,15 @@ const getUserInput = async (object) => {
 }
 
 const getUserAuthenticated = async () => { 
-    //try{
+    try{
         const response = await axios.get(`${url}auth/autenticado`, {
             withCredentials: true,
             // credentials: 'include'
-          }) 
-
-        console.log("RESPONSE GET_USER AUTHENTICATED", response);
+          })
+          console.log("RESPONSE AXIOS AUTHENTICATION", response);
+        }catch(error){
+            console.log("THERE HAS BEEN AN ERROR: ", error);
+        } 
 }
 
 const getPagejemplo = async () => {
@@ -62,4 +89,23 @@ const getPagejemplo = async () => {
     }
 }
 
-export { postUserInput, getUserInput, getPagejemplo, getUserAuthenticated }
+const getLogin = async () => {
+    try{
+        const response = await axios.get(`${url}login`)           
+        if(response.status === 200){
+            return response
+        }
+    }
+    catch (error){
+        console.error(`The process can not be completed. Error description: ${error}`)
+    }
+}
+export { 
+    postUserInput, 
+    getUserInput, 
+    getPagejemplo, 
+    getUserAuthenticated,
+    getLogin
+    // testCookiesGet,
+    // testCookiesPost
+}

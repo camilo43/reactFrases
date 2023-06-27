@@ -4,8 +4,9 @@ import mongoose from 'mongoose'
 import config from '../backend/utils/config.js'
 import { logger } from './utils/logger.js'
 import { SignUp_router } from './controllers/signUp_controller.js'
-import { PagEjemplo_router } from './controllers/pagEjemplo.js'
-import { Auth } from './controllers/auth.js'
+import { Quotes_router } from './controllers/quotes_controller.js'
+import { Login_router } from './controllers/login_controller.js'
+
 import cookieParser from 'cookie-parser'
 
 mongoose.set('strictQuery', false)
@@ -29,9 +30,9 @@ mongoose.connect(config.MONGODB_URI)
   .catch((error)=> logger.error("* Error connecting mongoDB", error.message))
 
 app.use("/", SignUp_router)
-app.use("/api/pagejemplo", PagEjemplo_router)
+app.use("/api/quotes", Quotes_router)
+app.use("/", Login_router)
 // app.use("/auth", Auth)
-
 // app.use('/api/login', loginRouter)
 
 export default app

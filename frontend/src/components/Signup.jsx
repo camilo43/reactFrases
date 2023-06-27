@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react"
-import { postUserInput, getPagejemplo, getUserInput } from "../axios/postAxios.js"
+import { postUserInput, getPagejemplo, getUserInput, testCookiesGet, testCookiesPost } from "../axios/postAxios.js"
 import { useNavigate } from "react-router-dom"
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
@@ -42,6 +42,8 @@ function Signup () {
         if(password && password==confirmedPassword){            
             try{
                 console.count("SignUp POST")
+                // await testCookiesGet()
+                // await testCookiesPost()
                 await postUserInput(userInput_signUp)
                 await getUserInput(userInput_signUp)
                 navigate("/auth")
@@ -57,11 +59,15 @@ function Signup () {
             console.log("NO MATCH PASSWORD", "The confirmation is wrong", password,confirmedPassword);
         }
     }
-      //.............................REVISAR LOS ERRORES, SI EL BACKEND EST[A FALLLAND] NO CORRE EL RESTO DEL CODIGO.......
-    
+
+      const backHome = () => {
+        navigate("/")
+      }
+
     return(
         <div>
-            <p>Join our comunity for free</p>
+            <button onClick={backHome}>Home</button>
+            <h2>Signup</h2>
             <form onSubmit={onSubmitForm}>
                 <label>Email: </label>
                 <input type="email" value={email} onChange={emailOnChange}></input>
