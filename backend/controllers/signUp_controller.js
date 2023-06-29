@@ -69,6 +69,12 @@ SignUp_router.post("/auth", async(req, res) => {
                     secure: true
             }).status(200).send("COOKIE sent") 
         }catch(error){
+            res.cookie("token", "", {
+                sameSite: 'none',
+                secure: true,
+                expires: new Date(0),
+              }).status(200).send("COOKIE deleted");
+
             console.log(`The token could not be signed. Details of this error:${error}`)
         }
     }
@@ -82,7 +88,6 @@ SignUp_router.get("/auth/autenticado", async(req,res)=>{
             jwt.verify(verificando, process.env.KEY, async (err, decodedToken) => {
                 if (err) {
                   console.error('An error happened while verifying the token:', err);
-                  return err
                 } else {
                    
                   res.status(200).json({response: "THE USER HAS BEEN AUTHENTICATED"})

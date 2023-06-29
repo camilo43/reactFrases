@@ -3,15 +3,21 @@ import { Quote_model } from "../models/quote.js"
 import { SignUp_model } from "../models/signUp.js"
 import jwt from 'jsonwebtoken'
 
-
 const Quotes_router = express.Router()
 // app.use("/api/quotes", Quotes_router)
+Quotes_router.get("/user/logout", async(req, res) => {
+  console.log(">>>>>>>The token was not verified");
+      res.clearCookie('token')
+      res.status(200).send("LoggedOut")
+})
 
 Quotes_router.get("/", async(req, res) => {
   const tokenCookie = req.cookies.token
   jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
     if(err){
-      console.log("The token was not verified", err);
+      console.log(">>>>>>>The token was not verified");
+      res.clearCookie('token')
+      res.status(400).send("Expired token")
     }else{
         const modelExample = await SignUp_model.findOne({email:decodedToken.email})        
         const listQuotes = modelExample.quotes
@@ -38,7 +44,8 @@ Quotes_router.post("/user", async(req, res) => {
     if(newPost){
       jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
         if(err){
-          console.log("The token was not verified", err);
+          console.log("The token was not verified");
+          res.status(400).send("Expired token")
         }else{
             const modelExample = await SignUp_model.findOne({email:decodedToken.email}).populate("quotes").exec();
             modelExample.quotes.push(newPost._id)

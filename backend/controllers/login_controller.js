@@ -12,24 +12,22 @@ Login_router.post("/login", async(req, res, next) => {
     const user = await SignUp_model.findOne({email:userEmail})
    
     function tokenExpiration(){
-        console.log(("PASO 0: ENTRA A FUNCT"));
-        const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"50m"})
+        const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"1m"})
+        console.log("=====> SIGNED LO QUE ES", signed);
         return signed
     }
+    console.log("DATA USER", dataUser);
+    console.log("USER", user);
+
     if(user){
-        console.log(("PASO 1: ENTRA A USER"));
-        if(bcrypt.compareSync(userPassword,user.password)){
-            console.log(("PASO 2: ENTRA A BCRY"));
+        if(bcrypt.compareSync(userPassword,user.password)){           
             const signedCondition = tokenExpiration()
-            console.log(">>>>>>SIGNED check data", signedCondition==true)
             res.cookie("token", signedCondition, {
                 SameSite: 'none',
                 secure: true}
             ).status(200).send("COOKIE sent")
         }
     } else{
-        console.log(("PASO 3: ENTRA A error"));
-        console.log("ERROR EN EL BACKEND-----Login");
         res.status(400).send("THE USER WAS NOT FOUND, PLEASE SIGN IN")
     }
 })
