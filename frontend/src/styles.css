@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;1,300&family=PT+Serif&family=Sen&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+Html{
+    font-size: 62.5%;
+    scroll-behavior:smooth;
+} 
+    
+body{
+    min-height:100vh;    
+    color:#002147;
+    font-family: "Sen", Helvetica;
+    font-size: 1.5rem ;
+    background-color: #8da9c4;
+    margin:0 auto;
+}
+
+h1{
+    font-family: "Merriweather";
+    text-align: center;
+    font-size: 4rem ;
+}
+
+h2{
+    font-size: 3rem;
+    font-family: "Merriweather";
+    font-style: italic;
+}
+
+button{
+    font-family: "Sen", Helvetica;
+    color:#8da9c4;
+    background-color: #0b2545;
+    width: 10rem;
+    height: 3rem;
+    border: none;
+    border-radius: 0.5rem;     
+}
+
+button:hover{
+    background-color: #8ec9ff;
+    color:#0b2545;
+    cursor: pointer;
+}
+
+input{
+    padding:0.5rem;
+    width:100%;
+    height:3rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: 0.2rem solid #002147;;
+}
+
+input:focus{
+    font-family: "Sen", Helvetica;
+    outline: none;
+    border: 0.1rem solid #002147;
+    border-radius: 0.5rem;
+}
+
+.button_logout{
+    margin-top: 2rem; 
+}
+
+.material-symbols-outlined.home {
+    background-color: #002147;
+    color:#8da9c4;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
+    border-radius: 50%;
+    width:4rem;
+    height:4rem;
+    font-size: 1.8rem;
+}
+
+.material-symbols-outlined{
+    background-color: transparent;
+    color: #002147;
+    display:inline;
+    font-size: 1.5rem;
+    width:3rem;
+    height:3rem;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+a:visited {
+    color: inherit;
+  }
+a:active{
+    color:#8ec9ff
+}
+
+.textBox{
+    width: 100%;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #002147;
+    font-size: 1.5rem;
+    height: 5rem;
+    padding: 1rem 1rem;
+    box-sizing: border-box;
+    border: 0.2rem solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+textarea:focus{
+    outline: #8ec9ff;
+}
+
+ul{
+    list-style-type: none;    
+    padding: 0;
+    margin: 0;
+}
+
+ul li {  
+    list-style: none;
+  }
+
+li{
+    align-content: center;
+    display:inline-block;    
+   
+  }
+
+.ulBox{
+    width: 30rem;
+    height: 100vh;
+}
+
+.ulBox_delete-list{
+    display: flex;
+    align-items: center;
+}
+
+.ulBox_div{
+    word-wrap: break-word;
+    width: 90%;
+    margin-top: 2rem;
+}
+
+.ulBox_button{
+    align-self: center;
+    margin-top: 2rem;
+}
+
+.ulBox_button:hover{
+    background-color: rgb(255, 98, 0);
+    color: white;
+    margin-right: 2rem;
+}
+
+.mainBox{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    padding: 5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainBox_header{
+    width: 100%;
+    width: 30rem;
+    justify-self: center;
+    align-self: center;
+}
+
+@media(max-width: 336px){
+    .textBox{
+        width: 100%;
+        height: 5rem;
+        padding: 1rem 1rem;
+        box-sizing: border-box;
+        border: 0.2rem solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        resize: none;
+    }
+    
+    h1{
+        font-family: "Merriweather";
+        text-align: center;
+        font-size: 2.5rem ;
+    }
+    
+    h2{
+        font-size: 2rem;
+        font-family: "Merriweather";
+        font-style: italic;
+    }
+
+    body{
+        font-size: 1rem;
+    }
+
+    .mainBox_header{
+        width: 20rem;
+    }
+
+    .ulBox{
+        width: 20rem;
+        height: 100vh;
+    }
+
+    button{
+        font-size: 1rem;     
+    }
+}
+
+@media(min-width: 529px){
+    .mainBox_header{
+        width: 50rem;
+    }
+    
+    .ulBox{
+        width: 50rem;
+        height: 100vh;
+    }
+
+}

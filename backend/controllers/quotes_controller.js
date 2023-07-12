@@ -66,10 +66,33 @@ Quotes_router.post("/user", async(req, res) => {
           res.status(200).json(modelExample)
         }
       })
-    }    
-    
-  }catch(error){
+    }
+  }catch(error){      
+      res.status(400).send("Expired token")
       console.log("THERE IS AN ERROR. MORE DETAILS AVAILABLE: ", error);
+  }
+})
+
+Quotes_router.delete("/:itemId", async(req, res) => {
+  const itemId = req.params.itemId;
+  console.log("ITEM ID====>>", itemId);
+  
+  const tokenCookie = req.cookies.token
+ 
+  try{
+    jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
+      if(err){
+        console.log("The token has expired");
+        res.status(400).send("Expired token")
+      }else{
+        const elementoId = await SignUp_model.updateOne({quotes: itemId}, {$pull:{quotes: itemId}})
+        console.log("ELEMENTO ID=====>>", elementoId);
+        return await Quote_model.deleteOne({_id:itemId})
+      }
+    })
+  }
+  catch(error){
+    console.log("Something has gone wrong =====> ", error);
   }
 })
 

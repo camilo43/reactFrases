@@ -7,12 +7,14 @@ const Login_router = express.Router()
 
 Login_router.post("/login", async(req, res, next) => {
     const dataUser = await req.body
-    const userEmail = dataUser.email    
+    const userEmail = dataUser.email
+    const userName = dataUser.userName    
     const userPassword = dataUser.password
     const user = await SignUp_model.findOne({email:userEmail})
    
     function tokenExpiration(){
-        const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"1m"})
+        console.log("---->>> dataUser", dataUser);
+        const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"30m"})
         console.log("=====> SIGNED LO QUE ES", signed);
         return signed
     }

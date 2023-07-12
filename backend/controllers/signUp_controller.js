@@ -62,7 +62,7 @@ SignUp_router.post("/auth", async(req, res) => {
    
     if(dataUser){
         try{
-            const token = jwt.sign(toBeSigned, process.env.KEY, {expiresIn:"50m"})           
+            const token = jwt.sign(toBeSigned, process.env.KEY, {expiresIn:"30m"})           
             res.set('Content-Type', 'application/json');
             res.cookie("token", token, {
                    SameSite: 'none',
@@ -83,14 +83,15 @@ SignUp_router.post("/auth", async(req, res) => {
 SignUp_router.get("/auth/autenticado", async(req,res)=>{
     try{
         const verificando = req.cookies.token
-        
         if(verificando){ 
             jwt.verify(verificando, process.env.KEY, async (err, decodedToken) => {
+                
                 if (err) {
                   console.error('An error happened while verifying the token:', err);
                 } else {
-                   
-                  res.status(200).json({response: "THE USER HAS BEEN AUTHENTICATED"})
+                    const findingUserName = await SignUp_model.findOne({email:decodedToken.email})                    
+                    console.log("======---->>> FINDING USERNAME", findingUserName);
+                    res.status(200).json({response:findingUserName.userName})
                 }
             })
            

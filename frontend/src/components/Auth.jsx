@@ -5,21 +5,18 @@ import { getUserAuthenticated } from "../axios/postAxios.js"
 
 function Auth () {
     const navigate = useNavigate()
-    // useEffect(() => {
-    //     getUserInput()
-    // }, []);
     
-    setTimeout(() => {
+    setTimeout(() => {        
         getUserAuthenticated()
         navigate("/auth/autenticado")
     }, 5000);
     
-    console.log("PASSWORD CONFIRMED---> 4");
-
     return(
-        <div>
-           <h1>We are authenticating your account</h1>
-           <h3>Please wait</h3>
+        <div className="mainBox">
+            <div className="mainBox_header">
+                <h1>We are authenticating your account</h1>
+                <h3>Please wait</h3>
+            </div>
         </div>
     )
 }

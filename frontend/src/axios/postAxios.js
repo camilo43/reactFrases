@@ -1,5 +1,4 @@
 import axios from "axios" 
-import { PagEjemplo } from "../components/PagEjemplo.jsx"
 axios.defaults.withCredentials = true;
 const url = "http://localhost:3002/"
 // const url = "https://backendfrases.onrender.com/"
@@ -71,22 +70,11 @@ const getUserAuthenticated = async () => {
             withCredentials: true,
             // credentials: 'include'
           })
-          console.log("RESPONSE AXIOS AUTHENTICATION", response);
+          console.log("RESPONSE AXIOS AUTHENTICATION", response.data.response);
+          return response.data.response
         }catch(error){
             console.log("THERE HAS BEEN AN ERROR: ", error);
         } 
-}
-
-const getPagejemplo = async () => {
-    try{
-        const userData = await axios.get(`${url}api/pagejemplo`)           
-        if(userData.status === 200){
-           
-        }
-    }
-    catch (error){
-        console.error(`The process can not be completed. Error description: ${error}`)
-    }
 }
 
 const getLogin = async () => {
@@ -103,7 +91,6 @@ const getLogin = async () => {
 export { 
     postUserInput, 
     getUserInput, 
-    getPagejemplo, 
     getUserAuthenticated,
     getLogin
     // testCookiesGet,

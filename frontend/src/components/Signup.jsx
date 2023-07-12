@@ -65,28 +65,30 @@ function Signup () {
       }
 
     return(
-        <div>
-            <button onClick={backHome}>Home</button>
-            <h2>Signup</h2>
-            <form onSubmit={onSubmitForm}>
-                <label>Email: </label>
-                <input type="email" value={email} onChange={emailOnChange}></input>
-                <br></br>
-                <br></br>
-                <label>User name: </label>
-                <input type="text" value={name} onChange={nameOnChange}></input>
-                <br></br>
-                <br></br>
-                <label>Password: </label>
-                <input type="password" value={password} onChange={passwordOnChange}></input>
-                <br></br>
-                <br></br>
-                <label>Confirm password: </label>
-                <input type="password" value={confirmedPassword} onChange={confirmPassword}></input>
-                <br></br>
-                <br></br>
-                <button onSubmit={onSubmitForm} type="submit">Submit</button>
-            </form>
+        <div className="mainBox">
+            <div className="mainBox_header">
+                <button className="material-symbols-outlined home" onClick={backHome}>Home</button>
+                <h2>Signup</h2>
+                <form onSubmit={onSubmitForm}>
+                    <label>Email: </label>
+                    <input type="email" value={email} onChange={emailOnChange}></input>
+                    <br></br>
+                    <br></br>
+                    <label>User name: </label>
+                    <input type="text" value={name} onChange={nameOnChange}></input>
+                    <br></br>
+                    <br></br>
+                    <label>Password: </label>
+                    <input type="password" value={password} onChange={passwordOnChange}></input>
+                    <br></br>
+                    <br></br>
+                    <label>Confirm password: </label>
+                    <input type="password" value={confirmedPassword} onChange={confirmPassword}></input>
+                    <br></br>
+                    <br></br>
+                    <button onSubmit={onSubmitForm} type="submit">Submit</button>
+                </form>
+                </div>
         </div>
     )
 }
