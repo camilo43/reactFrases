@@ -17,7 +17,7 @@ app.use(cors({
   origin:'https://backendfrases.onrender.com/'
 }))
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/');
+  res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/login');
   // res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/login');
   // res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/signup');
   // res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/auth');
