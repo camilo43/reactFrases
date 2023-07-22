@@ -2,7 +2,7 @@ import { SignUp_model } from "../models/signUp.js";
 import express, { response } from "express"
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
-import { verify } from 'jsonwebtoken'
+const { verify } = jwt
 
 const SignUp_router = express.Router()
 
