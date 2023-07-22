@@ -6,26 +6,15 @@ import { logger } from './utils/logger.js'
 import { SignUp_router } from './controllers/signUp_controller.js'
 import { Quotes_router } from './controllers/quotes_controller.js'
 import { Login_router } from './controllers/login_controller.js'
-
 import cookieParser from 'cookie-parser'
 
 mongoose.set('strictQuery', false)
 
 const app = express()
 
-app.use(cors({
-  origin:'https://backendfrases.onrender.com/'
-}))
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/login');
-  // res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/login');
-  // res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/signup');
-  // res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/auth');
-  // res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/auth/autenticado');
-  // res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/api/quotes');
-  // res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/api/quotes/user');
-  // res.setHeader('Access-Control-Allow-Origin', 'https://backendfrases.onrender.com/api/quotes/user/logout');
-// res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 res.setHeader('Access-Control-Allow-Credentials', 'true'); // Habilitar las credenciales
