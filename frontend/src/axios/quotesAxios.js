@@ -5,7 +5,7 @@ const url = "https://backendfrases.onrender.com/"
 
 const quotesGetLogOut = async () => {
   return await axios.get(`${url}api/quotes/user/logout`, {
-    withCredentials: true,
+    // withCredentials: true,
     // credentials: 'include'
   })    
 }
@@ -22,8 +22,8 @@ const quotesGet = async () => {
 const quotesInput = async (object) => {
     // try{ 
         const userData = await axios.post(`${url}api/quotes/user`, object, {
-            params:object,
-            withCredentials: true,
+            // params:object,
+            // withCredentials: true,
             // credentials: 'include'
           }) 
         console.log("USER DATA_POST", userData.data)        

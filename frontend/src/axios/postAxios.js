@@ -5,11 +5,7 @@ const url = "https://backendfrases.onrender.com/"
 
 const postUserInput = async (object) => {
     // try{ 
-        const userData = await axios.post(`${url}signup`, object, {
-            params:object,
-            withCredentials: true,
-            // credentials: 'include'
-          }) 
+        const userData = await axios.post(`${url}signup`, object) 
         console.log("USER DATA_POST", userData.data)        
         return userData.data
     // }
@@ -40,8 +36,8 @@ const postUserInput = async (object) => {
 const getUserInput = async (object) => { 
     //try{
         const response = await axios.post(`${url}auth`, {
-            params:object,
-            withCredentials: true,
+            // params:object,
+            // withCredentials: true,
             // credentials: 'include'
           }) 
 
@@ -67,7 +63,7 @@ const getUserInput = async (object) => {
 const getUserAuthenticated = async () => { 
     try{
         const response = await axios.get(`${url}auth/autenticado`, {
-            withCredentials: true,
+            // withCredentials: true,
             // credentials: 'include'
           })
           console.log("RESPONSE AXIOS AUTHENTICATION", response.data.response);
