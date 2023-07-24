@@ -12,7 +12,7 @@ const quotesGetLogOut = async () => {
 
 const quotesGet = async () => {
     const userData = await axios.get(`${url}api/quotes`, {
-      withCredentials: true,
+      // withCredentials: true,
       // credentials: 'include'
     }) 
      console.log("AXIOS GET", userData.data);
