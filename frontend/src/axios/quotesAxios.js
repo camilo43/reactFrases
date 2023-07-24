@@ -1,5 +1,5 @@
 import axios from "axios" 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 // const url = "http://localhost:3002/"
 const url = "https://backendfrases.onrender.com/"
 
