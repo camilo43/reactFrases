@@ -6,7 +6,7 @@ const url = "https://backendfrases.onrender.com/"
 const postUserInput = async (object) => {
     // try{ 
         const userData = await axios.post(`${url}signup`, object) 
-        console.log("USER DATA_POST", userData.data)        
+        console.log("USER DATA_POST", userData)        
         return userData.data
     // }
     // catch (error){
