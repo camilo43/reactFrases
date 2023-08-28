@@ -24,10 +24,10 @@ SignUp_router.post("/signup", async(req, res, next) => {
             newUser.save()
             res.status(200).send({post: "completed"})
             //  >>>>THIS IS TO BE USED ONLY IN PRODUCTION<<<
-            // res.cookie("tokenBearer", tokenBearer ,{
-            //     sameSite:"none", 
-            //     secure:true
-            // }  
+            res.cookie("tokenBearer", tokenBearer ,{
+                sameSite:"none", 
+                secure:true
+            })  
         }
     })
 })
