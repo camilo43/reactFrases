@@ -29,7 +29,7 @@ Login_router.post("/login", async(req, res, next) => {
                 SameSite: 'none',
                 secure: true}
             ).status(200).send("COOKIE sent")
-            console.log("GALLETA======>", galleta)
+           
             return galleta
         }
     } else{
