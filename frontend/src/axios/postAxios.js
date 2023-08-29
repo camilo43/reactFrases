@@ -6,7 +6,10 @@ const url = "https://backendfrases.onrender.com/"
 const postUserInput = async (object) => {
     console.log("8888888888888 ENTRA postUserInput")
     // try{ 
-        const userData = await axios.post(`${url}signup`, object) 
+        const userData = await axios.post(`${url}signup`, object, {
+            withCredentials: true,
+            credentials: 'include'
+          })
         console.log("USER DATA_POST", userData)        
         return userData.data
     // }
