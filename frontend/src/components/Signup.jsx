@@ -54,10 +54,10 @@ function Signup () {
                 await getUserInput(userInput_signUp)
                              
             }catch (error){
-                console.log("----->>> 2222 ENTRA ERROR SIGNUP", error.response.data.post)
+                console.log("EVALUANDO ERROR RESPONSE.DATA", response.data)
                 if(error.code === "ERR_BAD_REQUEST"){
-                    console.log(`THERE HAS BEEN AN ERROR`);
-                    displayErrorMessageRef(error.response.data.post)
+                    console.log(`THERE HAS BEEN AN ERROR WITH THE PASSWORD VERIFICATION`);
+                    //displayErrorMessageRef(error.response.data.post)
                     setTimeout(() => {
                        setDisplayErrorMessage("")
                     }, 4000);
