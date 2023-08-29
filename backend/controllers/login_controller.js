@@ -18,7 +18,7 @@ Login_router.post("/login", async(req, res, next) => {
         console.log("===============------777777------================")
         console.log("=====> SIGNED LO QUE ES", signed);
         console.log("DATA USER", dataUser);
-        console.log("7777====>>>> USER", user==true?true:false);
+        console.log("7777====>>>> USER", user);
         return signed
     }
     
