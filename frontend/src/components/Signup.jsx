@@ -54,7 +54,7 @@ function Signup () {
                 await getUserInput(userInput_signUp)
                              
             }catch (error){
-                console.log("EVALUANDO ERROR RESPONSE.DATA", response.data)
+                console.log("EVALUANDO ERROR RESPONSE.DATA")
                 if(error.code === "ERR_BAD_REQUEST"){
                     console.log(`THERE HAS BEEN AN ERROR WITH THE PASSWORD VERIFICATION`);
                     //displayErrorMessageRef(error.response.data.post)
