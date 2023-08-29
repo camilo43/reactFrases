@@ -19,12 +19,20 @@ SignUp_router.post("/signup", async(req, res, next) => {
                 email:dataUser.email,
                 password:hashedPassword
             }
+
+            function tokenExpiration(){
+                console.log("---->>> dataUser", dataUser);
+                const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"30m"})
+                console.log("=====> SIGNED LO QUE ES", signed);
+                return signed
+            }
                       
             const newUser = new SignUp_model(userData_HashedPassword);
             newUser.save()
             res.status(200).send({post: "completed"})
             //  >>>>THIS IS TO BE USED ONLY IN PRODUCTION<<<
-            res.cookie("tokenBearer", tokenBearer ,{
+            const signedCondition = tokenExpiration()
+            res.cookie("tokenBearer", signedCondition ,{
                 sameSite:"none", 
                 secure:true
             })  

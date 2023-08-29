@@ -15,14 +15,17 @@ Login_router.post("/login", async(req, res, next) => {
     function tokenExpiration(){
         console.log("---->>> dataUser", dataUser);
         const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"30m"})
+        console.log("===============------777777------================")
         console.log("=====> SIGNED LO QUE ES", signed);
+        console.log("DATA USER", dataUser);
+        console.log("7777====>>>> USER", user==true);
         return signed
     }
-    console.log("DATA USER", dataUser);
-    console.log("USER", user);
+    
 
     if(user){
-        if(bcrypt.compareSync(userPassword,user.password)){           
+        if(bcrypt.compareSync(userPassword,user.password)){       
+            console.log("THIS IS THE ENTRANCE OF COOKIES")    
             const signedCondition = tokenExpiration()
             res.cookie("token", signedCondition, {
                 SameSite: 'none',
