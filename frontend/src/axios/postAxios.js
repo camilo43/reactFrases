@@ -39,10 +39,9 @@ const postUserInput = async (object) => {
 
 const getUserInput = async (object) => { 
     //try{
-        const response = await axios.post(`${url}auth`, {
-            // params:object,
-            // withCredentials: true,
-            // credentials: 'include'
+        const response = await axios.post(`${url}auth`, object, {
+            withCredentials: true,
+            credentials: 'include'
           }) 
 
         console.log("RESPONSE NEW POST AXIOS", response.data);
