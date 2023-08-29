@@ -1,12 +1,29 @@
-import { React, useState, useEffect } from "react"
+import { React, useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { postUserInput_login } from "../axios/loginAxios.js"
 
 function Login () {
     const navigate = useNavigate()
+   
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [controlDisplay, setControlDisplay] = useState(false)
+
+//---------------- EXAMPLE USEREF-- ----------------
+
+    // const hideMessage = useRef()
+
+    // const timer = () => {
+    //     setTimeout(() => {
+    //         hideMessage.current.style.visibility = "hidden"
+    //     }, 5000);
+    // }
+
+    // useEffect(() => {
+    //     timer();
+    //   }, []);
+
+//---------------- ***FIN EXAMPLE USEREF***------------------
 
     const emailOnChange = (event) => {
         setEmail(event.target.value)
@@ -44,14 +61,17 @@ function Login () {
         }else{
             console.log("EMAIL AND PASSWORD ARE MANDATORY FIELDS")
         }
-    }
-
+    }   
+    
     // const backHome = () => {
     //     navigate("/")
     // }
     return(
         <div>
             <div>
+            {/* <h1 ref={hideMessage}>
+                THIS IS THE CRAZY MONKEY
+            </h1> */}
             {/* <button onClick={backHome}>Home</button>   */}
                 <h2>Login</h2>         
                 <form onSubmit={formOnSubmit}>

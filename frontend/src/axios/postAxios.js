@@ -1,9 +1,10 @@
 import axios from "axios" 
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 // const url = "http://localhost:3002/"
 const url = "https://backendfrases.onrender.com/"
 
 const postUserInput = async (object) => {
+    console.log("8888888888888 ENTRA postUserInput")
     // try{ 
         const userData = await axios.post(`${url}signup`, object) 
         console.log("USER DATA_POST", userData)        
@@ -60,16 +61,18 @@ const getUserInput = async (object) => {
     // }
 }
 
+console.log("AXIOS GET USER AUTHENTICATED+++>>>")
 const getUserAuthenticated = async () => { 
+    console.log("888888888 ENTRA USER AUTHENTICATED")
     try{
         const response = await axios.get(`${url}auth/autenticado`, {
-            // withCredentials: true,
-            // credentials: 'include'
+            withCredentials: true,
+            credentials: 'include'
           })
           console.log("RESPONSE AXIOS AUTHENTICATION", response.data.response);
           return response.data.response
         }catch(error){
-            console.log("THERE HAS BEEN AN ERROR: ", error);
+            console.log("THERE HAS BEEN AN ERROR: EN AXIOS getUserAuthenticated ", error);
         } 
 }
 

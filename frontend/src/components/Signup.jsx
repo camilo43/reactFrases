@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react"
+import { React, useEffect, useState, useRef } from "react"
 import { postUserInput, getPagejemplo, getUserInput, testCookiesGet, testCookiesPost } from "../axios/postAxios.js"
 import { useNavigate } from "react-router-dom"
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
@@ -9,9 +9,15 @@ function Signup () {
     const [password, setPassword] = useState("")
     const [confirmedPassword, setConfirmedPassword] = useState("")
     const [controlBoolean, setControlBoolean] = useState(false)
-
+    const [displayErrorMessage, setDisplayErrorMessage] = useState("")
+    
     const navigate = useNavigate()
-   
+    const errorMessage = useRef()
+
+    const displayErrorMessageRef = (errorType) => {
+       setDisplayErrorMessage(`The ${errorType}. Please choose another one`)
+    }
+
     const nameOnChange = (event) => {
         setName(event.target.value)
     }
@@ -41,16 +47,25 @@ function Signup () {
 
         if(password && password==confirmedPassword){            
             try{
-                console.count("SignUp POST")
+                console.log("----->>> 1111 ENTRA TRY SIGNUP")
                 // await testCookiesGet()
                 // await testCookiesPost()
                 await postUserInput(userInput_signUp)
                 await getUserInput(userInput_signUp)
-                navigate("/auth")
-             
+                             
             }catch (error){
-                console.log(`THERE HAS BEEN AN ERROR, DETAILS: ${error}`);
+                console.log("----->>> 2222 ENTRA ERROR SIGNUP", error.response.data.post)
+                if(error.code === "ERR_BAD_REQUEST"){
+                    console.log(`THERE HAS BEEN AN ERROR`);
+                    displayErrorMessageRef(error.response.data.post)
+                    setTimeout(() => {
+                       setDisplayErrorMessage("")
+                    }, 4000);
+                    return
+                }
             }
+            console.log("----->> 3333 NAVEGA")
+            navigate("/auth")
            
         }
         else if(!password){
@@ -69,6 +84,7 @@ function Signup () {
             <div className="mainBox_header">
                 <button className="material-symbols-outlined home" onClick={backHome}>Home</button>
                 <h2>Signup</h2>
+                <h3 style={{color:"#bf5102"}}>{displayErrorMessage}</h3>
                 <form onSubmit={onSubmitForm}>
                     <label>Email: </label>
                     <input type="email" value={email} onChange={emailOnChange}></input>

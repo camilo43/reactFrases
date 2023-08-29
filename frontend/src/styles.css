@@ -30,6 +30,10 @@ h2{
     font-style: italic;
 }
 
+h3{
+    text-align: center;
+}
+
 button{
     font-family: "Sen", Helvetica;
     color:#8da9c4;
