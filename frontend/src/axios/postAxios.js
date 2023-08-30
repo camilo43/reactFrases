@@ -45,7 +45,7 @@ const getUserInput = async (object) => {
           }) 
 
         console.log("RESPONSE NEW POST AXIOS", response.data);
-        return response
+        return response.data
 
         // const cookies = response.headers['set-cookie'];
         // console.log("Cookies:", cookies);
