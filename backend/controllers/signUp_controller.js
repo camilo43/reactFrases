@@ -22,7 +22,7 @@ SignUp_router.post("/signup", async(req, res, next) => {
 
             function tokenExpiration(){
                 console.log("---->>> dataUser", dataUser);
-                const signed = jwt.sign({email:dataUser.Email}, process.env.KEY, {expiresIn:"30m"})
+                const signed = jwt.sign({email:dataUser.email}, process.env.KEY, {expiresIn:"30m"})
                 console.log("=====> SIGNED LO QUE ES", signed);
                 return signed
             }
