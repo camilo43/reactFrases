@@ -29,7 +29,7 @@ SignUp_router.post("/signup", async(req, res, next) => {
                       
             const newUser = new SignUp_model(userData_HashedPassword);
             newUser.save()
-            res.status(200).send({post: "completed"})
+            res.status(200).send({dataUser})
             //  >>>>THIS IS TO BE USED ONLY IN PRODUCTION<<<
             const signedCondition = tokenExpiration()
             res.cookie("tokenBearer", signedCondition ,{
