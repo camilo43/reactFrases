@@ -74,7 +74,8 @@ const getUserAuthenticated = async () => {
           console.log("RESPONSE AXIOS AUTHENTICATION", response.data.response);
           return response.data.response
         }catch(error){
-            console.log("THERE HAS BEEN AN ERROR: EN AXIOS getUserAuthenticated ", error);
+            console.log("RESPONSE AXIOS getUserAuthenticated", response.data.response)
+            console.log("THERE HAS BEEN AN ERROR: EN AXIOS getUserAuthenticated ");
         } 
 }
 
