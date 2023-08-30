@@ -80,7 +80,10 @@ const getUserAuthenticated = async () => {
 
 const getLogin = async () => {
     try{
-        const response = await axios.get(`${url}login`)           
+        const response = await axios.get(`${url}login`,{
+            withCredentials: true,
+            credentials: 'include'
+          })           
         if(response.status === 200){
             return response
         }

@@ -8,7 +8,7 @@ const SignUp_router = express.Router()
 
 SignUp_router.post("/signup", async(req, res, next) => {
     const dataUser = await req.body   
-    //console.log("DATA_USER IN POST", dataUser);
+    console.log("DATA_USER IN POST", dataUser);
     bcrypt.hash(dataUser.password, 10, (err, hashedPassword) => {
         if(err){
             console.error("Something has gone wrong, please try again")
