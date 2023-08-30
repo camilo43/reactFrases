@@ -92,6 +92,7 @@ SignUp_router.post("/auth", async(req, res) => {
 SignUp_router.get("/auth/autenticado", async(req,res)=>{
     try{
         const verificando = req.cookies.token
+        console.log("VERIFICANDO COOKIE HAPPENS", verificando)
         if(verificando){ 
             jwt.verify(verificando, process.env.KEY, async (err, decodedToken) => {
                 
