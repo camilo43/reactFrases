@@ -51,7 +51,7 @@ function Signup () {
                 // await testCookiesGet()
                 // await testCookiesPost()
                 await postUserInput(userInput_signUp)
-                await getUserInput(userInput_signUp)
+                //await getUserInput(userInput_signUp)
                              
             }catch (error){
                 console.log("EVALUANDO ERROR RESPONSE.DATA")
