@@ -38,6 +38,7 @@ const postUserInput = async (object) => {
 // }
 
 const getUserInput = async (object) => { 
+    console.log("9999999999999///")
     try{
         const response = await axios.post(`${url}auth`, object, {
             withCredentials: true,
