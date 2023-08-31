@@ -68,7 +68,8 @@ SignUp_router.post("/auth", async(req, res) => {
         userName:dataUser.userName,
         email:dataUser.email
     }
-   
+    console.log("DATA USER CHECKING AUTH", dataUser)
+       
     if(dataUser){
         try{
             const token = jwt.sign(toBeSigned, process.env.KEY, {expiresIn:"30m"})           
