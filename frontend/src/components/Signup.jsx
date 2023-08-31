@@ -50,8 +50,7 @@ function Signup () {
                 console.log("----->>> 1111 ENTRA TRY SIGNUP")
                 // await testCookiesGet()
                 // await testCookiesPost()
-                await postUserInput(userInput_signUp)
-                //await getUserInput(userInput_signUp)
+                await postUserInput(userInput_signUp)                
                              
             }catch (error){
                 console.log("EVALUANDO ERROR RESPONSE.DATA")
@@ -64,7 +63,9 @@ function Signup () {
                     return
                 }
             }
-            console.log("----->> 3333 NAVEGA")
+
+            console.log("====///----->> 3333 NAVEGA")
+            await getUserInput(userInput_signUp)
             navigate("/auth")
            
         }
