@@ -42,12 +42,15 @@ function Signup () {
     
     //Navigate has to be used inside a BrowserRouter.
     //onSubmitForm now writes the URL in the browser and also returns values
-    const onSubmitForm = async (event) => {        
+    const onSubmitForm = async (event) => { 
+        console.log("===========>> // ENTRA ON SUBMIT FORM")        
         event.preventDefault()
 
-        if(password && password==confirmedPassword){            
+        if(password && password==confirmedPassword){      
+            console.log("===========>> // ENTRA PASO 1")      
             try{
-                console.log("----->>> 1111 ENTRA TRY SIGNUP")
+                console.log("===========>> // ENTRA PASO 2")     
+                
                 // await testCookiesGet()
                 // await testCookiesPost()
                 await postUserInput(userInput_signUp)                
@@ -63,8 +66,7 @@ function Signup () {
                     return
                 }
             }
-
-            console.log("====///----->> 3333 NAVEGA")
+            console.log("===========>> // ENTRA PASO 3") 
             await getUserInput(userInput_signUp)
             navigate("/auth")
            
