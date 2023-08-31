@@ -38,7 +38,7 @@ const postUserInput = async (object) => {
 // }
 
 const getUserInput = async (object) => { 
-    //try{
+    try{
         const response = await axios.post(`${url}auth`, object, {
             withCredentials: true,
             credentials: 'include'
@@ -57,10 +57,15 @@ const getUserInput = async (object) => {
     //     }
 
     //     return userData.data
-    // }
-    // catch (error){
-    //     console.error(`The process can not be completed. Error description: ${error}`)
-    // }
+    }
+    catch (error){
+        const response = await axios.post(`${url}auth`, object, {
+            withCredentials: true,
+            credentials: 'include'
+          }) 
+
+        console.error(`The process can not be completed. AXIOS getUserInput`, response)
+    }
 }
 
 console.log("AXIOS GET USER AUTHENTICATED+++>>>")
