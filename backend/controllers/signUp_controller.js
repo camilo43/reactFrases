@@ -79,13 +79,13 @@ SignUp_router.post("/auth", async(req, res) => {
                     secure: true
             }).status(200).send("COOKIE sent") 
         }catch(error){
-            res.cookie("token", "", {
-                sameSite: 'none',
-                secure: true,
-                expires: new Date(0),
-              }).status(200).send("COOKIE deleted");
+            // res.cookie("token", "", {
+            //     sameSite: 'none',
+            //     secure: true,
+            //     expires: new Date(0),
+            //   }).status(200).send("COOKIE deleted");
 
-            console.log(`The token could not be signed. Details of this error:${error}`)
+            console.log(`The token could not be signed. axios.SignUp_router`)
         }
     }
 })
