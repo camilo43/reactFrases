@@ -4,7 +4,7 @@ axios.defaults.withCredentials = true;
 const url = "https://backendfrases.onrender.com/"
 
 const postUserInput = async (object) => {
-    console.log("8888888888888 ENTRA postUserInput")
+    console.log("ENTRA postUserInput")
     // try{ 
         const userData = await axios.post(`${url}signup`, object, {
             withCredentials: true,

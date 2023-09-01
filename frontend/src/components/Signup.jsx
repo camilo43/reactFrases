@@ -53,7 +53,8 @@ function Signup () {
                 
                 // await testCookiesGet()
                 // await testCookiesPost()
-                await postUserInput(userInput_signUp)                
+                await postUserInput(userInput_signUp)
+                console.log(">>>===========>> // ENTRA PASO 2.1<=====<<<")          
                              
             }catch (error){
                 console.log("EVALUANDO ERROR RESPONSE.DATA")
@@ -66,8 +67,7 @@ function Signup () {
                     return
                 }
             }
-            console.log("===========>> // ENTRA PASO 3") 
-            await getUserInput(userInput_signUp)
+            console.log("===========>> // ENTRA PASO 3")             
             navigate("/auth")
            
         }
