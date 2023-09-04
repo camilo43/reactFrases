@@ -21,21 +21,22 @@ SignUp_router.post("/signup", async(req, res, next) => {
             }
 
             function tokenExpiration(){
-                console.log("---->>> dataUser", dataUser);
+                // console.log("---->>> dataUser", dataUser);
                 const signed = jwt.sign({email:dataUser.email}, process.env.KEY, {expiresIn:"30m"})
-                console.log("BACKEND SIGNED LO QUE ES==> TOKEN EXPIRATION", signed);
+                // console.log("BACKEND SIGNED LO QUE ES==> TOKEN EXPIRATION", signed);
                 return signed
             }
                       
             const newUser = new SignUp_model(userData_HashedPassword);
             newUser.save()
-            res.status(200).send(dataUser)
-            //  >>>>THIS IS TO BE USED ONLY IN PRODUCTION<<<
             const signedCondition = tokenExpiration()
-            res.cookie("token", signedCondition ,{
+            const sendCookie = res.cookie("token", signedCondition ,{
                 sameSite:"none", 
                 secure:true
-            })  
+            }) 
+            res.status(200).send(dataUser)
+            //  >>>>THIS IS TO BE USED ONLY IN PRODUCTION<<<
+             
         }
     })
 })
@@ -63,13 +64,13 @@ SignUp_router.post("/auth", async(req, res) => {
     //     secure: true
     //   }).status(200).send("COOKIE sent") 
     //...................................................................................
-    const dataUser = req.body.params
+    const dataUser = req.body
     const toBeSigned = {
-        userName:dataUser.userName,
+        // userName:dataUser.userName,
         email:dataUser.email
     }
-    console.log("DATA USER CHECKING AUTH", dataUser)
-       
+     console.log("Signup_router.post>>", dataUser) 
+
     if(dataUser){
         try{
             const token = jwt.sign(toBeSigned, process.env.KEY, {expiresIn:"30m"})           
@@ -87,22 +88,24 @@ SignUp_router.post("/auth", async(req, res) => {
 
             console.log(`The token could not be signed. axios.SignUp_router`)
         }
+    }else{
+        console.log("signup_controller has an issue in line 75")
     }
 })
 
 SignUp_router.get("/auth/autenticado", async(req,res)=>{
+    console.count("LLAMADOS A SignUp_router.get")
     try{
         const verificando = req.cookies.token
-        console.log("VERIFICANDO COOKIE HAPPENS", verificando)
+       
         if(verificando){ 
-            jwt.verify(verificando, process.env.KEY, async (err, decodedToken) => {
-                
+            jwt.verify(verificando, process.env.KEY, async (err, decodedToken) => {                
                 if (err) {
-                  console.error('An error happened while verifying the token:', err);
-                } else {
+                  console.error('An error happened while verifying the token: check SignUp_router in Backend');
+                } else {                   
                     const findingUserName = await SignUp_model.findOne({email:decodedToken.email})                    
-                    console.log("======---->>> FINDING USERNAME", findingUserName);
-                    res.status(200).json({response:findingUserName.userName})
+                    console.log(">>> FINDING USERNAME", findingUserName);
+                    res.status(200).json(findingUserName)
                 }
             })
            
@@ -111,7 +114,7 @@ SignUp_router.get("/auth/autenticado", async(req,res)=>{
             return Error
         }
     }catch(error){
-        console.log("THIS ERROR HAS HAPPENED IN THE BACKEND: ", error)
+        console.log("THIS ERROR HAS HAPPENED IN THE BACKEND: SignUp_router.get")
     }
     
 })

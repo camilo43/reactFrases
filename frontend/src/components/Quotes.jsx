@@ -78,9 +78,9 @@ function Quotes () {
                     </form>
                     <ul>
                         {listQuotes.map((quote) => (
-                        <div className="ulBox_delete-list">
+                        <div className="ulBox_delete-list"  key={quote.id}>
                             <button onClick={()=>deleteQuote(quote.id)} className="material-symbols-outlined ulBox_button">Delete</button>
-                            <li className="ulBox_div" key={quote.id}>{
+                            <li className="ulBox_div">{
                                 quote.content                               
                             }</li>
                         </div>

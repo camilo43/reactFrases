@@ -15,7 +15,7 @@ function Authenticated() {
         console.log("GET USER AUTHENTICATED====+++>>>", pruebaFunc)
         console.log("GET USER AUTHENTICATED====+++>>>", pruebaFunc==true)
         pruebaFunc? setIsAuthenticated(true) : setIsAuthenticated(false);
-        setUserNameWelcome(pruebaFunc)       
+        setUserNameWelcome(pruebaFunc.userName)       
       };
   
       fetchData();

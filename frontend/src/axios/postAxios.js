@@ -77,10 +77,10 @@ const getUserAuthenticated = async () => {
             withCredentials: true,
             credentials: 'include'
           })
-          console.log("RESPONSE AXIOS AUTHENTICATION", response.data.response);
-          return response.data.response
+          console.log("RESPONSE AXIOS AUTHENTICATION", response.data);
+          return response.data
         }catch(error){
-            console.log("RESPONSE AXIOS getUserAuthenticated", response.data.response)
+            //console.log("RESPONSE AXIOS getUserAuthenticated", response.data.response)
             console.log("THERE HAS BEEN AN ERROR: EN AXIOS getUserAuthenticated ");
         } 
 }

@@ -1,6 +1,7 @@
 import { React, useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { postUserInput_login } from "../axios/loginAxios.js"
+import { getUserInput } from "../axios/postAxios.js"
 
 function Login () {
     const navigate = useNavigate()
@@ -53,7 +54,10 @@ function Login () {
                     setControlDisplay(false)
                 }, 5000);
             }else{
-                setTimeout(() => {
+                setTimeout(async () => {
+                    const getUser = await getUserInput(userLogin)
+                    // getUser(userLogin)
+                    console.log("GET USER >> LOGIN", getUser)
                     navigate("/auth")
                 }, 2000); 
                 return ejemplo
