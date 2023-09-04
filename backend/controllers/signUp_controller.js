@@ -68,7 +68,7 @@ SignUp_router.post("/auth", async(req, res) => {
         // userName:dataUser.userName,
         email:dataUser.email
     }
-     console.log("Signup_router.post>>", dataUser) 
+    // console.log("Signup_router.post>>", dataUser) 
 
     if(dataUser){
         try{
@@ -96,7 +96,8 @@ SignUp_router.get("/auth/autenticado", async(req,res)=>{
     console.count("LLAMADOS A SignUp_router.get")
     try{
         const verificando = req.cookies.token
-       
+       console.log("VERIFICANDO SignUp_router.get", verificando)
+
         if(verificando){ 
             jwt.verify(verificando, process.env.KEY, async (err, decodedToken) => {                
                 if (err) {
