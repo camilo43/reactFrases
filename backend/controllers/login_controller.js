@@ -13,23 +13,18 @@ Login_router.post("/login", async(req, res, next) => {
     const user = await SignUp_model.findOne({email:userEmail})
    
     function tokenExpiration(){
-        // console.log("---->>> dataUser", dataUser);
-        const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"30m"})
-        // console.log("===============------777777------================")
-        // console.log("=====> SIGNED LO QUE ES", signed);
-        // console.log("DATA USER", dataUser);
-        // console.log("7777====>>>> USER", user);
+        const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"30m"})        
         return signed
     }
     if(user){
         if(bcrypt.compareSync(userPassword,user.password)){       
-            // console.log("THIS IS THE ENTRANCE OF COOKIES")    
+            console.log("THIS IS THE ENTRANCE OF COOKIES")    
             const signedCondition = tokenExpiration()
             const galleta = res.cookie("token", signedCondition, {
                 SameSite: 'none',
                 secure: true}
             ).status(200).send("COOKIE sent")
-           
+           console.log("ESTA ES LA GALLETA>>", galleta)
             return galleta
         }
     } else{

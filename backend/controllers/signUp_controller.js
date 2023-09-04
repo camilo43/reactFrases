@@ -30,11 +30,10 @@ SignUp_router.post("/signup", async(req, res, next) => {
             const newUser = new SignUp_model(userData_HashedPassword);
             newUser.save()
             const signedCondition = tokenExpiration()
-            const sendCookie = res.cookie("token", signedCondition ,{
+            res.cookie("token", signedCondition ,{
                 sameSite:"none", 
                 secure:true
-            }) 
-            res.status(200).send(dataUser)
+            }).status(200).send(dataUser)
             //  >>>>THIS IS TO BE USED ONLY IN PRODUCTION<<<
              
         }

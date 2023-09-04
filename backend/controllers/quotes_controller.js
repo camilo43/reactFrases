@@ -4,9 +4,7 @@ import { SignUp_model } from "../models/signUp.js"
 import jwt from 'jsonwebtoken'
 
 const Quotes_router = express.Router()
-// app.use("/api/quotes", Quotes_router)
 Quotes_router.get("/user/logout", async(req, res) => {
-  // console.log(">>>>>>>The token was not verified");
       res.clearCookie('token')
       res.status(200).send("LoggedOut")
 })
@@ -15,7 +13,6 @@ Quotes_router.get("/", async(req, res) => {
   const tokenCookie = req.cookies.token
   jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
     if(err){
-      // console.log(">>>>>>>The token was not verified");
       res.clearCookie('token')
       res.status(400).send("Expired token")
     }else{
@@ -28,7 +25,6 @@ Quotes_router.get("/", async(req, res) => {
             const mappedQuotes = Quote_model.findById(e.toString())
             return mappedQuotes
           }))
-        // console.log("============================777", mapQuotes );
         res.status(200).json(mapQuotes)
       }}})
     }
@@ -44,7 +40,6 @@ Quotes_router.post("/user", async(req, res) => {
     if(newPost){
       jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
         if(err){
-          // console.log("The token was not verified");
           res.status(400).send("Expired token")
         }else{
             const modelExample = await SignUp_model.findOne({email:decodedToken.email}).populate("quotes").exec();
@@ -86,7 +81,6 @@ Quotes_router.delete("/:itemId", async(req, res) => {
         res.status(400).send("Expired token")
       }else{
         const elementoId = await SignUp_model.updateOne({quotes: itemId}, {$pull:{quotes: itemId}})
-        console.log("ELEMENTO ID=====>>", elementoId);
         return await Quote_model.deleteOne({_id:itemId})
       }
     })
