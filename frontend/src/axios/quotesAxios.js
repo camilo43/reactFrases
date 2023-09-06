@@ -1,7 +1,8 @@
 import axios from "axios" 
 // axios.defaults.withCredentials = true;
 // const url = "http://localhost:3002/"
-const url = "https://backendfrases.onrender.com/"
+// const url = "https://backendfrases.onrender.com/"
+const url = "https://www.camilovega.site/"
 
 const quotesGetLogOut = async () => {
   return await axios.get(`${url}api/quotes/user/logout`, {
