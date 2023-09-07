@@ -45,7 +45,7 @@ function Login () {
         event.preventDefault()
         if(userLogin.email && userLogin.password){
             const ejemplo= await postUserInput_login(userLogin)
-            console.log("=====> ESTE ES EL EJMEPLO", ejemplo == "COOKIE sent");
+            console.log("=====> oi oi oi oi ESTE ES EL EJMEPLO", ejemplo);
             if(ejemplo != "COOKIE sent"){
                 setControlDisplay(true) 
                 setEmail("")
@@ -56,6 +56,8 @@ function Login () {
             }else{
                 setTimeout(async () => {
                     const getUser = await getUserInput(userLogin)
+                    const ejemplo= await postUserInput_login(userLogin)
+                    console.log("=====> oi oi oi oi ESTE ES EL EJMEPLO", ejemplo);
                     // getUser(userLogin)
                     console.log("GET USER >> LOGIN", getUser)
                     navigate("/auth")

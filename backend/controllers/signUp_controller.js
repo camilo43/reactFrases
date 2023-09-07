@@ -77,8 +77,7 @@ SignUp_router.post("/auth", async(req, res) => {
             res.cookie("token", token, {
                    SameSite: 'none',
                     secure: true
-            }).status(200).send("COOKIE sent")
-            console.log("OI OI OI, COOKIES======>>>>>", req.cookies) 
+            }).status(200).send("COOKIE sent") 
         }catch(error){
             // res.cookie("token", "", {
             //     sameSite: 'none',
@@ -97,7 +96,7 @@ SignUp_router.get("/auth/autenticado", async(req,res)=>{
     console.count("LLAMADOS A SignUp_router.get")
     try{
         const verificando = req.cookies.token
-       console.log("VERIFICANDO SignUp_router.get", verificando)
+       console.log("VERIFICANDO SignUp_router.get", req.cookies.token)
 
         if(verificando){ 
             jwt.verify(verificando, process.env.KEY, async (err, decodedToken) => {                
