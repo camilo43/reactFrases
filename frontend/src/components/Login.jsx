@@ -38,8 +38,8 @@ function Login () {
         email:email,
         password: password
     }
-    console.log("=====> EMAIL", email);
-    console.log("=====> PASSWORD", password);
+    // console.log("=====> EMAIL", email);
+    // console.log("=====> PASSWORD", password);
 
     const formOnSubmit = async (event) => {
         event.preventDefault()
