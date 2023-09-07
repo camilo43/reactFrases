@@ -77,7 +77,8 @@ SignUp_router.post("/auth", async(req, res) => {
             res.cookie("token", token, {
                    SameSite: 'none',
                     secure: true
-            }).status(200).send("COOKIE sent") 
+            }).status(200).send("COOKIE sent")
+            console.log("OI OI OI, COOKIES======>>>>>", req.cookies) 
         }catch(error){
             // res.cookie("token", "", {
             //     sameSite: 'none',
