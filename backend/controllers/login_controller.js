@@ -11,6 +11,7 @@ Login_router.post("/login", async(req, res, next) => {
     const userName = dataUser.userName    
     const userPassword = dataUser.password
     const user = await SignUp_model.findOne({email:userEmail})
+    console.log("SIGNUP MODEL login_controller", user)
    
     function tokenExpiration(){
         const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"30m"})        
