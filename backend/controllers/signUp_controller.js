@@ -31,9 +31,10 @@ SignUp_router.post("/signup", async(req, res, next) => {
             newUser.save()
             const signedCondition = tokenExpiration()
             res.cookie("token", signedCondition ,{
-                sameSite:"none", 
-                secure:true
-            }).status(200).send(dataUser)
+                httpOnly:true,
+                SameSite: 'lax',
+                secure: true}
+                ).status(200).send(dataUser)
             //  >>>>THIS IS TO BE USED ONLY IN PRODUCTION<<<
              
         }
@@ -75,9 +76,10 @@ SignUp_router.post("/auth", async(req, res) => {
             const token = jwt.sign(toBeSigned, process.env.KEY, {expiresIn:"30m"})           
             res.set('Content-Type', 'application/json');
             res.cookie("token", token, {
-                   SameSite: 'none',
-                    secure: true
-            }).status(200).send("COOKIE sent") 
+                httpOnly:true,
+                SameSite: 'lax',
+                secure: true}
+                ).status(200).send("COOKIE sent") 
         }catch(error){
             // res.cookie("token", "", {
             //     sameSite: 'none',
