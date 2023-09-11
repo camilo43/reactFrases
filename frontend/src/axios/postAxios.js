@@ -2,12 +2,12 @@ import axios from "axios"
 axios.defaults.withCredentials = true;
 // const url = "http://localhost:3002/"
 // const url = "https://backendfrases.onrender.com/"
-const url = "https://backendprojects.site/"
+const url = "https://backendprojects.site"
 
 const postUserInput = async (object) => {
     console.log("ENTRA postUserInput")
     // try{ 
-        const userData = await axios.post(`${url}signup`, object, {
+        const userData = await axios.post(`${url}/signup`, object, {
             // withCredentials: true,
             // credentials: 'include'
           })
@@ -41,7 +41,7 @@ const postUserInput = async (object) => {
 const getUserInput = async (object) => { 
     console.log("9999999999999///")
     try{
-        const response = await axios.post(`${url}auth`, object, {
+        const response = await axios.post(`${url}/auth`, object, {
             // withCredentials: true,
             // credentials: 'include'
           }) 
@@ -61,7 +61,7 @@ const getUserInput = async (object) => {
     //     return userData.data
     }
     catch (error){
-        const response = await axios.post(`${url}auth`, object, {
+        const response = await axios.post(`${url}/auth`, object, {
             // withCredentials: true,
             // credentials: 'include'
           }) 
@@ -74,7 +74,7 @@ console.log("AXIOS GET USER AUTHENTICATED+++>>>")
 const getUserAuthenticated = async () => { 
     console.log("888888888 ENTRA USER AUTHENTICATED")
     try{
-        const response = await axios.get(`${url}auth/autenticado`, {
+        const response = await axios.get(`${url}/auth/autenticado`, {
             // withCredentials: true,
             // credentials: 'include'
           })
@@ -88,7 +88,7 @@ const getUserAuthenticated = async () => {
 
 const getLogin = async () => {
     try{
-        const response = await axios.get(`${url}login`,{
+        const response = await axios.get(`${url}/login`,{
             // withCredentials: true,
             // credentials: 'include'
           })           

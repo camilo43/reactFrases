@@ -2,17 +2,17 @@ import axios from "axios"
 // axios.defaults.withCredentials = true;
 // const url = "http://localhost:3002/"
 // const url = "https://backendfrases.onrender.com/"
-const url = "https://backendprojects.site/"
+const url = "https://backendprojects.site"
 
 const quotesGetLogOut = async () => {
-  return await axios.get(`${url}api/quotes/user/logout`, {
+  return await axios.get(`${url}/api/quotes/user/logout`, {
     withCredentials: true,
     credentials: 'include'
   })    
 }
 
 const quotesGet = async () => {
-    const userData = await axios.get(`${url}api/quotes`, {
+    const userData = await axios.get(`${url}/api/quotes`, {
       withCredentials: true,
       credentials: 'include'
     }) 
@@ -22,7 +22,7 @@ const quotesGet = async () => {
 
 const quotesInput = async (object) => {
     // try{ 
-        const userData = await axios.post(`${url}api/quotes/user`, object, {
+        const userData = await axios.post(`${url}/api/quotes/user`, object, {
             // params:object,
             withCredentials: true,
             credentials: 'include'
@@ -34,7 +34,7 @@ const quotesInput = async (object) => {
 const deleteQuotes = async (itemId) => {
   console.log("ITEMiD ------------->>>>>>>>", itemId.id);
   const itemIdString = itemId.id
-    return await axios.delete(`${url}api/quotes/${itemIdString}`, {
+    return await axios.delete(`${url}/api/quotes/${itemIdString}`, {
       params: itemId,
       withCredentials: true
     });    
