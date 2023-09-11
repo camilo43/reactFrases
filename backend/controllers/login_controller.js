@@ -23,7 +23,7 @@ Login_router.post("/login", async(req, res, next) => {
             const signedCondition = tokenExpiration()
             const galleta = res.cookie("token", signedCondition, {
                 httpOnly:true,
-                SameSite: 'lax',
+                SameSite: 'none',
                 secure: true}
             ).status(200).send("COOKIE sent")
            console.log("ESTA ES LA GALLETA>>", galleta)

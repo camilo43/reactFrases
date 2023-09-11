@@ -32,7 +32,7 @@ SignUp_router.post("/signup", async(req, res, next) => {
             const signedCondition = tokenExpiration()
             res.cookie("token", signedCondition ,{
                 httpOnly:true,
-                SameSite: 'lax',
+                SameSite: 'none',
                 secure: true}
                 ).status(200).send(dataUser)
             //  >>>>THIS IS TO BE USED ONLY IN PRODUCTION<<<
@@ -77,7 +77,7 @@ SignUp_router.post("/auth", async(req, res) => {
             res.set('Content-Type', 'application/json');
             res.cookie("token", token, {
                 httpOnly:true,
-                SameSite: 'lax',
+                SameSite: 'none',
                 secure: true}
                 ).status(200).send("COOKIE sent") 
         }catch(error){
