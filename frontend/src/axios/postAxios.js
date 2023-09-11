@@ -9,8 +9,8 @@ const postUserInput = async (object) => {
     console.log("ENTRA postUserInput")
     // try{ 
         const userData = await axios.post(`${url}/signup`, object, {
-            withCredentials: false,
-            // credentials: 'include'
+            withCredentials: true,
+            credentials: 'include'
           })
         console.log("USER DATA_POST", userData)        
         return userData.data
@@ -43,8 +43,8 @@ const getUserInput = async (object) => {
     console.log("9999999999999///")
     try{
         const response = await axios.post(`${url}/auth`, object, {
-            withCredentials: false,
-            // credentials: 'include'
+            withCredentials: true,
+            credentials: 'include'
           }) 
 
         console.log("RESPONSE NEW POST AXIOS", response.data);
@@ -63,8 +63,8 @@ const getUserInput = async (object) => {
     }
     catch (error){
         const response = await axios.post(`${url}/auth`, object, {
-            withCredentials: false,
-            // credentials: 'include'
+            withCredentials: true,
+            credentials: 'include'
           }) 
 
         console.error(`The process can not be completed. AXIOS getUserInput`, response)
@@ -76,8 +76,8 @@ const getUserAuthenticated = async () => {
     console.log("888888888 ENTRA USER AUTHENTICATED")
     try{
         const response = await axios.get(`${url}/auth/autenticado`, {
-            withCredentials: false,
-            // credentials: 'include'
+            withCredentials: true,
+            credentials: 'include'
           })
           console.log("RESPONSE AXIOS AUTHENTICATION", response.data);
           return response.data
@@ -90,8 +90,8 @@ const getUserAuthenticated = async () => {
 const getLogin = async () => {
     try{
         const response = await axios.get(`${url}/login`,{
-            withCredentials: false,
-            // credentials: 'include'
+            withCredentials: true,
+            credentials: 'include'
           })           
         if(response.status === 200){
             return response
