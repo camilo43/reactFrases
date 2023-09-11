@@ -9,7 +9,7 @@ const url = "https://api.camilovega.site"
 const postUserInput_login = async (object) => {
     try{ 
         const userData = await axios.post(`${url}/login`,object, {
-            // withCredentials: true,
+            withCredentials: false,
             // credentials: 'include'
         })
         console.log("AXIOS >> postUserInput_login >>  userData.data",  userData.data)   //COOKIE sent    

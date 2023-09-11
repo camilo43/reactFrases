@@ -9,7 +9,7 @@ const postUserInput = async (object) => {
     console.log("ENTRA postUserInput")
     // try{ 
         const userData = await axios.post(`${url}/signup`, object, {
-            // withCredentials: true,
+            withCredentials: false,
             // credentials: 'include'
           })
         console.log("USER DATA_POST", userData)        
@@ -43,7 +43,7 @@ const getUserInput = async (object) => {
     console.log("9999999999999///")
     try{
         const response = await axios.post(`${url}/auth`, object, {
-            // withCredentials: true,
+            withCredentials: false,
             // credentials: 'include'
           }) 
 
@@ -63,7 +63,7 @@ const getUserInput = async (object) => {
     }
     catch (error){
         const response = await axios.post(`${url}/auth`, object, {
-            // withCredentials: true,
+            withCredentials: false,
             // credentials: 'include'
           }) 
 
@@ -76,7 +76,7 @@ const getUserAuthenticated = async () => {
     console.log("888888888 ENTRA USER AUTHENTICATED")
     try{
         const response = await axios.get(`${url}/auth/autenticado`, {
-            // withCredentials: true,
+            withCredentials: false,
             // credentials: 'include'
           })
           console.log("RESPONSE AXIOS AUTHENTICATION", response.data);
@@ -90,7 +90,7 @@ const getUserAuthenticated = async () => {
 const getLogin = async () => {
     try{
         const response = await axios.get(`${url}/login`,{
-            // withCredentials: true,
+            withCredentials: false,
             // credentials: 'include'
           })           
         if(response.status === 200){
