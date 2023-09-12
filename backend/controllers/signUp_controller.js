@@ -80,6 +80,7 @@ SignUp_router.post("/auth", async(req, res) => {
                 SameSite: 'none',
                 secure: true}
                 ).status(200).send("COOKIE sent") 
+            res.redirect("/auth")
         }catch(error){
             // res.cookie("token", "", {
             //     sameSite: 'none',
@@ -108,9 +109,9 @@ SignUp_router.get("/auth/autenticado", async(req,res)=>{
                     const findingUserName = await SignUp_model.findOne({email:decodedToken.email})                    
                     console.log(">>> FINDING USERNAME", findingUserName);
                     res.status(200).json(findingUserName)
+                    res.redirect("/auth/autenticado")
                 }
             })
-           
             return verify
         }else{
             return Error

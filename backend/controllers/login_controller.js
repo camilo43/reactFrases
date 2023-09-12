@@ -21,13 +21,12 @@ Login_router.post("/login", async(req, res, next) => {
         if(bcrypt.compareSync(userPassword,user.password)){       
             console.log("THIS IS THE ENTRANCE OF COOKIES")    
             const signedCondition = tokenExpiration()
-            const galleta = res.cookie("token", signedCondition, {
+            res.cookie("token", signedCondition, {
                 httpOnly:true,
                 SameSite: 'none',
                 secure: true}
             ).status(200).send("COOKIE sent")
-           console.log("ESTA ES LA GALLETA>>", galleta)
-            return galleta
+           res.redirect("/login")
         }
     } else{
         res.status(400).send("THE USER WAS NOT FOUND, PLEASE SIGN IN")
