@@ -14,7 +14,7 @@ const app = express()
 
 // app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 // app.use(cors({ credentials: true, origin: 'https://frontendfrases.onrender.com' }))
-app.use(cors({ credentials: true, origin: 'https://www.camilovega.site'}))
+app.use(cors({ credentials: true, origin: 'https://www.camilovega.site',methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'}))
 
 app.use((req, res, next) => {
 // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');

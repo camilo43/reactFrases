@@ -26,7 +26,7 @@ Login_router.post("/login", async(req, res, next) => {
                 SameSite: 'none',
                 secure: true}
             ).status(200).send("COOKIE sent")
-           res.redirect("/login")
+           
         }
     } else{
         res.status(400).send("THE USER WAS NOT FOUND, PLEASE SIGN IN")
