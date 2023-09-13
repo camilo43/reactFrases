@@ -40,7 +40,7 @@ app.use(express.json())
 console.log("=====> MN", config.MONGODB_URI)
 mongoose.connect(config.MONGODB_URI)
   .then(()=> logger.info("// Connected to mongoDB el servidor"))
-  .catch((error)=> logger.error("* Error connecting mongoDB", error.message))
+  .catch((error)=> logger.error("* Error connecting mongoDB", error.message, config.MONGODB_URI))
 
 app.use("/", SignUp_router)
 app.use("/api/quotes", Quotes_router)
