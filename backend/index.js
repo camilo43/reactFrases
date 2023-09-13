@@ -3,7 +3,7 @@ import cors from 'cors'
 import config from './utils/config.js'
 import { logger } from './utils/logger.js'
 import https from 'https';
-
+console.log("______+", app.listen)
 app.listen(10000, () => {
   console.log('Servidor iniciado en el puerto 10000');
 });

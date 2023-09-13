@@ -37,6 +37,7 @@ next()
 app.use(cookieParser())
 app.use(express.json())
 
+console.log("=====> MN", config.MONGODB_URI)
 mongoose.connect(config.MONGODB_URI)
   .then(()=> logger.info("// Connected to mongoDB el servidor"))
   .catch((error)=> logger.error("* Error connecting mongoDB", error.message))
