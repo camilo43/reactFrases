@@ -1,12 +1,14 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import config from '../backend/utils/config.js'
+//import config from '../backend/utils/config.js'
 import { logger } from './utils/logger.js'
 import { SignUp_router } from './controllers/signUp_controller.js'
 import { Quotes_router } from './controllers/quotes_controller.js'
 import { Login_router } from './controllers/login_controller.js'
 import cookieParser from 'cookie-parser'
+import { config } from 'dotenv';
+config();
 
 mongoose.set('strictQuery', false)
 
@@ -34,13 +36,16 @@ res.setHeader('Access-Control-Allow-Credentials', 'true'); // Habilitar las cred
 next()
 })
 
+const varMongoose = process.env.MONGODB_URI
 app.use(cookieParser())
 app.use(express.json())
 
-console.log("=====> MN", config.MONGODB_URI)
-mongoose.connect(config.MONGODB_URI)
+// console.log("=====> MN", config.MONGODB_URI)
+console.log("=====> MN", varMongoose)
+
+mongoose.connect(varMongoose)
   .then(()=> logger.info("// Connected to mongoDB el servidor"))
-  .catch((error)=> logger.error("* Error connecting mongoDB", error.message, config.MONGODB_URI))
+  .catch((error)=> logger.error("* Error connecting mongoDB", error.message, varMongoose))
 
 app.use("/", SignUp_router)
 app.use("/api/quotes", Quotes_router)
