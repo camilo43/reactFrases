@@ -3,7 +3,7 @@ import axios from "axios"
 // const url = "http://localhost:3002"
 // const url = "https://backendfrases.onrender.com/"
 // const url = "https://backendprojects.site"
-const url = "https://api.camilovega.site"
+const url = "https://www.api.camilovega.site"
 
 const quotesGetLogOut = async () => {
   return await axios.get(`${url}/api/quotes/user/logout`, {
