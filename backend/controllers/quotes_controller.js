@@ -4,29 +4,41 @@ import { SignUp_model } from "../models/signUp.js"
 import jwt from 'jsonwebtoken'
 
 const Quotes_router = express.Router()
-Quotes_router.get("/user/logout", async(req, res) => {
-      res.clearCookie('token')
-      res.status(200).send("LoggedOut")
-})
+ 
+    Quotes_router.get("/user/logout", async(req, res) => {
+      try{
+        res.clearCookie('token')
+        res.status(200).send("LoggedOut")
+      }catch(error){
+        console.log("Logout process could not be completed", error)
+    }
+  })
 
 Quotes_router.get("/", async(req, res) => {
   const tokenCookie = req.cookies.token
-  jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
-    if(err){
-      res.clearCookie('token')
-      res.status(400).send("Expired token")
-    }else{
-        const modelExample = await SignUp_model.findOne({email:decodedToken.email})        
-        const listQuotes = modelExample.quotes
-          if(!listQuotes){
-            res.status(200).json("")
-          }else{
-            const mapQuotes = await Promise.all(listQuotes.map((e)=>{
-            const mappedQuotes = Quote_model.findById(e.toString())
-            return mappedQuotes
-          }))
-        res.status(200).json(mapQuotes)
-      }}})
+  try{
+    jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
+      if(err){
+        res.clearCookie('token')
+        res.status(400).send("Expired token")
+      }else{
+          const modelExample = await SignUp_model.findOne({email:decodedToken.email})        
+          const listQuotes = modelExample.quotes
+            if(!listQuotes){
+              res.status(200).json("")
+            }else{
+              const mapQuotes = await Promise.all(listQuotes.map((e)=>{
+              const mappedQuotes = Quote_model.findById(e.toString())
+              return mappedQuotes
+            }))
+          res.status(200).json(mapQuotes)
+        }
+      }
+    })
+  }catch(error){
+    console.log("There was a problem when sending your data", error)
+  }
+  
     }
 )
 
@@ -45,19 +57,6 @@ Quotes_router.post("/user", async(req, res) => {
             const modelExample = await SignUp_model.findOne({email:decodedToken.email}).populate("quotes").exec();
             modelExample.quotes.push(newPost._id)
             await modelExample.save()
-          
-          // const modelExample = await SignUp_model.findOne({email:decodedToken.email}).populate("quotes") 
-          // modelExample.quotes.push(newPost._id)
-          // await modelExample.save()
-         
-          //=========DO NOT DELETE THE NEXT LINE =======
-         // modelExample.quotes.push(newPost._id)
-        
-         //await modelExample.save()
-          
-          //============================================
-          // const userIdString = userId[0]._id
-          // newPost.user = newPost.user.concat(userIdString) 
           res.status(200).json(modelExample)
         }
       })
