@@ -16,30 +16,30 @@ const Quotes_router = express.Router()
 
 Quotes_router.get("/", async(req, res) => {
   const tokenCookie = req.cookies.token
-  try{
-    jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
-      if(err){
-        res.clearCookie('token')
-        res.status(400).send("Expired token")
-      }else{
-          const modelExample = await SignUp_model.findOne({email:decodedToken.email})        
-          const listQuotes = modelExample.quotes
-            if(!listQuotes){
-              res.status(200).json("")
-            }else{
-              const mapQuotes = await Promise.all(listQuotes.map((e)=>{
-              const mappedQuotes = Quote_model.findById(e.toString())
-              return mappedQuotes
-            }))
-          res.status(200).json(mapQuotes)
+  //await SignUp_model.deleteOne({id:"64f3f66bfd3c1fed6bdbd22d"})
+    try{
+      jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
+        if(err){
+          res.clearCookie('token')
+          res.status(400).send("Expired token")
+        }else{
+            const modelExample = await SignUp_model.findOne({email:decodedToken.email}) 
+            const listQuotes = modelExample.quotes           
+              if(!listQuotes){
+                res.status(200).json("")
+              }else{
+                const mapQuotes = await Promise.all(listQuotes.map((e)=>{
+                  const mappedQuotes =  Quote_model.findById(e.toString())                 
+                  return mappedQuotes
+              }))
+            res.status(200).json(mapQuotes)
+          }
         }
-      }
-    })
-  }catch(error){
-    console.log("There was a problem when sending your data", error)
+      })
+    }catch(error){
+    console.log("There was a problem when sending user's data", error)
   }
-  
-    }
+  }
 )
 
 Quotes_router.post("/user", async(req, res) => {
@@ -61,31 +61,39 @@ Quotes_router.post("/user", async(req, res) => {
         }
       })
     }
-  }catch(error){      
-      res.status(400).send("Expired token")
-      console.log("THERE IS AN ERROR. MORE DETAILS AVAILABLE: ", error);
+  }catch(error){
+      console.log("There was an error when getting the account info. More details:", error);
   }
 })
 
 Quotes_router.delete("/:itemId", async(req, res) => {
-  const itemId = req.params.itemId;
-  console.log("ITEM ID====>>", itemId);
-  
+  const itemId = req.params.itemId;  
   const tokenCookie = req.cookies.token
- 
+  
   try{
     jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
+      
       if(err){
         console.log("The token has expired");
         res.status(400).send("Expired token")
       }else{
-        const elementoId = await SignUp_model.updateOne({quotes: itemId}, {$pull:{quotes: itemId}})
-        return await Quote_model.deleteOne({_id:itemId})
+        await SignUp_model.updateOne({quotes: itemId}, {$pull:{quotes: itemId}})
+        await Quote_model.deleteOne({_id:itemId})
+        const modelExample = await SignUp_model.findOne({email:decodedToken.email}) 
+        const listQuotes = modelExample.quotes           
+        if(!listQuotes){
+          res.status(200).json("")
+        }else{
+          const mapQuotes = await Promise.all(listQuotes.map((e)=>{
+            const mappedQuotes =  Quote_model.findById(e.toString())                 
+            return mappedQuotes
+          }))
+      res.status(200).json(mapQuotes)          
       }
-    })
+    }})
   }
   catch(error){
-    console.log("Something has gone wrong =====> ", error);
+    console.log("The item selected could not be deleted", error);
   }
 })
 

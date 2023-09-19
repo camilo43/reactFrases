@@ -17,13 +17,13 @@ app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 // app.use(cors({ credentials: true, origin: 'https://www.camilovega.site',methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'}))
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' ,methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'}))
 
-app.options('*', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.camilovega.site');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.sendStatus(200);
-});
+// app.options('*', (req, res) => {
+//   res.setHeader('Access-Control-Allow-Origin', 'https://www.camilovega.site');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   res.setHeader('Access-Control-Allow-Credentials', 'true');
+//   res.sendStatus(200);
+// });
 
 app.use((req, res, next) => {
 res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -31,22 +31,19 @@ res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 // res.setHeader('Access-Control-Allow-Origin', 'https://www.camilovega.site');
 res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-res.setHeader('Access-Control-Allow-Credentials', 'true'); // Habilitar las credenciales
+res.setHeader('Access-Control-Allow-Credentials', 'true'); 
 next()
 })
 
 app.use(cookieParser())
 app.use(express.json())
 
-console.log("=====> MN", config.MONGODB_URI)
 mongoose.connect(config.MONGODB_URI)
   .then(()=> logger.info("// Connected to mongoDB el servidor"))
-  .catch((error)=> logger.error("* Error connecting mongoDB", error.message, config.MONGODB_URI))
+  .catch((error)=> logger.error("Error connecting mongoDB", error.message, config.MONGODB_URI))
 
 app.use("/", SignUp_router)
 app.use("/api/quotes", Quotes_router)
 app.use("/", Login_router)
-// app.use("/auth", Auth)
-// app.use('/api/login', loginRouter)
 
 export default app

@@ -1,15 +1,14 @@
 import mongoose from "mongoose";
-import { SignUp_model } from "./signUp.js";
 
 const noteSchema = new mongoose.Schema({
     content: {
         type: String,
         required: true
-    }
-    // user: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Signup_model",
-    // }]
+    },
+    user: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Signup_model",
+    }]
 })
 
 noteSchema.set('toJSON', {
