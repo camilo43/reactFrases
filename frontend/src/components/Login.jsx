@@ -10,22 +10,6 @@ function Login () {
     const [password, setPassword] = useState("")
     const [controlDisplay, setControlDisplay] = useState(false)
 
-//---------------- EXAMPLE USEREF-- ----------------
-
-    // const hideMessage = useRef()
-
-    // const timer = () => {
-    //     setTimeout(() => {
-    //         hideMessage.current.style.visibility = "hidden"
-    //     }, 5000);
-    // }
-
-    // useEffect(() => {
-    //     timer();
-    //   }, []);
-
-//---------------- ***FIN EXAMPLE USEREF***------------------
-
     const emailOnChange = (event) => {
         setEmail(event.target.value)
     }
@@ -38,15 +22,11 @@ function Login () {
         email:email,
         password: password
     }
-    // console.log("=====> EMAIL", email);
-    // console.log("=====> PASSWORD", password);
-
     const formOnSubmit = async (event) => {
         event.preventDefault()
         if(userLogin.email && userLogin.password){
-            const ejemplo= await postUserInput_login(userLogin)
-            console.log("=====> oi oi oi oi ESTE ES EL EJMEPLO", ejemplo);
-            if(ejemplo != "COOKIE sent"){
+            const postUserLogin= await postUserInput_login(userLogin)
+            if(postUserLogin != "COOKIE sent"){
                 setControlDisplay(true) 
                 setEmail("")
                 setPassword("")
@@ -55,30 +35,18 @@ function Login () {
                 }, 5000);
             }else{
                 setTimeout(async () => {
-                    const getUser = await getUserInput(userLogin)
-                    const ejemplo= await postUserInput_login(userLogin)
-                    console.log("=====> oi oi oi oi ESTE ES EL EJMEPLO", ejemplo);
-                    // getUser(userLogin)
-                    console.log("GET USER >> LOGIN", getUser)
                     navigate("/auth")
                 }, 2000); 
-                return ejemplo
+                return postUserLogin
             }
         }else{
             console.log("EMAIL AND PASSWORD ARE MANDATORY FIELDS")
         }
     }   
     
-    // const backHome = () => {
-    //     navigate("/")
-    // }
     return(
         <div>
             <div>
-            {/* <h1 ref={hideMessage}>
-                THIS IS THE CRAZY MONKEY
-            </h1> */}
-            {/* <button onClick={backHome}>Home</button>   */}
                 <h2>Login</h2>         
                 <form onSubmit={formOnSubmit}>
                     <label>Email </label>

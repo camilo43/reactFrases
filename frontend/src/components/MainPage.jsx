@@ -2,14 +2,6 @@ import React from 'react'
 import { Login } from './Login.jsx'
 import { useNavigate } from 'react-router-dom'
 
-const styleSignUp = {
-    
-}
-
-const stylesMainDiv = {
-}
-
-
 function MainPage () {
     const navigate = useNavigate()
     
@@ -27,7 +19,7 @@ function MainPage () {
                 <h1>Create a quote and save it</h1>
                 <Login></Login>
                 <br></br>
-                <p>Not a member yet? <a style={styleSignUp} href={"#"} onClick={redirectSignUp}>SignUp</a> to become part of our community</p>
+                <p>Not a member yet? <a href={"#"} onClick={redirectSignUp}>SignUp</a> to become part of our community</p>
             </div>
         </div>
     )

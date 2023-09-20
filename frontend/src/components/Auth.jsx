@@ -10,9 +10,7 @@ function Auth () {
     setTimeout(async () => {        
         await getUserAuthenticated()
         const users = await getUserAuthenticated()
-        console.log("ENRTA SECOND =====>>>>> 1", users)
         await getUserInput(users)
-        console.log("ENRTA SECOND =====>>>>> 2")
         navigate("/auth/autenticado")
     }, 5000);
     

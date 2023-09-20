@@ -1,22 +1,17 @@
 import { React, useEffect, useState, useRef } from "react"
-import { postUserInput, getPagejemplo, getUserInput, testCookiesGet, testCookiesPost } from "../axios/postAxios.js"
+import { postUserInput } from "../axios/postAxios.js"
 import { useNavigate } from "react-router-dom"
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 function Signup () {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmedPassword, setConfirmedPassword] = useState("")
-    const [controlBoolean, setControlBoolean] = useState(false)
     const [displayErrorMessage, setDisplayErrorMessage] = useState("")
+    const [errorInfo, setErrorInfo] = useState("")
+    const [differentPassword, setDifferentPassowrd] = useState("")
     
     const navigate = useNavigate()
-    const errorMessage = useRef()
-
-    const displayErrorMessageRef = (errorType) => {
-       setDisplayErrorMessage(`The ${errorType}. Please choose another one`)
-    }
 
     const nameOnChange = (event) => {
         setName(event.target.value)
@@ -42,42 +37,41 @@ function Signup () {
     
     //Navigate has to be used inside a BrowserRouter.
     //onSubmitForm now writes the URL in the browser and also returns values
-    const onSubmitForm = async (event) => { 
-        console.log("===========>> // ENTRA ON SUBMIT FORM")        
+    const onSubmitForm = async (event) => {     
         event.preventDefault()
 
-        if(password && password==confirmedPassword){      
-            console.log("===========>> // ENTRA PASO 1")      
+        if(password && password==confirmedPassword){    
             try{
-                console.log("===========>> // ENTRA PASO 2")     
-                
-                // await testCookiesGet()
-                // await testCookiesPost()
-                await postUserInput(userInput_signUp)
-                console.log(">>>===========>> // ENTRA PASO 2.1<=====<<<")          
+                await postUserInput(userInput_signUp)              
                              
             }catch (error){
-                console.log("EVALUANDO ERROR RESPONSE.DATA")
                 if(error.code === "ERR_BAD_REQUEST"){
                     console.log(`THERE HAS BEEN AN ERROR WITH THE PASSWORD VERIFICATION`);
-                    //displayErrorMessageRef(error.response.data.post)
                     setTimeout(() => {
                        setDisplayErrorMessage("")
                     }, 4000);
                     return
                 }
-            }
-            console.log("===========>> // ENTRA PASO 3")             
+            }           
             navigate("/auth")
            
         }
         else if(!password){
-            console.log("NO PASSWORD", "Please type a password", password)
+            setErrorInfo("Please type a password")
+            setTimeout(() => {
+                setErrorInfo("")
+            }, 3000);
+
         }else if(password!=confirmedPassword){
-            console.log("NO MATCH PASSWORD", "The confirmation is wrong", password,confirmedPassword);
+            setDifferentPassowrd("The passwords do not match. Please type it again")
+            setTimeout(() => {
+                setDifferentPassowrd("")
+            }, 3000);
         }
     }
 
+    const cssVisibility = () => errorInfo == ""? {display : "none", color: "orange"} : {visibility :"visible", color: "orange"}
+    
       const backHome = () => {
         navigate("/")
       }
@@ -99,10 +93,12 @@ function Signup () {
                     <br></br>
                     <label>Password: </label>
                     <input type="password" value={password} onChange={passwordOnChange}></input>
+                    <p style={cssVisibility()}>{errorInfo}</p>
                     <br></br>
                     <br></br>
                     <label>Confirm password: </label>
                     <input type="password" value={confirmedPassword} onChange={confirmPassword}></input>
+                    <p>{differentPassword}</p>
                     <br></br>
                     <br></br>
                     <button onSubmit={onSubmitForm} type="submit">Submit</button>
