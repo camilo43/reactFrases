@@ -22,8 +22,7 @@ function Quotes () {
                 console.error("There was an error while trying to get the information");
             }
           };
-          fetchData();  
-          console.log("LIST QUOTES", listQuotes)       
+          fetchData();       
     }, [triggerBoolean]);
     
     const quoteModel = {

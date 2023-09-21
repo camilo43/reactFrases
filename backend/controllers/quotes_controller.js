@@ -15,6 +15,7 @@ const Quotes_router = express.Router()
   })
 
 Quotes_router.get("/", async(req, res) => {
+  
   const tokenCookie = req.cookies.token
   //await SignUp_model.deleteOne({id:"64f3f66bfd3c1fed6bdbd22d"})
     try{
