@@ -8,8 +8,8 @@ function Logout () {
     }, 3000);
    
     return(
-        <div className="mainBox">
-            <h1 className="mainBox_header">Thanks for visiting our site</h1>
+        <div className="centerDiv">
+            <h1>Thanks for visiting our site</h1>
         </div>
     )
 }

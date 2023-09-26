@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom"
 import { postUserInput_login } from "../axios/loginAxios.js"
 import { getUserInput } from "../axios/postAxios.js"
 
-function Login () {
+function Login ({loaderVisibility}) {
     const navigate = useNavigate()
    
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [controlDisplay, setControlDisplay] = useState(false)
+    const [emptyAuthentification, setEmptyAuthentification] = useState(false)
 
     const emailOnChange = (event) => {
         setEmail(event.target.value)
@@ -24,7 +25,9 @@ function Login () {
     }
     const formOnSubmit = async (event) => {
         event.preventDefault()
+
         if(userLogin.email && userLogin.password){
+            loaderVisibility()
             const postUserLogin= await postUserInput_login(userLogin)
             if(postUserLogin != "COOKIE sent"){
                 setControlDisplay(true) 
@@ -34,12 +37,17 @@ function Login () {
                     setControlDisplay(false)
                 }, 5000);
             }else{
-                setTimeout(async () => {
+                setTimeout(() => {
                     navigate("/auth")
-                }, 2000); 
+                }, 3000);
+                
                 return postUserLogin
             }
         }else{
+            setEmptyAuthentification(true)
+            setTimeout(() => {
+                setEmptyAuthentification(false)
+            }, 3000);
             console.log("EMAIL AND PASSWORD ARE MANDATORY FIELDS")
         }
     }   
@@ -47,7 +55,10 @@ function Login () {
     return(
         <div>
             <div>
-                <h2>Login</h2>         
+                <h2>Login</h2> 
+                <div style={!emptyAuthentification?{display:"none"}:{display:"block"}}>
+                    <h3>Email and password are mandatory fields</h3>
+                </div>        
                 <form onSubmit={formOnSubmit}>
                     <label>Email </label>
                     <input onChange={emailOnChange} value={email} type="email"></input>

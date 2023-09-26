@@ -15,7 +15,6 @@ const Quotes_router = express.Router()
   })
 
 Quotes_router.get("/", async(req, res) => {
-  
   const tokenCookie = req.cookies.token
   //await SignUp_model.deleteOne({id:"64f3f66bfd3c1fed6bdbd22d"})
     try{
@@ -53,6 +52,7 @@ Quotes_router.post("/user", async(req, res) => {
     if(newPost){
       jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
         if(err){
+          res.clearCookie('token')
           res.status(400).send("Expired token")
         }else{
             const modelExample = await SignUp_model.findOne({email:decodedToken.email}).populate("quotes").exec();
@@ -73,9 +73,9 @@ Quotes_router.delete("/:itemId", async(req, res) => {
   
   try{
     jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
-      
       if(err){
         console.log("The token has expired");
+        res.clearCookie('token')
         res.status(400).send("Expired token")
       }else{
         await SignUp_model.updateOne({quotes: itemId}, {$pull:{quotes: itemId}})

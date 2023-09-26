@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Login } from './Login.jsx'
 import { useNavigate } from 'react-router-dom'
 
 function MainPage () {
+
+    const [itsVisible, setItsVisible] = useState("none")
+
     const navigate = useNavigate()
-    
+        
     const redirectLogin = () => {
         navigate("/login")
+    }
+
+    const changingVisibility = () => {
+        setItsVisible("block")
+       
+
     }
 
     const redirectSignUp = () => {
@@ -14,14 +23,19 @@ function MainPage () {
     }
 
     return (
-        <div className="mainBox">
-            <div className="mainBox_header">
-                <h1>Create a quote and save it</h1>
-                <Login></Login>
-                <br></br>
-                <p>Not a member yet? <a href={"#"} onClick={redirectSignUp}>SignUp</a> to become part of our community</p>
+        <div className="centerDiv">
+            <div className="loader" style={{display:itsVisible}}/> 
+            <div className="whitePageLoader" style={{display:itsVisible}}/>   
+            <div>
+                <div>
+                    <h1>Create a quote and save it</h1>
+                    <Login loaderVisibility={changingVisibility} ></Login>
+                    <br></br>
+                    <p>Not a member yet? <a href={"#"} onClick={redirectSignUp}>SignUp</a> to become part of our community</p>
+                </div>
             </div>
         </div>
+        
     )
 }
 export { MainPage }

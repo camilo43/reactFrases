@@ -15,8 +15,8 @@ function Auth () {
     }, 5000);
     
     return(
-        <div className="mainBox">
-            <div className="mainBox_header">
+        <div className="centerDiv">
+            <div>
                 <h1>We are authenticating your account</h1>
                 <h3>Please wait</h3>
             </div>

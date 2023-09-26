@@ -77,8 +77,8 @@ function Signup () {
       }
 
     return(
-        <div className="mainBox">
-            <div className="mainBox_header">
+        <div className="centerDiv">
+            <div >
                 <button className="material-symbols-outlined home" onClick={backHome}>Home</button>
                 <h2>Signup</h2>
                 <h3 style={{color:"#bf5102"}}>{displayErrorMessage}</h3>
