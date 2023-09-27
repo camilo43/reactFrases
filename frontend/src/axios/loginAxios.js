@@ -7,10 +7,11 @@ const url = "https://www.api.camilovega.site"
 
 const getUserInput_login = async (object) => {
     try{        
-        const serverMessage = await axios.get(`${url}/`,object, {
+        const serverMessage = await axios.get(`${url}/`, {
             withCredentials: true,
             credentials: 'include'
         })
+        console.log("SERVER MSG", serverMessage)
         return serverMessage.data
     }catch(error){
         console.log("The page could not be loaded");        
