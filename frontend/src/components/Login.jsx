@@ -1,6 +1,6 @@
 import { React, useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { postUserInput_login } from "../axios/loginAxios.js"
+import { postUserInput_login, getUserInput_login } from "../axios/loginAxios.js"
 import { getUserInput } from "../axios/postAxios.js"
 
 function Login ({loaderVisibility}) {
@@ -10,6 +10,11 @@ function Login ({loaderVisibility}) {
     const [password, setPassword] = useState("")
     const [controlDisplay, setControlDisplay] = useState(false)
     const [emptyAuthentification, setEmptyAuthentification] = useState(false)
+
+    useEffect(() => {
+        const initializingApp = async () => await getUserInput_login()
+        initializingApp()
+    }, []);
 
     const emailOnChange = (event) => {
         setEmail(event.target.value)

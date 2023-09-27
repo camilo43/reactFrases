@@ -5,6 +5,10 @@ import jwt from 'jsonwebtoken'
 
 const Login_router = express.Router()
 
+Login_router.get("/", async(req, res, next) => {
+    res.status(400).send("Starting Server")
+})   
+
 Login_router.post("/login", async(req, res, next) => {
     console.time("Login Inicia")
     const dataUser = await req.body
