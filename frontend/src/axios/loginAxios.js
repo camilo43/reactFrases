@@ -5,7 +5,7 @@ import axios from "axios"
 // const url = "https://www.backendprojects.site"
 const url = "https://www.api.camilovega.site"
 
-const getUserInput_login = async (object) => {
+const getUserInput_login = async () => {
     try{        
         const serverMessage = await axios.get(`${url}/`, {
             withCredentials: true,
