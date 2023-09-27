@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 const Login_router = express.Router()
 
 Login_router.post("/login", async(req, res, next) => {
+    console.time("Login Inicia")
     const dataUser = await req.body
     const userEmail = dataUser.email   
     const userPassword = dataUser.password
@@ -15,7 +16,6 @@ Login_router.post("/login", async(req, res, next) => {
         const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"5m"})        
         return signed
     }
-
     try{
         if(user){
             if(bcrypt.compareSync(userPassword,user.password)){  
@@ -32,6 +32,7 @@ Login_router.post("/login", async(req, res, next) => {
     } catch(error){
         console.log("Login could not be completed")
     }
+    console.timeEnd("Login Inicia")
 })
 
 export { Login_router }
