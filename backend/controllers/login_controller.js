@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 const Login_router = express.Router()
 
 Login_router.post("/login", async(req, res, next) => {
+    console.time("Inicia Login======>")
     const dataUser = await req.body
     const userEmail = dataUser.email   
     const userPassword = dataUser.password
@@ -34,7 +35,7 @@ Login_router.post("/login", async(req, res, next) => {
     } catch(error){
         console.log("Login could not be completed", error)
     }
-    
+    console.timeEnd("Inicia Login======>")
 })
 
 export { Login_router }
