@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 const Login_router = express.Router()
 
 Login_router.get("/", async(req, res, next) => {
+    console.log("Starting Server")
     res.status(200).send("Starting Server")
 })  
 
