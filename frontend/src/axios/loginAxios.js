@@ -5,15 +5,16 @@ const url = "http://localhost:3002"
 // const url = "https://www.backendprojects.site"
 // const url = "https://www.api.camilovega.site"
 
-const getUserInput_login = async (object) => {
+const getUserInput_login = async () => {
     try{        
-        const serverMessage = await axios.get(`${url}/`,object, {
+        const serverMessage = await axios.get(`${url}/`, {
             withCredentials: true,
             credentials: 'include'
         })
+        console.log("AXIOS RESPONSE", serverMessage)
         return serverMessage.data
     }catch(error){
-        console.log("The page could not be loaded");        
+        console.log("The page could not be loaded", error);        
     }
 }
 

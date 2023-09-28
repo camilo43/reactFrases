@@ -12,8 +12,11 @@ function Login ({loaderVisibility}) {
     const [emptyAuthentification, setEmptyAuthentification] = useState(false)
 
     useEffect(() => {
-        const initializingApp = async () => await getUserInput_login()
-        initializingApp()
+        const initialize = async () => {
+            const algo = await getUserInput_login();
+            console.log("=====>", algo);
+        }
+        initialize();
     }, []);
 
     const emailOnChange = (event) => {
