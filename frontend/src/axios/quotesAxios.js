@@ -24,6 +24,7 @@ const quotesGet = async () => {
       withCredentials: true,
       credentials: 'include'
     }) 
+    console.log("CHECKING AXIOS GET", userData)
     return (userData.data).reverse()
   }catch(error){
     console.log("Quotes could not be listed. More details:", userData)

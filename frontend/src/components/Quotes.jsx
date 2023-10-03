@@ -22,7 +22,7 @@ function Quotes () {
               setListQuotes(quotes);
             }catch (error) {
                 setCssTrigger(true)
-                console.error("There was an error while trying to get the information");
+                console.error("There was an error while trying to get the information", error);
             }
           };
           fetchData();       

@@ -24,7 +24,8 @@ Quotes_router.get("/", async(req, res) => {
           res.status(400).send("Expired token")
         }else{
             const modelExample = await SignUp_model.findOne({email:decodedToken.email}) 
-            const listQuotes = modelExample.quotes           
+            const listQuotes = modelExample.quotes 
+            console.log("LIST QUOTES BACKEND===>", modelExample)          
               if(!listQuotes){
                 res.status(200).json("")
               }else{
@@ -44,6 +45,7 @@ Quotes_router.get("/", async(req, res) => {
 
 Quotes_router.post("/user", async(req, res) => {
   const tokenCookie = req.cookies.token
+  console.log("ENTRA AL /USER")
   try{
     const body = await req.body 
     const newPost = await Quote_model({content:body.content})
@@ -55,7 +57,9 @@ Quotes_router.post("/user", async(req, res) => {
           res.clearCookie('token')
           res.status(400).send("Expired token")
         }else{
-            const modelExample = await SignUp_model.findOne({email:decodedToken.email}).populate("quotes").exec();
+          console.log("SIGUE AL ELSE DE /USER")
+            const modelExample = await SignUp_model.findOne({email:decodedToken.email})
+            console.log("POPULATE TEST====>>>>", SignUp_model.populated("quotes"))
             modelExample.quotes.push(newPost._id)
             await modelExample.save()
           res.status(200).json(modelExample)
