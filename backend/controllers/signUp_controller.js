@@ -1,4 +1,4 @@
-import { SignUp_model } from "../models/signUp.js";
+import {  SignUp_modelo_test } from "../models/signUp.js";
 import express, { response } from "express"
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
@@ -25,7 +25,7 @@ SignUp_router.post("/signup", async(req, res, next) => {
                     return signed
                 }
                           
-                const newUser = new SignUp_model(userData_HashedPassword);
+                const newUser = new SignUp_modelo_test(userData_HashedPassword);
                 newUser.save()
                 const signedCondition = tokenExpiration()
                 res.cookie("token", signedCondition ,{
@@ -75,7 +75,7 @@ SignUp_router.get("/auth/autenticado", async(req,res)=>{
                 if (err) {
                   console.error('An error happened while verifying the token: check SignUp_router');
                 } else {                   
-                    const findingUserName = await SignUp_model.findOne({email:decodedToken.email}) 
+                    const findingUserName = await SignUp_modelo_test.findOne({email:decodedToken.email}) 
                     res.status(200).json(findingUserName)
                 }
             })

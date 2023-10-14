@@ -1,9 +1,9 @@
 import axios from "axios" 
 // axios.defaults.withCredentials = true;
-// const url = "http://localhost:3002"
+const url = "http://localhost:3002"
 // const url = "https://backendfrases.onrender.com/"
 // const url = "https://backendprojects.site"
-const url = "https://www.api.camilovega.site"
+// const url = "https://www.api.camilovega.site"
 
 const quotesGetLogOut = async () => {
   try{
@@ -24,6 +24,7 @@ const quotesGet = async () => {
       withCredentials: true,
       credentials: 'include'
     }) 
+   
     return (userData.data).reverse()
   }catch(error){
     console.log("Quotes could not be listed. More details:", userData)
@@ -33,12 +34,12 @@ const quotesGet = async () => {
 
 const quotesInput = async (object) => {
     try{ 
-        const userData = await axios.post(`${url}/api/quotes/user`, object, {
+        const userData = await axios.post(`${url}/api/quotes`, object, {
             // params:object,
             withCredentials: true,
             credentials: 'include'
-          })       
-        return userData.data
+          })   
+         console.log("USER POSTED")
     }catch(error){
       console.log("The quote could not be posted. More details: ", error)
     }

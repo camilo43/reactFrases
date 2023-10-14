@@ -31,13 +31,13 @@ function Authenticated() {
 
     if (isAuthenticated) {
       return (
-        <div className="mainBox">
+        <div className="mainBox" style={{position:"relative", height:"100vh", width:"100vw", display:"flex", justifyContent:"center", alignItems:"center"}}>
           <h1 className="mainBox_header">WELCOME {userNameWelcome}!</h1>
         </div>
       );
     } else {
-        <div className="mainBox">
-          <div className="mainBox_header">
+        <div className="centerDiv">
+          <div>
             <h1>THE USER COULD NOT BE AUTHENTICATED</h1>
             <button onClick={goingBackHome}>Home</button>
           </div>

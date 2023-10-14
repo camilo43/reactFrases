@@ -5,12 +5,15 @@ import { useNavigate } from "react-router-dom"
 function Quotes () {
     const [userQuote, setUserQuote] = useState("")
     let [listQuotes, setListQuotes] = useState([])
-    const [updatedList, setUpdatedList] = useState([])
     const [triggerBoolean, setTriggerBoolean] = useState(false)
     const [cssTrigger, setCssTrigger] = useState(false)
     const [emptyMessageCss, setEmptyMessageCss] = useState(false)
 
     const navigate = useNavigate()
+    
+    const quoteModel = {
+        content:userQuote
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,15 +22,11 @@ function Quotes () {
               setListQuotes(quotes);
             }catch (error) {
                 setCssTrigger(true)
-                console.error("There was an error while trying to get the information");
+                console.error("There was an error while trying to get the information", error);
             }
           };
           fetchData();       
     }, [triggerBoolean]);
-    
-    const quoteModel = {
-        content:userQuote
-    }
 
     const inputSubmit = async (event) => {
         event.preventDefault()
@@ -48,13 +47,7 @@ function Quotes () {
             setUserQuote("")
         }
     }
-        
-    const inputUserQuote = (event) => {
-        const userInput = event.target.value
-        setUserQuote(userInput);
-       
-    }
-   
+  
     const goingBackHome = () => {
         navigate("/")
     }
@@ -62,69 +55,60 @@ function Quotes () {
     const loggingOut = () => {
         navigate("/api/quotes/user/logout")
     }
-
-    const deleteQuote = async (itemId) => {
-        try{
-            const newUpdatedList = await deleteQuotes({id:itemId})
-            setUpdatedList(newUpdatedList.reverse())
-        }catch(error){
-            console.log("There was a problem while deleting the note")
-        }
-    }
-    // const MappingList = () => {
-    //     return listQuotes.map((quote,index) => {
-    //         return(
-    //         <div className="ulBox_delete-list"  key={quote.id}>
-    //             <button onClick={()=> {deleteQuote(quote.id); setTriggerBoolean(!triggerBoolean); setListQuotes(updatedList)}} className="material-symbols-outlined ulBox_button">Delete</button>
-               
-    //             <li className="ulBox_div">{
-    //                 quote.content                
-    //             }</li> 
-    //         </div>
-    //     )}) 
-    // }
-
-    const handleDelete = (index, id) => {        
+    
+    const handleDelete = async (index, id) => {        
         const updatedItems = listQuotes.filter((_, i) => i !== index);
-        console.log("=====>>>> =====>>>>", updatedItems)
         setListQuotes(updatedItems);
-        deleteQuote(id)
+        await deleteQuotes({id:id})
         return updatedItems
       };
+
+    const inputUserQuote = (event) => {
+        event.preventDefault()
+        const userInput = event.target.value
+        setUserQuote(userInput)
+    }
+
+    const FormSubmitQuotes = () => {    
+        return(
+            <form onSubmit={inputSubmit}>
+                <textarea className="textBox" onChange={inputUserQuote} value={userQuote}></textarea>
+                <br/>
+                <br/>
+                <button type="submit">
+                    Submit
+                </button>
+            </form>)
+    } 
 
      const MappingList = () => {
         return listQuotes.map((quote,index) => {
             return(
-            <div className="ulBox_delete-list"  key={quote.id}>
-                <li className="ulBox_div">
-                    <button onClick={()=> {handleDelete(index, quote.id)}} className="material-symbols-outlined">Delete</button>
-                {quote.content }</li> 
-            </div>
+                <ul className="esteUl" key={quote.id}>
+                    <div className="ulBox_delete-list">
+                        <li className="ulBox_div">
+                            <button onClick={()=> {handleDelete(index, quote.id)}} className="material-symbols-outlined buttonHide buttonShow"><span>Delete</span></button>
+                        {quote.content }</li> 
+                    </div>
+                </ul>
         )}) 
     }
-
+   
     return(
-        <div className="mainBox">
-            <div className="mainBox_header  mainBox_quotes">
+        <div className="centerDiv">
+            <div className="mainDiv">
                 <div style={!emptyMessageCss?{display:"none"}:{display:"block"}}>
                     <h2>The input can not be a blank space</h2>
                 </div>
-                <div style={!cssTrigger?{display:"none"}:{display:"block"}}>
+                <div style={!cssTrigger?{display:"none"}:{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
                     <h1>Your session has expired, please login again</h1>
                     <button onClick={goingBackHome}>Home</button>
                 </div>
-                <div className="ulBox" style={cssTrigger?{visibility:"hidden"}:{visibility:"visible"}}>
-                    <form onSubmit={inputSubmit}>
-                        <textarea className="textBox" onChange={inputUserQuote} value={userQuote}></textarea>
-                        <br/>
-                        <br/>
-                        <button type="submit">
-                            Submit
-                        </button>
-                    </form>
-                    <ul>
+                <div style={cssTrigger?{visibility:"hidden"}:{visibility:"visible", width:"100%"}}>
+                    <div>
+                        {FormSubmitQuotes()}
                         <MappingList/>
-                    </ul>
+                    </div>
                     <button className="button_logout" onClick={loggingOut}>Logout</button>
                 </div>
             </div>

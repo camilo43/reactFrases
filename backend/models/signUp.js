@@ -1,7 +1,4 @@
 import mongoose from "mongoose";
-const { Schema } = mongoose;
-import { Quote_model } from "./quote.js";
-
 
 const newSignUp = new mongoose.Schema({
     userName:{
@@ -28,7 +25,7 @@ const newSignUp = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Quote_model'
     }]
-})
+},{ collection: 'signup_models' })
 
 newSignUp.set('toJSON', {
     transform: (document, returnedObject) => {
@@ -40,5 +37,5 @@ newSignUp.set('toJSON', {
     }
   })
 
-const SignUp_model = mongoose.model("SignUp_model", newSignUp)
-export { SignUp_model }
+const SignUp_modelo_test = mongoose.model("SignUp_model", newSignUp)
+export { SignUp_modelo_test }

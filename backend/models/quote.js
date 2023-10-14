@@ -5,12 +5,20 @@ const noteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    user: [{
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Signup_model",
-    }]
-})
+        ref: "SignUp_model",
+    },
+    author: {
+        type: String,
+        required: true
+    },
+    liked: {
+      type: Boolean
+    }
+},{ collection: 'quote_models' })
 
+//The DELETE request does not work well without this 
 noteSchema.set('toJSON', {
     transform: (document, returnedObject) => {
       returnedObject.id = returnedObject._id.toString()
@@ -20,7 +28,7 @@ noteSchema.set('toJSON', {
       delete returnedObject.passwordHash
     }
   })
+  
+const Quote_modelo_test = mongoose.model("Quote_model", noteSchema)
 
-const Quote_model = mongoose.model("Quote_model", noteSchema)
-
-export { Quote_model }
+export { Quote_modelo_test }
