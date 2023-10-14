@@ -24,7 +24,7 @@ const quotesGet = async () => {
       withCredentials: true,
       credentials: 'include'
     }) 
-    console.log("CHECKING AXIOS GET", userData)
+   
     return (userData.data).reverse()
   }catch(error){
     console.log("Quotes could not be listed. More details:", userData)
@@ -34,12 +34,12 @@ const quotesGet = async () => {
 
 const quotesInput = async (object) => {
     try{ 
-        const userData = await axios.post(`${url}/api/quotes/user`, object, {
+        const userData = await axios.post(`${url}/api/quotes`, object, {
             // params:object,
             withCredentials: true,
             credentials: 'include'
-          })       
-        return userData.data
+          })   
+         console.log("USER POSTED")
     }catch(error){
       console.log("The quote could not be posted. More details: ", error)
     }

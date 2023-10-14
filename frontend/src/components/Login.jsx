@@ -37,7 +37,9 @@ function Login ({loaderVisibility}) {
         if(userLogin.email && userLogin.password){
             loaderVisibility()
             const postUserLogin= await postUserInput_login(userLogin)
+            
             if(postUserLogin != "COOKIE sent"){
+                loaderVisibility(false)
                 setControlDisplay(true) 
                 setEmail("")
                 setPassword("")
@@ -77,7 +79,7 @@ function Login ({loaderVisibility}) {
                     <br></br>
                     <br></br>
                    <div style={controlDisplay==true? {display:"inline"} : {display:"none"}}>
-                        <h1>The user does not exist, please Sign In</h1>
+                        <h1>The user does not exist, please Sign Up</h1>
                    </div>
                     <button onClick={formOnSubmit} type="submit">Submit</button>
                 </form>

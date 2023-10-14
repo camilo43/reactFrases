@@ -9,6 +9,9 @@ import { Login_router } from './controllers/login_controller.js'
 import cookieParser from 'cookie-parser'
 
 mongoose.set('strictQuery', false)
+mongoose.set('strictPopulate', false);
+// mongoose.set('debug', true)
+
 
 const app = express()
 

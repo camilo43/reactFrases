@@ -12,10 +12,14 @@ function MainPage () {
         navigate("/login")
     }
 
-    const changingVisibility = () => {
-        setItsVisible("block")
+    const changingVisibility = (control=true) => {
+       console.log("HA ENTRADO A CHANGE VIS", control)
+        if(control === true){
+            setItsVisible("block")
+        }else{
+            setItsVisible("none")
+        }
        
-
     }
 
     const redirectSignUp = () => {
