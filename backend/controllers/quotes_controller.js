@@ -61,6 +61,7 @@ Quotes_router.post("/", async(req, res) => {
           // const modelExample = await SignUp_modelo_test.findOne({email:decodedToken.email}).populate("populateQuotes").exec()
           const modelExample = await SignUp_modelo_test.findOne({email:decodedToken.email})
           const quotesPopulate = await Quote_modelo_test.findOne({content:body.content})
+          console.log("QUOTESPOPULATE", quotesPopulate)
           modelExample.quotes.push(newPost._id)
           quotesPopulate.user = modelExample._id
                     
