@@ -83,15 +83,21 @@ function Quotes () {
 
      const MappingList = () => {
         return listQuotes.map((quote,index) => {
-            return(
-                <ul className="esteUl" key={quote.id}>
-                    <div className="ulBox_delete-list">
-                        <li className="ulBox_div">
-                            <button onClick={()=> {handleDelete(index, quote.id)}} className="material-symbols-outlined buttonHide buttonShow"><span>Delete</span></button>
-                        {quote.content }</li> 
-                    </div>
-                </ul>
-        )}) 
+            if(quote==null){
+                setListQuotes([])
+            }else{
+                return(
+                    <ul className="esteUl" key={quote.id}>
+                        <div className="ulBox_delete-list">
+                            <li className="ulBox_div">
+                                <button onClick={()=> {handleDelete(index, quote.id)}} className="material-symbols-outlined buttonHide buttonShow"><span>Delete</span></button>
+                            {quote.content }</li> 
+                        </div>
+                    </ul>
+                    )
+            }
+        })  
+         
     }
    
     return(
