@@ -50,14 +50,14 @@ function Signup () {
                     setName("")
                     setPassword("")
                     setConfirmedPassword("")
-                    setErrorEmail("This email is registered already. Please log in")
+                    setErrorEmail("This email is already registered. Please log in.")
                     setTimeout(() => {
                         setEmail("")
                         setErrorEmail("")
                     }, 4000);
                    
                 }else if(checkingUserCredentials == "Repeated user"){
-                    setErrorUserName("This user name is in use already. Please choose another one")
+                    setErrorUserName("This username is already in use. Please choose another one.")
                     setTimeout(() => {
                         setErrorUserName("")
                     }, 3000);
@@ -82,7 +82,7 @@ function Signup () {
             }, 3000);
 
         }else if(password!=confirmedPassword){
-            setDifferentPassowrd("The passwords do not match. Please type them again")
+            setDifferentPassowrd("The passwords do not match. Please retype them.")
             setTimeout(() => {
                 setDifferentPassowrd("")
             }, 3000);
