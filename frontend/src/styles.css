@@ -130,6 +130,8 @@ input:focus{
     background-color: #ff8928;
     color:#090909;
     cursor: pointer;
+    width:4.1rem;
+    height:4.1rem;
 }
 
 a:visited {
