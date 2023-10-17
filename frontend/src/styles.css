@@ -111,6 +111,9 @@ input:focus{
     background-color: #ff8928;
     color:#090909;
     cursor: pointer;
+    border-radius: 50%;
+    width:4rem;
+    height:4rem;
 }
 
 .material-symbols-outlined{
@@ -119,7 +122,7 @@ input:focus{
     color: #ffffff;
     align-items: center;
     justify-items: center;
-    font-size: 1.5rem;
+    font-size: 2rem;
     width:3rem;
     height:3rem;
     font-variation-settings:
