@@ -98,9 +98,10 @@ input:focus{
 .material-symbols-outlined.home {
     /* background-color: #002147;
     color:#8da9c4; */
+    display: grid;
     background-color: #000000;
-    align-self: center;
-    justify-self: center;
+    align-items: center;
+    justify-items: center;
     color:#ffffff;
     font-variation-settings:
     'FILL' 0,
