@@ -119,12 +119,13 @@ input:focus{
     color:#090909;
     cursor: pointer;
 }
+
 .material-symbols-outlined{
     background-color: transparent;
     color: #002147;
     color: #000000;
-    align-self: center;
-    justify-self: center;
+    align-items: center;
+    justify-items: center;
     font-size: 1.5rem;
     width:3rem;
     height:3rem;
