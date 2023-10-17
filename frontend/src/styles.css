@@ -95,26 +95,19 @@ input:focus{
     margin-top: 2rem; 
 }
 
-.material-symbols-outlined.home {
+.home {
     /* background-color: #002147;
     color:#8da9c4; */
     display: grid;
     background-color: #000000;
     align-items: center;
     justify-items: center;
-    color:#ffffff;
-    font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 48;
     border-radius: 50%;
     width:4rem;
     height:4rem;
-    font-size: 1.8rem;
 }
 
-.material-symbols-outlined.home:hover {
+.home.material-symbols-outlined:hover {
     background-color: #ff8928;
     color:#090909;
     cursor: pointer;
@@ -122,8 +115,8 @@ input:focus{
 
 .material-symbols-outlined{
     background-color: transparent;
-    color: #002147;
     color: #000000;
+    color: #ffffff;
     align-items: center;
     justify-items: center;
     font-size: 1.5rem;

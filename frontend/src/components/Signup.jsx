@@ -98,8 +98,10 @@ function Signup () {
 
     return(
         <div className="centerDiv">
-            <div >
-                <button className="material-symbols-outlined home" onClick={backHome}>Home</button>
+            <div>
+                <div className="home">
+                    <button className="material-symbols-outlined" onClick={backHome}>Home</button>
+                </div>
                 <h2>Signup</h2>
                 <h3 style={{color:"#b60000"}}>{displayErrorMessage}</h3>
                 <form onSubmit={onSubmitForm}>
