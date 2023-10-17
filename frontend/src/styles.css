@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;1,300&family=PT+Serif&family=Sen&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;1,300&family=PT+Serif&family=Sen&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;1,500;1,900&display=swap');
 
 *{
     box-sizing: border-box;
@@ -21,14 +22,15 @@ body{
 }
 
 h1{
-    font-family: "Merriweather";
+    font-family: "Playfair";
+    font-weight: 900;
     text-align: center;
     font-size: 3.8rem ;
 }
 
 h2{
     font-size: 3rem;
-    font-family: "Merriweather";
+    font-family: "Playfair";
     font-style: italic;
 }
 
@@ -115,7 +117,8 @@ input:focus{
     background-color: transparent;
     color: #002147;
     color: #000000;
-    display:inline;
+    align-self: center;
+    justify-self: center;
     font-size: 1.5rem;
     width:3rem;
     height:3rem;
