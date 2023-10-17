@@ -114,6 +114,11 @@ input:focus{
     font-size: 1.8rem;
 }
 
+.material-symbols-outlined.home:hover {
+    background-color: #ff8928;
+    color:#090909;
+    cursor: pointer;
+}
 .material-symbols-outlined{
     background-color: transparent;
     color: #002147;
