@@ -72,7 +72,7 @@ function Login ({loaderVisibility}) {
         <div>
             <div>
                 <h2>Login</h2> 
-                <div style={!emptyAuthentification?{display:"none"}:{display:"block"}}>
+                <div style={!emptyAuthentification?{display:"none"}:{display:"block",color:"#b60000"}}>
                     <h3>Email and password are mandatory fields</h3>
                 </div>        
                 <form onSubmit={formOnSubmit}>
@@ -84,8 +84,8 @@ function Login ({loaderVisibility}) {
                     <input onChange={passwordOnChange} value={password} type="password"></input>
                     <br></br>
                     <br></br>
-                   <div style={controlDisplay==true? {display:"inline"} : {display:"none"}}>
-                        <h1>The user does not exist, please Sign Up</h1>
+                   <div style={controlDisplay==true? {display:"inline", color:"#b60000"} : {display:"none"}}>
+                        <h2>The user does not exist, please Sign Up</h2>
                    </div>
                     <button onClick={formOnSubmit} type="submit">Submit</button>
                 </form>

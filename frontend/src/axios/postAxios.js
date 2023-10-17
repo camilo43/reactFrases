@@ -13,7 +13,8 @@ const postUserInput = async (object) => {
           })
         return userData.data
     }catch (error){
-        console.error("The process can not be completed. More details: ", error)
+        console.error("The process can not be completed. More details: ", error.response.data.error)
+        return error.response.data.error
     }
 }
 

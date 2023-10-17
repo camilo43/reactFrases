@@ -8,37 +8,45 @@ const SignUp_router = express.Router()
 
 SignUp_router.post("/signup", async(req, res, next) => {
     const dataUser = await req.body
-    try{
-        bcrypt.hash(dataUser.password, 10, (err, hashedPassword) => {
-            if(err){
-                console.error("The user could not be registered. Check SignUp_router.post('/signup...')")
-                res.status(500).json({ error: "Server error" })
-            }else{
-                const userData_HashedPassword = {
-                    userName:dataUser.userName,
-                    email:dataUser.email,
-                    password:hashedPassword
-                }
-    
-                function tokenExpiration(){
-                    const signed = jwt.sign({email:dataUser.email}, process.env.KEY, {expiresIn:"30m"})
-                    return signed
-                }
-                          
-                const newUser = new SignUp_modelo_test(userData_HashedPassword);
-                newUser.save()
-                const signedCondition = tokenExpiration()
-                res.cookie("token", signedCondition ,{
-                    httpOnly:true,
-                    SameSite: 'none',
-                    secure: true}
-                    ).status(200).send(dataUser)             
-                }
-            })
-    }catch(error){
-        console.log("The user could not sign up", error)
+    const findRepeatedUser = await SignUp_modelo_test.findOne({userName:dataUser.userName})
+    const findRepeatedEmail = await SignUp_modelo_test.findOne({email:dataUser.email})
+    console.log("REPETED USER", findRepeatedUser, findRepeatedEmail)
+    if(findRepeatedEmail){
+        res.status(500).json({ error: "Repeated email" })
+    }else if(findRepeatedUser){
+        res.status(500).json({ error: "Repeated user" })
+    }else{
+        try{
+            bcrypt.hash(dataUser.password, 10, (err, hashedPassword) => {
+                if(err){
+                    console.error("The user could not be registered. Check SignUp_router.post('/signup...')")
+                    res.status(500).json({ error: "Server error" })
+                }else{
+                    const userData_HashedPassword = {
+                        userName:dataUser.userName,
+                        email:dataUser.email,
+                        password:hashedPassword
+                    }
+        
+                    function tokenExpiration(){
+                        const signed = jwt.sign({email:dataUser.email}, process.env.KEY, {expiresIn:"30m"})
+                        return signed
+                    }
+                              
+                    const newUser = new SignUp_modelo_test(userData_HashedPassword);
+                    newUser.save()
+                    const signedCondition = tokenExpiration()
+                    res.cookie("token", signedCondition ,{
+                        httpOnly:true,
+                        SameSite: 'none',
+                        secure: true}
+                        ).status(200).send(dataUser)             
+                    }
+                })
+        }catch(error){
+            console.log("The user could not sign up", error)
+        }
     }
-    
     })
 
 SignUp_router.post("/auth", async(req, res) => {

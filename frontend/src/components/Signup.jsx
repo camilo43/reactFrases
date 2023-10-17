@@ -10,6 +10,8 @@ function Signup () {
     const [displayErrorMessage, setDisplayErrorMessage] = useState("")
     const [errorInfo, setErrorInfo] = useState("")
     const [differentPassword, setDifferentPassowrd] = useState("")
+    const [errorUserName, setErrorUserName] = useState("")
+    const [errorEmail, setErrorEmail] = useState("")
     
     const navigate = useNavigate()
 
@@ -42,19 +44,36 @@ function Signup () {
 
         if(password && password==confirmedPassword){    
             try{
-                await postUserInput(userInput_signUp)              
-                             
+                const checkingUserCredentials = await postUserInput(userInput_signUp)
+                console.log("CHEKING", checkingUserCredentials)
+                if(checkingUserCredentials == "Repeated email"){
+                    setName("")
+                    setPassword("")
+                    setConfirmedPassword("")
+                    setErrorEmail("This email is registered already. Please log in")
+                    setTimeout(() => {
+                        setEmail("")
+                        setErrorEmail("")
+                    }, 4000);
+                   
+                }else if(checkingUserCredentials == "Repeated user"){
+                    setErrorUserName("This user name is in use already. Please choose another one")
+                    setTimeout(() => {
+                        setErrorUserName("")
+                    }, 3000);
+                }else{
+                    navigate("/auth")
+                } 
+                       
             }catch (error){
-                if(error.code === "ERR_BAD_REQUEST"){
+                if(error.code === "ERR_BAD_REQUEST" || error.code === "The process can not be completed"){
                     console.log(`THERE HAS BEEN AN ERROR WITH THE PASSWORD VERIFICATION`);
                     setTimeout(() => {
                        setDisplayErrorMessage("")
                     }, 4000);
                     return
                 }
-            }           
-            navigate("/auth")
-           
+            }              
         }
         else if(!password){
             setErrorInfo("Please type a password")
@@ -63,15 +82,16 @@ function Signup () {
             }, 3000);
 
         }else if(password!=confirmedPassword){
-            setDifferentPassowrd("The passwords do not match. Please type it again")
+            setDifferentPassowrd("The passwords do not match. Please type them again")
             setTimeout(() => {
                 setDifferentPassowrd("")
             }, 3000);
         }
     }
 
-    const cssVisibility = () => errorInfo == ""? {display : "none", color: "orange"} : {visibility :"visible", color: "orange"}
-    
+    const cssVisibility = () => errorInfo == ""? {display : "none", color: "#b60000"} : {visibility :"visible", color: "#b60000"}
+    const cssVisibilityUser = () => errorUserName == ""? {visibility : "hidden", color: "#b60000"} : {visibility :"visible", color: "#b60000"}
+    const cssVisibilityEmail = () => errorEmail == ""? {visibility : "hidden", color: "#b60000"} : {visibility :"visible", color: "#b60000"}
       const backHome = () => {
         navigate("/")
       }
@@ -81,16 +101,14 @@ function Signup () {
             <div >
                 <button className="material-symbols-outlined home" onClick={backHome}>Home</button>
                 <h2>Signup</h2>
-                <h3 style={{color:"#bf5102"}}>{displayErrorMessage}</h3>
+                <h3 style={{color:"#b60000"}}>{displayErrorMessage}</h3>
                 <form onSubmit={onSubmitForm}>
                     <label>Email: </label>
                     <input type="email" value={email} onChange={emailOnChange}></input>
-                    <br></br>
-                    <br></br>
+                    <p style={cssVisibilityEmail()}>{errorEmail}</p>
                     <label>User name: </label>
                     <input type="text" value={name} onChange={nameOnChange}></input>
-                    <br></br>
-                    <br></br>
+                    <p style={cssVisibilityUser()}>{errorUserName}</p>
                     <label>Password: </label>
                     <input type="password" value={password} onChange={passwordOnChange}></input>
                     <p style={cssVisibility()}>{errorInfo}</p>
@@ -98,7 +116,7 @@ function Signup () {
                     <br></br>
                     <label>Confirm password: </label>
                     <input type="password" value={confirmedPassword} onChange={confirmPassword}></input>
-                    <p>{differentPassword}</p>
+                    <p style={{color:"#b60000"}}>{differentPassword}</p>
                     <br></br>
                     <br></br>
                     <button onSubmit={onSubmitForm} type="submit">Submit</button>

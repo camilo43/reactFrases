@@ -82,6 +82,7 @@ input:focus{
     display:flex;
     justify-content:center;
     align-items:center;
+    padding: 10%
 }
 
 .algo{
@@ -96,6 +97,8 @@ input:focus{
     /* background-color: #002147;
     color:#8da9c4; */
     background-color: #000000;
+    align-self: center;
+    justify-self: center;
     color:#ffffff;
     font-variation-settings:
     'FILL' 0,
@@ -110,7 +113,7 @@ input:focus{
 
 .material-symbols-outlined{
     background-color: transparent;
-    /* color: #002147; */
+    color: #002147;
     color: #000000;
     display:inline;
     font-size: 1.5rem;
