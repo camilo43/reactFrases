@@ -100,7 +100,7 @@ function Signup () {
         <div className="centerDiv">
             <div>
                 <div className="home">
-                    <button onClick={backHome}><span className="material-symbols-outlined">Home</span></button>
+                    <button className="material-symbols-outlined" onClick={backHome}>Home</button>
                 </div>
                 <h2>Signup</h2>
                 <h3 style={{color:"#b60000"}}>{displayErrorMessage}</h3>
