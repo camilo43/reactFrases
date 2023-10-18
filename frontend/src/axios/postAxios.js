@@ -1,9 +1,9 @@
 import axios from "axios" 
 axios.defaults.withCredentials = true;
-// const url = "http://localhost:3002"
+const url = "http://localhost:3002"
 // const url = "https://backendfrases.onrender.com/"
 // const url = "https://backendprojects.site"
-const url = "https://www.api.camilovega.site"
+// const url = "https://www.api.camilovega.site"
 
 const postUserInput = async (object) => {
     try{ 
@@ -11,6 +11,7 @@ const postUserInput = async (object) => {
             withCredentials: true,
             credentials: 'include'
           })
+          console.log("SIGNUP userData.data", userData.data)
         return userData.data
     }catch (error){
         console.error("The process can not be completed. More details: ", error.response.data.error)

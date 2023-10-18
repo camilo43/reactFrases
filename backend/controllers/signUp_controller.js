@@ -10,14 +10,24 @@ SignUp_router.post("/signup", async(req, res, next) => {
     const dataUser = await req.body
     const findRepeatedUser = await SignUp_modelo_test.findOne({userName:dataUser.userName})
     const findRepeatedEmail = await SignUp_modelo_test.findOne({email:dataUser.email})
-    console.log("REPETED USER", findRepeatedUser, findRepeatedEmail)
-    if(findRepeatedEmail){
-        res.status(500).json({ error: "Repeated email" })
-    }else if(findRepeatedUser){
-        res.status(500).json({ error: "Repeated user" })
-    }else{
-        try{
-            bcrypt.hash(dataUser.password, 10, (err, hashedPassword) => {
+    console.log("REPETED USER", findRepeatedEmail)
+    
+    try{
+        if(!dataUser.email){
+            res.status(422).json({ error: "Email requested" })
+        }
+        else if(!dataUser.userName){
+            res.status(422).json({ error: "User name requested" })
+        }
+  
+        else if(findRepeatedEmail){
+            res.status(422).json({ error: "Repeated email" })
+        }
+        else if(findRepeatedUser){
+            res.status(422).json({ error: "Repeated user" })
+        }
+        else{
+            bcrypt.hash(dataUser.password, 10, async (err, hashedPassword) => {
                 if(err){
                     console.error("The user could not be registered. Check SignUp_router.post('/signup...')")
                     res.status(500).json({ error: "Server error" })
@@ -32,21 +42,28 @@ SignUp_router.post("/signup", async(req, res, next) => {
                         const signed = jwt.sign({email:dataUser.email}, process.env.KEY, {expiresIn:"30m"})
                         return signed
                     }
-                              
-                    const newUser = new SignUp_modelo_test(userData_HashedPassword);
-                    newUser.save()
+                    
+                    try{
+                        console.log("==========>>>>>> ENTRA AL TRY")
+                        const newUser = new SignUp_modelo_test(userData_HashedPassword);
+                        await newUser.save()
+                    }catch(e){
+                        console.log("HAY ERORES+++<<<", e)
+                        res.status(422).json({ error: "Invalid email" })
+                    }
+                    
                     const signedCondition = tokenExpiration()
                     res.cookie("token", signedCondition ,{
                         httpOnly:true,
                         SameSite: 'none',
                         secure: true}
                         ).status(200).send(dataUser)             
-                    }
-                })
-        }catch(error){
-            console.log("The user could not sign up", error)
+                }
+            })
         }
-    }
+    }catch(e){
+        console.log("ERRRROOORRR")    
+    }    
     })
 
 SignUp_router.post("/auth", async(req, res) => {

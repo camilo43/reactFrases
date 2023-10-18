@@ -12,7 +12,7 @@ function Signup () {
     const [differentPassword, setDifferentPassowrd] = useState("")
     const [errorUserName, setErrorUserName] = useState("")
     const [errorEmail, setErrorEmail] = useState("")
-    
+    const [itsVisible, setItsVisible] = useState("none")
     const navigate = useNavigate()
 
     const nameOnChange = (event) => {
@@ -37,16 +37,49 @@ function Signup () {
         password: password
     }
     
+    const changingVisibility = (control=true) => {
+       console.log("HA ENTRADO A CHANGE VIS", control)
+        if(control === true){
+            setItsVisible("block")
+        }else{
+            setItsVisible("none")
+        }
+       
+    }
+
     //Navigate has to be used inside a BrowserRouter.
     //onSubmitForm now writes the URL in the browser and also returns values
     const onSubmitForm = async (event) => {     
         event.preventDefault()
-
+        changingVisibility()
         if(password && password==confirmedPassword){    
             try{
                 const checkingUserCredentials = await postUserInput(userInput_signUp)
                 console.log("CHEKING", checkingUserCredentials)
-                if(checkingUserCredentials == "Repeated email"){
+
+                if(checkingUserCredentials == "Invalid email"){
+                    changingVisibility(false)
+                    setErrorEmail("The email is not valid")
+                    setTimeout(() => {
+                        setErrorEmail("")
+                    }, 4000);
+                }
+                else if(checkingUserCredentials == "Email requested"){
+                    changingVisibility(false)
+                    setErrorEmail("Please type your email")
+                    setTimeout(() => {
+                        setErrorEmail("")
+                    }, 4000);
+                }
+                else if(checkingUserCredentials == "User name requested"){
+                    changingVisibility(false)
+                    setErrorUserName("Please choose a user name")
+                    setTimeout(() => {
+                        setErrorUserName("")
+                    }, 4000);
+                }                
+                else if(checkingUserCredentials == "Repeated email"){
+                    changingVisibility(false)
                     setName("")
                     setPassword("")
                     setConfirmedPassword("")
@@ -57,15 +90,18 @@ function Signup () {
                     }, 4000);
                    
                 }else if(checkingUserCredentials == "Repeated user"){
+                    changingVisibility(false)
                     setErrorUserName("This username is already in use. Please choose another one.")
                     setTimeout(() => {
                         setErrorUserName("")
-                    }, 3000);
+                    }, 4000);
                 }else{
+                    changingVisibility(false)
                     navigate("/auth")
                 } 
                        
             }catch (error){
+                changingVisibility(false)
                 if(error.code === "ERR_BAD_REQUEST" || error.code === "The process can not be completed"){
                     console.log(`THERE HAS BEEN AN ERROR WITH THE PASSWORD VERIFICATION`);
                     setTimeout(() => {
@@ -76,32 +112,34 @@ function Signup () {
             }              
         }
         else if(!password){
+            changingVisibility(false)
             setErrorInfo("Please type a password")
             setTimeout(() => {
                 setErrorInfo("")
-            }, 3000);
+            }, 4000);
 
         }else if(password!=confirmedPassword){
+            changingVisibility(false)
             setDifferentPassowrd("The passwords do not match. Please retype them.")
             setTimeout(() => {
                 setDifferentPassowrd("")
-            }, 3000);
+            }, 4000);
         }
     }
 
     const cssVisibility = () => errorInfo == ""? {display : "none", color: "#b60000"} : {visibility :"visible", color: "#b60000"}
     const cssVisibilityUser = () => errorUserName == ""? {visibility : "hidden", color: "#b60000"} : {visibility :"visible", color: "#b60000"}
     const cssVisibilityEmail = () => errorEmail == ""? {visibility : "hidden", color: "#b60000"} : {visibility :"visible", color: "#b60000"}
-      const backHome = () => {
+    const backHome = () => {
         navigate("/")
       }
 
     return(
         <div className="centerDiv">
+            <div className="loader" style={{display:itsVisible}}/> 
+            <div className="whitePageLoader" style={{display:itsVisible}}/>  
             <div>
-                <div className="home">
-                    <button className="material-symbols-outlined" onClick={backHome}>Home</button>
-                </div>
+                <button className="material-symbols-outlined home" onClick={backHome}>Home</button>
                 <h2>Signup</h2>
                 <h3 style={{color:"#b60000"}}>{displayErrorMessage}</h3>
                 <form onSubmit={onSubmitForm}>
