@@ -50,8 +50,10 @@ function Login ({loaderVisibility}) {
                 if(postUserLogin == "Invalid email" || postUserLogin == "The password is wrong"){
                     if(postUserLogin == "Invalid email"){
                         setEmailError(postUserLogin)
+                        setPasswordError("")
                     }else if(postUserLogin == "The password is wrong"){
                         setPasswordError(postUserLogin)
+                        setEmailError("")
                     }
                     loaderVisibility(false)
                     setControlDisplay(true)
