@@ -97,14 +97,14 @@ function Login ({loaderVisibility}) {
                 <form onSubmit={formOnSubmit}>
                     <label>Email </label>
                     <input onChange={emailOnChange} value={email} type="email"></input>
-                    <div style={controlDisplay==true? {display:"flex", color:"#b60000"} : {display:"none"}}>
+                    <div style={emailError!==""? {display:"flex", color:"#b60000"} : {display:"none"}}>
                         <p>{emailError}</p>
                    </div>
                     <br></br>
                     <br></br>
                     <label>Password </label>
                     <input onChange={passwordOnChange} value={password} type="password"></input>
-                   <div style={controlDisplay==true? {display:"flex", color:"#b60000"} : {display:"none"}}>
+                   <div style={passwordError!==""? {display:"flex", color:"#b60000"} : {display:"none"}}>
                         <p>{passwordError}</p>
                    </div>
                    <br></br>
