@@ -57,6 +57,8 @@ function Login ({loaderVisibility}) {
                     setControlDisplay(true)
                     setPassword("") 
                     setTimeout(() => {
+                        setEmailError("")
+                        setPasswordError("")
                         setControlDisplay(false)
                     }, 5000);
                 }else{
