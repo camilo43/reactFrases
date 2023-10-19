@@ -11,6 +11,7 @@ function Login ({loaderVisibility}) {
     const [controlDisplay, setControlDisplay] = useState(false)
     const [emptyAuthentification, setEmptyAuthentification] = useState(false)
     const [emailError, setEmailError] = useState("")
+    const [passwordError, setPasswordError] = useState("")
 
     useEffect(() => {
         const initialize = async () => {
@@ -47,7 +48,11 @@ function Login ({loaderVisibility}) {
             
             if(postUserLogin != "COOKIE sent"){
                 if(postUserLogin == "Invalid email" || postUserLogin == "The password is wrong"){
-                    setEmailError(postUserLogin)
+                    if(postUserLogin == "Invalid email"){
+                        setEmailError(postUserLogin)
+                    }else if(postUserLogin == "The password is wrong"){
+                        setPasswordError(postUserLogin)
+                    }
                     loaderVisibility(false)
                     setControlDisplay(true)
                     setPassword("") 
@@ -85,17 +90,20 @@ function Login ({loaderVisibility}) {
             <div>
                 <h2>Login</h2> 
                 <div style={!emptyAuthentification?{display:"none"}:{display:"block",color:"#b60000"}}>
-                    <h3>Email and password are mandatory fields</h3>
+                    <p>Email and password are mandatory fields</p>
                 </div>        
                 <form onSubmit={formOnSubmit}>
                     <label>Email </label>
                     <input onChange={emailOnChange} value={email} type="email"></input>
+                    <div style={controlDisplay==true? {display:"flex", color:"#b60000"} : {display:"none"}}>
+                        <p>{emailError}</p>
+                   </div>
                     <br></br>
                     <br></br>
                     <label>Password </label>
                     <input onChange={passwordOnChange} value={password} type="password"></input>
                    <div style={controlDisplay==true? {display:"flex", color:"#b60000"} : {display:"none"}}>
-                        <p>{emailError}</p>
+                        <p>{passwordError}</p>
                    </div>
                    <br></br>
                    <br></br>
