@@ -15,28 +15,35 @@ Login_router.post("/login", async(req, res, next) => {
     const userEmail = dataUser.email   
     const userPassword = dataUser.password
     const user = await SignUp_modelo_test.findOne({email:userEmail})
-   
+   console.log(userEmail.match(/\S+@\S+\.com/))
     function tokenExpiration(){
         const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"30m"})        
         return signed
     }
-    try{
-        if(user){
-            if(bcrypt.compareSync(userPassword,user.password)){  
-                const signedCondition = tokenExpiration()
-                res.cookie("token", signedCondition, {
-                    httpOnly:true,
-                    SameSite: 'none',
-                    secure: true}
-                ).status(200).send("COOKIE sent")
-            }
-        } else{
-            res.status(400).send("THE USER WAS NOT FOUND, PLEASE SIGN IN")
-        }
-    } catch(error){
+    if(userEmail.match(/\S+@\S+\.com/)){
+        try{
+            if(user){
+                if(bcrypt.compareSync(userPassword,user.password)){  
+                    const signedCondition = tokenExpiration()
+                    res.cookie("token", signedCondition, {
+                        httpOnly:true,
+                        SameSite: 'none',
+                        secure: true}
+                    ).status(200).send("COOKIE sent")
+                }else{
+                    res.status(422).json({error:"The password is wrong"})
+                }
+            }else{
+                res.status(422).json({error:"The user was not found. Please Sign Up"})
+            } 
+        } catch(error){
         console.log("Login could not be completed")
+        }
+    }else{
+        res.status(422).json({error:"Invalid email"})
     }
     console.timeEnd("Login Inicia")
-})
+    }
+)
 
 export { Login_router }

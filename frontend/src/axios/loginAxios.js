@@ -19,15 +19,17 @@ const getUserInput_login = async () => {
 }
 
 const postUserInput_login = async (object) => {
+    
     try{ 
-        console.log("URL", url)
         const userData = await axios.post(`${url}/login`,object, {
             withCredentials: true,
             credentials: 'include'
         })
+        console.log("URL", url)
         return userData.data
     }catch(error){
-        console.log("The login process could not be completed. More details: ", error);        
+        console.log("The login process could not be completed.", error.response.data.error); 
+        return  error.response.data.error       
     }
 }
 

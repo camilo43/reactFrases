@@ -10,6 +10,7 @@ function Login ({loaderVisibility}) {
     const [password, setPassword] = useState("")
     const [controlDisplay, setControlDisplay] = useState(false)
     const [emptyAuthentification, setEmptyAuthentification] = useState(false)
+    const [emailError, setEmailError] = useState("")
 
     useEffect(() => {
         const initialize = async () => {
@@ -45,13 +46,24 @@ function Login ({loaderVisibility}) {
             const postUserLogin= await postUserInput_login(userLogin)
             
             if(postUserLogin != "COOKIE sent"){
-                loaderVisibility(false)
-                setControlDisplay(true) 
-                setEmail("")
-                setPassword("")
-                setTimeout(() => {
-                    setControlDisplay(false)
-                }, 5000);
+                if(postUserLogin == "Invalid email" || postUserLogin == "The password is wrong"){
+                    setEmailError(postUserLogin)
+                    loaderVisibility(false)
+                    setControlDisplay(true)
+                    setPassword("") 
+                    setTimeout(() => {
+                        setControlDisplay(false)
+                    }, 5000);
+                }else{
+                    setEmailError(postUserLogin)
+                    loaderVisibility(false)
+                    setControlDisplay(true) 
+                    setEmail("")
+                    setPassword("")
+                    setTimeout(() => {
+                        setControlDisplay(false)
+                    }, 5000);
+                }
             }else{
                 setTimeout(() => {
                     navigate("/auth")
@@ -82,11 +94,11 @@ function Login ({loaderVisibility}) {
                     <br></br>
                     <label>Password </label>
                     <input onChange={passwordOnChange} value={password} type="password"></input>
-                    <br></br>
-                    <br></br>
-                   <div style={controlDisplay==true? {display:"inline", color:"#b60000"} : {display:"none"}}>
-                        <h2>The user does not exist, please Sign Up</h2>
+                   <div style={controlDisplay==true? {display:"flex", color:"#b60000"} : {display:"none"}}>
+                        <p>{emailError}</p>
                    </div>
+                   <br></br>
+                   <br></br>
                     <button onClick={formOnSubmit} type="submit">Submit</button>
                 </form>
             </div> 

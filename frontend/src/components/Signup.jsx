@@ -52,7 +52,22 @@ function Signup () {
     const onSubmitForm = async (event) => {     
         event.preventDefault()
         changingVisibility()
-        if(password && password==confirmedPassword){    
+        
+        if(!email){
+            changingVisibility(false)
+            setErrorEmail("An email is required")
+            setTimeout(() => {
+                setErrorEmail("")
+            }, 4000);
+        }
+        else if(!name){
+            changingVisibility(false)
+            setErrorUserName("A name is required")
+            setTimeout(() => {
+                setErrorUserName("")
+            }, 4000);
+        }
+        else if(password && password==confirmedPassword){    
             try{
                 const checkingUserCredentials = await postUserInput(userInput_signUp)
                 console.log("CHEKING", checkingUserCredentials)
@@ -117,7 +132,6 @@ function Signup () {
             setTimeout(() => {
                 setErrorInfo("")
             }, 4000);
-
         }else if(password!=confirmedPassword){
             changingVisibility(false)
             setDifferentPassowrd("The passwords do not match. Please retype them.")
@@ -130,6 +144,7 @@ function Signup () {
     const cssVisibility = () => errorInfo == ""? {display : "none", color: "#b60000"} : {visibility :"visible", color: "#b60000"}
     const cssVisibilityUser = () => errorUserName == ""? {visibility : "hidden", color: "#b60000"} : {visibility :"visible", color: "#b60000"}
     const cssVisibilityEmail = () => errorEmail == ""? {visibility : "hidden", color: "#b60000"} : {visibility :"visible", color: "#b60000"}
+
     const backHome = () => {
         navigate("/")
       }
