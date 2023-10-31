@@ -10,7 +10,9 @@ function Login ({loaderVisibility}) {
     const [password, setPassword] = useState("")
     const [controlDisplay, setControlDisplay] = useState(false)
     const [emptyAuthentification, setEmptyAuthentification] = useState(false)
-     
+    const [emailError, setEmailError] = useState("")
+    const [passwordError, setPasswordError] = useState("")
+
     useEffect(() => {
         const initialize = async () => {
             const algo = await getUserInput_login();
@@ -18,6 +20,12 @@ function Login ({loaderVisibility}) {
         }
         initialize();
     }, []);
+   
+    useEffect(() => {
+        const initializingApp = async () => await getUserInput_login()
+        initializingApp()
+    }, []);
+
 
     const redirectSignUp = () => {
         navigate("/signup")
@@ -43,13 +51,32 @@ function Login ({loaderVisibility}) {
             const postUserLogin= await postUserInput_login(userLogin)
             
             if(postUserLogin != "COOKIE sent"){
-                loaderVisibility(false)
-                setControlDisplay(true) 
-                setEmail("")
-                setPassword("")
-                setTimeout(() => {
-                    setControlDisplay(false)
-                }, 5000);
+                if(postUserLogin == "Invalid email" || postUserLogin == "The password is wrong"){
+                    if(postUserLogin == "Invalid email"){
+                        setEmailError(postUserLogin)
+                        setPasswordError("")
+                    }else if(postUserLogin == "The password is wrong"){
+                        setPasswordError(postUserLogin)
+                        setEmailError("")
+                    }
+                    loaderVisibility(false)
+                    setControlDisplay(true)
+                    setPassword("") 
+                    setTimeout(() => {
+                        setEmailError("")
+                        setPasswordError("")
+                        setControlDisplay(false)
+                    }, 5000);
+                }else{
+                    setEmailError(postUserLogin)
+                    loaderVisibility(false)
+                    setControlDisplay(true) 
+                    setEmail("")
+                    setPassword("")
+                    setTimeout(() => {
+                        setControlDisplay(false)
+                    }, 5000);
+                }
             }else{
                 setTimeout(() => {
                     navigate("/auth")

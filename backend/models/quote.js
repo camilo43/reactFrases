@@ -8,14 +8,14 @@ const noteSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "SignUp_model",
-    },
-    author: {
-        type: String,
-        required: true
-    },
-    liked: {
-      type: Boolean
     }
+    // author: {
+    //     type: String,
+    //     required: true
+    // },
+    // liked: {
+    //   type: Boolean
+    // }
 },{ collection: 'quote_models' })
 
 //The DELETE request does not work well without this 

@@ -11,7 +11,8 @@ function Authenticated() {
       const fetchData = async () => {
         const pruebaFunc = await getUserAuthenticated();
         pruebaFunc? setIsAuthenticated(true) : setIsAuthenticated(false);
-        setUserNameWelcome(pruebaFunc.userName)       
+        setUserNameWelcome(pruebaFunc.userName)
+        console.log("PRUEBA NAME",pruebaFunc.userName )      
       };
       fetchData();
     }, []);
