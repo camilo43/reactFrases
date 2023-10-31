@@ -22,24 +22,24 @@ function MainPage () {
        
     }
 
-    const redirectSignUp = () => {
-        navigate("/signup")
-    }
-
     return (
-        <div className="centerDiv">
+        <>
+         <header className='algo'>
+            <button>
+                Try Free
+            </button>
+         </header>
+         <div className="centerDiv">
             <div className="loader" style={{display:itsVisible}}/> 
             <div className="whitePageLoader" style={{display:itsVisible}}/>   
-            <div>
-                <div>
-                    <h1>Create a quote and save it</h1>
-                    <Login loaderVisibility={changingVisibility} ></Login>
-                    <br></br>
-                    <p>Not a member yet? <a href={"#"} onClick={redirectSignUp}>SignUp</a> to become part of our community</p>
-                </div>
+            <div className='divLogin'>
+                <h1>Create a quote and save it</h1>
+                <Login loaderVisibility={changingVisibility} ></Login>
+                <br></br>
+                
             </div>
         </div>
-        
+        </>
     )
 }
 export { MainPage }

@@ -20,6 +20,10 @@ function Login ({loaderVisibility}) {
         }
         initialize();
     }, []);
+        
+    const redirectSignUp = () => {
+        navigate("/signup")
+    }
 
     useEffect(() => {
         const initializingApp = async () => await getUserInput_login()
@@ -93,26 +97,24 @@ function Login ({loaderVisibility}) {
         <div>
             <div>
                 <h2>Login</h2> 
-                <div style={!emptyAuthentification?{display:"none"}:{display:"block",color:"#b60000"}}>
-                    <p>Email and password are mandatory fields</p>
-                </div>        
+                <div style={!emptyAuthentification?{display:"none"}:{display:"block"}}>
+                    <h3>Email and password are mandatory fields</h3>
+                </div>
                 <form onSubmit={formOnSubmit}>
                     <label>Email </label>
                     <input onChange={emailOnChange} value={email} type="email"></input>
-                    <div style={emailError!==""? {display:"flex", color:"#b60000"} : {display:"none"}}>
-                        <p>{emailError}</p>
-                   </div>
                     <br></br>
                     <br></br>
                     <label>Password </label>
                     <input onChange={passwordOnChange} value={password} type="password"></input>
-                   <div style={passwordError!==""? {display:"flex", color:"#b60000"} : {display:"none"}}>
-                        <p>{passwordError}</p>
+                    <br></br>
+                    <br></br>
+                   <div style={controlDisplay==true? {display:"inline"} : {display:"none"}}>
+                        <h1>The user does not exist, please Sign Up</h1>
                    </div>
-                   <br></br>
-                   <br></br>
                     <button onClick={formOnSubmit} type="submit">Submit</button>
                 </form>
+                <p style={{maxWidth:"350px", paddingTop:"30px"}}>Do you want to add your own quote? <a href={"#"} onClick={redirectSignUp}>Register for free</a> if you're not a member yet and share it with the world.</p>
             </div> 
         </div>
        

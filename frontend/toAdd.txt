@@ -1,0 +1,464 @@
+<meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital@0;1&family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;1,500;1,900&display=swap" rel="stylesheet">
+    
+    <link rel="preload" href="./styles.css" as="style" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" as="style" type="text/css">
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+
+    IN Login.jsx
+     return(
+        <div>
+            <div>
+                <h2>Login</h2> 
+                <div style={!emptyAuthentification?{display:"none"}:{display:"block"}}>
+                    <h3>Email and password are mandatory fields</h3>
+                </div>
+                <form onSubmit={formOnSubmit}>
+                    <label>Email </label>
+                    <input onChange={emailOnChange} value={email} type="email"></input>
+                    <br></br>
+                    <br></br>
+                    <label>Password </label>
+                    <input onChange={passwordOnChange} value={password} type="password"></input>
+                    <br></br>
+                    <br></br>
+                   <div style={controlDisplay==true? {display:"inline"} : {display:"none"}}>
+                        <h1>The user does not exist, please Sign Up</h1>
+                   </div>
+                    <button onClick={formOnSubmit} type="submit">Submit</button>
+                </form>
+                <p style={{maxWidth:"350px", paddingTop:"30px"}}>Do you want to add your own quote? <a href={"#"} onClick={redirectSignUp}>Register for free</a> if you're not a member yet and share it with the world.</p>
+            </div> 
+        </div>
+       
+    )
+}
+
+En MainPage.jsx:
+
+ return (
+        <>
+         <header className='algo'>
+            <button>
+                Try Free
+            </button>
+         </header>
+         <div className="centerDiv">
+            <div className="loader" style={{display:itsVisible}}/> 
+            <div className="whitePageLoader" style={{display:itsVisible}}/>   
+            <div className='divLogin'>
+                <h1>Create a quote and save it</h1>
+                <Login loaderVisibility={changingVisibility} ></Login>
+                <br></br>
+                
+            </div>
+        </div>
+        </>
+        
+        
+    )
+}
+
+En Styles:
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;1,300&family=PT+Serif&family=Sen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital@0;1&family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;1,500;1,900&display=swap');
+/* FontFamilies:
+font-family: 'Inria Serif', serif;
+font-family: 'Inter', sans-serif;
+font-family: 'Playfair Display', serif; */
+
+
+*{
+    box-sizing: border-box;
+}
+
+Html{
+    font-size: 62.5%;
+    scroll-behavior:smooth;
+} 
+    
+body{
+    height:100vh;    
+    /* color:#002147;
+    background-color: #8da9c4; */
+     color:#000000;
+    background-color: #ffffff;
+    font-family: Helvetica;
+    font-size: 1.5rem ;
+    margin:0 auto;
+}
+
+h1{
+    font-family: "Inria Serif', regular;";
+    font-weight: 400;
+    text-align: center;
+    font-size: 3.8rem ;
+}
+
+h2{
+    font-size: 3rem;
+    font-family:"Inria Serif', regular;";
+    font-weight: 400;
+    font-style: italic;
+}
+
+h3{
+    text-align: center;
+}
+
+button{
+    font-family: Helvetica;
+    /* color:#8da9c4;
+    background-color: #0b2545; */
+    color:#ffffff;
+    background-color: #0b0b0b;
+    width: 15rem;
+    height: 3.5rem;
+    border: none;
+    border-radius: 0.5rem;  
+    font-size: 1.5rem;   
+}
+
+button:hover{
+    /* background-color: #8ec9ff;
+    color:#0b2545; */
+    background-color: #ff8928;
+    color:#090909;
+    cursor: pointer;
+}
+
+input{
+    padding:0.5rem;
+    width:100%;
+    height:3rem;
+    background-color: transparent;
+    border: none;
+    /* border-bottom: 0.2rem solid #002147; */
+    border-bottom: 0.2rem solid #000000;;
+}
+
+input:focus{
+    font-family: Helvetica;
+    outline: none;
+    /* border: 0.1rem solid #002147; */
+    border: 0.1rem solid #000000;
+    border-radius: 0.5rem;
+}
+
+.centerDiv{
+    position:relative;
+    height:70vh;
+    width:100vw ;
+    display:flex;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    justify-content:center;
+    align-items:center;
+}
+
+.divLogin{
+    position:relative;
+    height:70vh;
+    width:100vw ;
+    display:flex;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+}
+
+.algo{
+    background-color: #92DCE5;
+    width: 100vw;
+    height: 20vh;
+    flex-direction: row;
+}
+
+.button_logout{
+    margin-top: 2rem; 
+}
+
+.material-symbols-outlined.home {
+    /* background-color: #002147;
+    color:#8da9c4; */
+    background-color: #000000;
+    color:#ffffff;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
+    border-radius: 50%;
+    width:4rem;
+    height:4rem;
+    font-size: 1.8rem;
+}
+
+.material-symbols-outlined{
+    background-color: transparent;
+    /* color: #002147; */
+    color: #000000;
+    display:inline;
+    font-size: 1.5rem;
+    width:3rem;
+    height:3rem;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+a:visited {
+    color: inherit;
+  }
+a:active{
+    color:#8ec9ff
+}
+.buttonHide:hover{
+    background-color: red;
+    width: fit-content;
+}
+
+.buttonHide:hover span{
+    display: none;
+}
+
+.buttonHide:hover:after{
+    content: "Delete";
+    color: white;
+    font-weight: bold;
+    font-family: "Sen", Helvetica;
+}
+
+.textBox{
+    width: 100%;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #002147;
+    font-size: 1.5rem;
+    height: 5rem;
+    padding: 1rem 1rem;
+    box-sizing: border-box;
+    border: 0.2rem solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+textarea:focus{
+    outline: #8ec9ff;
+}
+
+ul{
+    list-style-type: none;    
+    padding: 0;
+    margin: 0;
+}
+
+ul li {  
+    list-style: none;
+  }
+
+li{
+    align-content: center;
+    display:inline-block;    
+   
+  }
+/* 
+.ulBox{
+    width: 30rem;
+    height: 100vh;
+} */
+
+/* .ulBox_delete-list{
+    display: flex;
+    align-items: center;
+} */
+
+.ulBox_div{
+    word-wrap: break-word;
+    width: 90%;
+    margin-top: 2rem;
+}
+
+/* .ulBox_button{
+    align-self: center;
+    margin-top: 2rem;
+}
+
+.ulBox_button:hover{
+    background-color: rgb(255, 0, 204);
+    color: white;
+    margin-right: 2rem;
+} */
+
+.loader {
+    border: 1rem solid #bababa; /* Light grey */
+    border-top: 1rem solid #253d4e; /* Blue */
+    border-radius: 50%;
+    width: 7rem;
+    height: 7rem;
+    z-index: 100;
+    animation: spin 2s linear infinite;
+  }
+.mainDiv{
+    width:70%;
+}
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  } 
+
+  .whitePageLoader{
+    position:absolute;
+    background-color: white;
+    opacity: 0.5; 
+    height: 100vh;
+    width: 100%;
+    z-index: 10;
+}
+
+.buttonHide{
+    margin-right: 1rem;
+}
+
+
+/* ----------------      MEDIA      ------------------- */
+/* Estilos para pantallas más grandes que 720px */
+@media(min-width: 720px){
+    .loader {
+        position: absolute;
+    }
+    
+    .mainDiv{
+        width:50%;
+    }
+
+    .centerDiv{
+        position:relative;
+        height:70vh;
+        width:100vw;
+        display:flex;
+        padding-left: 20%;
+        padding-right: 20%;
+        justify-content:center;
+        align-items:center;
+    }
+}
+
+@media(max-width: 720px){
+    .loader {
+        position: absolute;
+    }
+    
+    .centerDiv{
+        position:relative;
+        height:70vh;
+        width:100vw ;
+        display:flex;
+        padding-left: 20%;
+        padding-right: 20%;
+        justify-content:center;
+        align-items:center;
+    }
+}
+
+/* Estilos para pantallas más pequeñas que 529px */
+@media(max-width: 529px){
+    .loader {
+        position: absolute;
+    }
+
+    /* .ulBox{
+        width: 50rem;
+        height: 100vh;
+    } */
+
+    
+    h1{
+        font-family: "Merriweather";
+        text-align: center;
+        font-size: 2.4rem ;
+    }
+    
+    h2{
+        font-size: 2.2rem;
+        font-family: "Inria Serif', regular;";
+        font-weight: 400;
+        font-style: italic;
+    }
+
+    body{
+        font-size: 1.3rem;
+    }
+
+
+}
+
+@media(max-width: 422px){
+    .loader {
+        position: absolute;
+        border: 0.5rem solid #bababa; /* Light grey */
+        border-top: 0.5rem solid #253d4e; /* Blue */
+        border-radius: 50%;
+        width: 5rem;
+        height: 5rem;
+        z-index: 100;
+        animation: spin 2s linear infinite;
+      }
+      
+
+    .textBox{
+        width: 100%;
+        height: 5rem;
+        padding: 1rem 1rem;
+        box-sizing: border-box;
+        border: 0.2rem solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        resize: none;
+    }
+    
+    h1{
+        font-family: "Merriweather";
+        text-align: center;
+        font-size: 2.4rem ;
+    }
+    
+    h2{
+        font-size: 2.2rem;
+        font-family: "Inria Serif', regular;";
+        font-weight: 400;
+        font-style: italic;
+    }
+
+    body{
+        font-size: 1.3rem;
+    }
+
+    .ulBox{
+        width: 20rem;
+        height: 100vh;
+    }
+
+    
+
+    button{
+        font-size: 1.5rem;
+             
+    }
+}
+
