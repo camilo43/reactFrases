@@ -1,4 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;1,300&family=PT+Serif&family=Sen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital@0;1&family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;1,500;1,900&display=swap');
+/* FontFamilies:
+font-family: 'Inria Serif', serif;
+font-family: 'Inter', sans-serif;
+font-family: 'Playfair Display', serif; */
+
 
 *{
     box-sizing: border-box;
@@ -14,21 +20,23 @@ body{
     /* color:#002147;
     background-color: #8da9c4; */
      color:#000000;
-    background-color: #c3c2c2;
-    font-family: "Sen", Helvetica;
+    background-color: #ffffff;
+    font-family: Helvetica;
     font-size: 1.5rem ;
     margin:0 auto;
 }
 
 h1{
-    font-family: "Merriweather";
+    font-family: "Inria Serif', regular;";
+    font-weight: 400;
     text-align: center;
     font-size: 3.8rem ;
 }
 
 h2{
     font-size: 3rem;
-    font-family: "Merriweather";
+    font-family:"Inria Serif', regular;";
+    font-weight: 400;
     font-style: italic;
 }
 
@@ -37,7 +45,7 @@ h3{
 }
 
 button{
-    font-family: "Sen", Helvetica;
+    font-family: Helvetica;
     /* color:#8da9c4;
     background-color: #0b2545; */
     color:#ffffff;
@@ -68,7 +76,7 @@ input{
 }
 
 input:focus{
-    font-family: "Sen", Helvetica;
+    font-family: Helvetica;
     outline: none;
     /* border: 0.1rem solid #002147; */
     border: 0.1rem solid #000000;
@@ -77,17 +85,34 @@ input:focus{
 
 .centerDiv{
     position:relative;
-    height:100vh;
+    height:70vh;
     width:100vw ;
     display:flex;
+    padding-left: 3rem;
+    padding-right: 3rem;
     justify-content:center;
     align-items:center;
 }
 
-.algo{
-    align-self: center;
-    justify-self: center;
+.divLogin{
+    position:relative;
+    height:70vh;
+    width:100vw ;
+    display:flex;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
 }
+
+.algo{
+    background-color: #92DCE5;
+    width: 100vw;
+    height: 20vh;
+    flex-direction: row;
+}
+
 .button_logout{
     margin-top: 2rem; 
 }
@@ -239,7 +264,7 @@ li{
 
 
 /* ----------------      MEDIA      ------------------- */
-
+/* Estilos para pantallas más grandes que 720px */
 @media(min-width: 720px){
     .loader {
         position: absolute;
@@ -248,6 +273,17 @@ li{
     .mainDiv{
         width:50%;
     }
+
+    .centerDiv{
+        position:relative;
+        height:70vh;
+        width:100vw;
+        display:flex;
+        padding-left: 20%;
+        padding-right: 20%;
+        justify-content:center;
+        align-items:center;
+    }
 }
 
 @media(max-width: 720px){
@@ -255,24 +291,47 @@ li{
         position: absolute;
     }
     
-    .mainDiv{
-        width:60%;
+    .centerDiv{
+        position:relative;
+        height:70vh;
+        width:100vw ;
+        display:flex;
+        padding-left: 20%;
+        padding-right: 20%;
+        justify-content:center;
+        align-items:center;
     }
 }
 
+/* Estilos para pantallas más pequeñas que 529px */
 @media(max-width: 529px){
     .loader {
         position: absolute;
     }
 
-    .ulBox{
+    /* .ulBox{
         width: 50rem;
         height: 100vh;
+    } */
+
+    
+    h1{
+        font-family: "Merriweather";
+        text-align: center;
+        font-size: 2.4rem ;
+    }
+    
+    h2{
+        font-size: 2.2rem;
+        font-family: "Inria Serif', regular;";
+        font-weight: 400;
+        font-style: italic;
     }
 
-    .mainDiv{
-        width:70%;
+    body{
+        font-size: 1.3rem;
     }
+
 
 }
 
@@ -303,17 +362,18 @@ li{
     h1{
         font-family: "Merriweather";
         text-align: center;
-        font-size: 2.5rem ;
+        font-size: 2.4rem ;
     }
     
     h2{
-        font-size: 2rem;
-        font-family: "Merriweather";
+        font-size: 2.2rem;
+        font-family: "Inria Serif', regular;";
+        font-weight: 400;
         font-style: italic;
     }
 
     body{
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .ulBox{
@@ -321,9 +381,7 @@ li{
         height: 100vh;
     }
 
-    .mainDiv{
-        width:80%;
-    }
+    
 
     button{
         font-size: 1.5rem;

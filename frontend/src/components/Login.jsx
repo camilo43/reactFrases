@@ -1,4 +1,4 @@
-import { React, useState, useRef, useEffect } from "react"
+import { React, useState, useReducer, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { postUserInput_login, getUserInput_login } from "../axios/loginAxios.js"
 import { getUserInput } from "../axios/postAxios.js"
@@ -10,7 +10,7 @@ function Login ({loaderVisibility}) {
     const [password, setPassword] = useState("")
     const [controlDisplay, setControlDisplay] = useState(false)
     const [emptyAuthentification, setEmptyAuthentification] = useState(false)
-
+     
     useEffect(() => {
         const initialize = async () => {
             const algo = await getUserInput_login();
@@ -18,6 +18,10 @@ function Login ({loaderVisibility}) {
         }
         initialize();
     }, []);
+
+    const redirectSignUp = () => {
+        navigate("/signup")
+    }
 
     const emailOnChange = (event) => {
         setEmail(event.target.value)
@@ -68,7 +72,7 @@ function Login ({loaderVisibility}) {
                 <h2>Login</h2> 
                 <div style={!emptyAuthentification?{display:"none"}:{display:"block"}}>
                     <h3>Email and password are mandatory fields</h3>
-                </div>        
+                </div>
                 <form onSubmit={formOnSubmit}>
                     <label>Email </label>
                     <input onChange={emailOnChange} value={email} type="email"></input>
@@ -83,6 +87,7 @@ function Login ({loaderVisibility}) {
                    </div>
                     <button onClick={formOnSubmit} type="submit">Submit</button>
                 </form>
+                <p style={{maxWidth:"350px", paddingTop:"30px"}}>Do you want to add your own quote? <a href={"#"} onClick={redirectSignUp}>Register for free</a> if you're not a member yet and share it with the world.</p>
             </div> 
         </div>
        

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import { quotesInput, quotesGet, deleteQuotes } from "../axios/quotesAxios";
 import { useNavigate } from "react-router-dom"
 
