@@ -6,6 +6,8 @@ import { logger } from './utils/logger.js'
 import { SignUp_router } from './controllers/signUp_controller.js'
 import { Quotes_router } from './controllers/quotes_controller.js'
 import { Login_router } from './controllers/login_controller.js'
+import { Google_authentication } from './controllers/googleAuth_controller.js'
+import { Google_token } from './controllers/googleAuth_controller.js'
 import cookieParser from 'cookie-parser'
 
 mongoose.set('strictQuery', false)
@@ -48,5 +50,7 @@ mongoose.connect(config.MONGODB_URI)
 app.use("/", SignUp_router)
 app.use("/api/quotes", Quotes_router)
 app.use("/", Login_router)
+app.use("/auth/google", Google_authentication)
+app.use("/", Google_token)
 
 export default app
