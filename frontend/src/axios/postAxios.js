@@ -24,7 +24,8 @@ const getUserInput = async (object) => {
         const response = await axios.post(`${url}/auth`, object, {
             withCredentials: true,
             credentials: 'include'
-          }) 
+          })
+        console.log("AXIOS /AUTH===>", response.data) 
         return response.data
 
     }catch(error){
@@ -38,6 +39,7 @@ const getUserAuthenticated = async () => {
             withCredentials: true,
             credentials: 'include'
           })
+          console.log("RESPONSE AXIOS AUTH GOOGLE", response)
           return response.data
     }catch(error){           
         console.log("There was a problem when authenticating. More details: ", error);

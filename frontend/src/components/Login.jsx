@@ -1,9 +1,9 @@
 import { React, useState, useReducer, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { postUserInput_login, getUserInput_login } from "../axios/loginAxios.js"
-import { getUserInput } from "../axios/postAxios.js"
+import axios from 'axios';
 
-function Login ({loaderVisibility}) {
+function  Login ({loaderVisibility}) {
     const navigate = useNavigate()
    
     const [email, setEmail] = useState("")
@@ -12,6 +12,32 @@ function Login ({loaderVisibility}) {
     const [emptyAuthentification, setEmptyAuthentification] = useState(false)
     const [emailError, setEmailError] = useState("")
     const [passwordError, setPasswordError] = useState("")
+
+    //************************ */
+    
+    const enviarCodigoAlBackend = async (code) => {try {
+        const response = await axios.post('http://localhost:3002/auth/google/token', {
+          code,
+        });
+    
+        console.log("RESPUESTA TOKENS", response.data);
+        // Aquí puedes manejar los tokens como lo necesites
+      } catch (error) {
+        console.error('Error al enviar el código al backend:', error);
+      }
+    }
+    
+      useEffect(() => {
+        // Obtener el código de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+    
+        if (code) {
+          enviarCodigoAlBackend(code);
+        }
+      }, []); // Se ejecuta solo al montar el componente
+
+   //************************ */
 
     useEffect(() => {
         const initialize = async () => {
@@ -25,7 +51,6 @@ function Login ({loaderVisibility}) {
         const initializingApp = async () => await getUserInput_login()
         initializingApp()
     }, []);
-
 
     const redirectSignUp = () => {
         navigate("/signup")
@@ -91,14 +116,20 @@ function Login ({loaderVisibility}) {
             }, 3000);
             console.log("EMAIL AND PASSWORD ARE MANDATORY FIELDS")
         }
-    }   
+    } 
+    
+    const redirectingGoogle = async () => {
+        const urlAuth = await google_gettingTokens()
+        console.log(urlAuth)
+        return urlAuth
+    }
     
     return(
         <div>
             <div>
                 <h2>Login</h2> 
-                <div style={!emptyAuthentification?{display:"none"}:{display:"block"}}>
-                    <h3>Email and password are mandatory fields</h3>
+                <div style={!emptyAuthentification?{display:"none"}:{display:"block", color:"#D64933"}}>
+                    <p>Email and password are mandatory fields</p>
                 </div>
                 <form onSubmit={formOnSubmit}>
                     <label>Email </label>
@@ -109,12 +140,21 @@ function Login ({loaderVisibility}) {
                     <input onChange={passwordOnChange} value={password} type="password"></input>
                     <br></br>
                     <br></br>
-                   <div style={controlDisplay==true? {display:"inline"} : {display:"none"}}>
-                        <h1>The user does not exist, please Sign Up</h1>
+                   <div style={controlDisplay==true? {display:"inline", color:"#D64933"} : {display:"none"}}>
+                        <h3>The user does not exist, please Sign Up</h3>
                    </div>
                     <button onClick={formOnSubmit} type="submit">Submit</button>
                 </form>
-                <p style={{maxWidth:"350px", paddingTop:"30px"}}>Do you want to add your own quote? <a href={"#"} onClick={redirectSignUp}>Register for free</a> if you're not a member yet and share it with the world.</p>
+
+                <div className="google-button-main-container">
+                    <div className="google-icon-container">
+                        <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                    </div>
+                    <button className="google-button"><a className="google-link" href="https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&client_id=14549060393-rdlcf6ftfu8qiommco6tt4sla1of4vqf.apps.googleusercontent.com&prompt=consent&redirect_uri=http%3A%2F%2Flocalhost%3A3002%2Fauth%2Fgoogle&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email">Sign in with Google</a></button>
+                   
+                </div>
+                <p style={{maxWidth:"350px", paddingTop:"30px", lineHeight:"25px"}}>Do you want to add your own quote? If you're not a member yet, <a href={"#"} style={{color:"black"}} onClick={redirectSignUp}>register</a> for free and share it with the world</p>
+               
             </div> 
         </div>
        

@@ -10,9 +10,19 @@ function Authenticated() {
     useEffect(() => {
       const fetchData = async () => {
         const pruebaFunc = await getUserAuthenticated();
+        console.log("PRUENA FUNC", pruebaFunc)
         pruebaFunc? setIsAuthenticated(true) : setIsAuthenticated(false);
-        setUserNameWelcome(pruebaFunc.userName)
-        console.log("PRUEBA NAME",pruebaFunc.userName )      
+        try{
+          if(pruebaFunc.userName){
+            setUserNameWelcome(pruebaFunc.userName)
+          }else{
+            //TO BE CHANGED <======================
+            setUserNameWelcome("NEW USER")
+          }
+        }catch{
+          console.log("There is a problem with the authentication")
+        }
+            
       };
       fetchData();
     }, []);
@@ -32,9 +42,15 @@ function Authenticated() {
 
     if (isAuthenticated) {
       return (
-        <div className="mainBox" style={{position:"relative", height:"100vh", width:"100vw", display:"flex", justifyContent:"center", alignItems:"center"}}>
-          <h1 className="mainBox_header">WELCOME {userNameWelcome}!</h1>
-        </div>
+        <>
+          <header className="backgroundAuth">
+
+          </header>
+          <div className="mainBox " style={{position:"relative", height:"100vh", width:"100vw", display:"flex", justifyContent:"center", alignItems:"center", zIndex:90}}>
+            <h1 className="mainBox_header fadeIn">WELCOME {userNameWelcome}!</h1>
+          </div>
+        </>
+       
       );
     } else {
         <div className="centerDiv">

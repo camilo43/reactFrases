@@ -49,7 +49,8 @@ function Signup () {
 
     //Navigate has to be used inside a BrowserRouter.
     //onSubmitForm now writes the URL in the browser and also returns values
-    const onSubmitForm = async (event) => {     
+    const onSubmitForm = async (event) => { 
+        console.log("Entra a SUBMIT")     
         event.preventDefault()
         changingVisibility()
         
@@ -67,7 +68,8 @@ function Signup () {
                 setErrorUserName("")
             }, 4000);
         }
-        else if(password && password==confirmedPassword){    
+        else if(password && password==confirmedPassword){ 
+              
             try{
                 const checkingUserCredentials = await postUserInput(userInput_signUp)
                 console.log("CHEKING", checkingUserCredentials)
@@ -150,16 +152,19 @@ function Signup () {
       }
 
     return(
-        <div className="centerDiv">
+        <>
+         <div className="whitePageLoader" style={{display:itsVisible}}/>  
+            <header className='header'>
+                <button className="material-symbols-outlined home buttonHome" onClick={backHome}><span>Home</span></button>
+            </header>
+            <div className="centerDiv">
             <div className="loader" style={{display:itsVisible}}/> 
-            <div className="whitePageLoader" style={{display:itsVisible}}/>  
             <div>
-                <button className="material-symbols-outlined home" onClick={backHome}>Home</button>
                 <h2>Signup</h2>
                 <h3 style={{color:"#b60000"}}>{displayErrorMessage}</h3>
                 <form onSubmit={onSubmitForm}>
                     <label>Email: </label>
-                    <input type="email" value={email} onChange={emailOnChange}></input>
+                    <input type="text" value={email} onChange={emailOnChange}></input>
                     <p style={cssVisibilityEmail()}>{errorEmail}</p>
                     <label>User name: </label>
                     <input type="text" value={name} onChange={nameOnChange}></input>
@@ -178,6 +183,8 @@ function Signup () {
                 </form>
                 </div>
         </div>
+        </>
+        
     )
 }
 

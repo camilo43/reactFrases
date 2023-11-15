@@ -15,12 +15,17 @@ function Auth () {
     }, 5000);
     
     return(
-        <div className="centerDiv">
-            <div>
-                <h1>We are authenticating your account</h1>
-                <h3>Please wait</h3>
+        <>
+            <header>
+            </header>
+            <div className="centerDiv fadeIn">
+                <div>
+                    <h1>We are authenticating your account</h1>
+                    <h3>Please wait</h3>
+                </div>
             </div>
-        </div>
+        </>
+      
     )
 }
 

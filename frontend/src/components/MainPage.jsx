@@ -19,24 +19,26 @@ function MainPage () {
         }else{
             setItsVisible("none")
         }
-       
+    }
+
+    const redirectSignUp = () => {
+        navigate("/signup")
     }
 
     return (
         <>
-         <header className='algo'>
-            <button>
+        <div className="whitePageLoader" style={{display:itsVisible}}/> 
+         <header className="header">
+            <button className="buttonTryFree fadeIn" onClick={redirectSignUp}>
                 Try Free
             </button>
          </header>
-         <div className="centerDiv">
+         <div className="centerDiv fadeIn">
             <div className="loader" style={{display:itsVisible}}/> 
-            <div className="whitePageLoader" style={{display:itsVisible}}/>   
-            <div className='divLogin'>
+            <div className="divLogin">
                 <h1>Create a quote and save it</h1>
                 <Login loaderVisibility={changingVisibility} ></Login>
                 <br></br>
-                
             </div>
         </div>
         </>

@@ -72,7 +72,7 @@ function Quotes () {
     const FormSubmitQuotes = () => {    
         return(
             <form onSubmit={inputSubmit}>
-                <textarea className="textBox" onChange={inputUserQuote} value={userQuote}></textarea>
+                <textarea className="textBox" onChange={inputUserQuote} value={userQuote} placeholder="Please type here"></textarea>
                 <br/>
                 <br/>
                 <button type="submit">
@@ -83,15 +83,17 @@ function Quotes () {
 
      const MappingList = () => {
         return listQuotes.map((quote,index) => {
+            console.count("ESTE ES EL CONUNT DEL map")
+            console.log("TIGGER", triggerBoolean)
             if(quote==null){
                 setListQuotes([])
             }else{
                 return(
-                    <ul className="esteUl" key={quote.id}>
+                    <ul className="esteUl fadeIn" key={quote.id}>
                         <div className="ulBox_delete-list">
-                            <li className="ulBox_div">
+                            <li className="ulBox_div" style={{backgroundColor:"#EEE5E9", borderRadius:"10px"}}>
                                 <button onClick={()=> {handleDelete(index, quote.id)}} className="material-symbols-outlined buttonHide buttonShow"><span>Delete</span></button>
-                            {quote.content }</li> 
+                            {quote.content}</li> 
                         </div>
                     </ul>
                     )
@@ -101,25 +103,28 @@ function Quotes () {
     }
    
     return(
-        <div className="centerDiv">
-            <div className="mainDiv">
-                <div style={!emptyMessageCss?{display:"none"}:{display:"block"}}>
-                    <h2>The input can not be a blank space</h2>
-                </div>
-                <div style={!cssTrigger?{display:"none"}:{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
-                    <h1>Your session has expired, please login again</h1>
-                    <button onClick={goingBackHome}>Home</button>
-                </div>
-                <div style={cssTrigger?{visibility:"hidden"}:{visibility:"visible", width:"100%"}}>
-                    <div>
-                        {FormSubmitQuotes()}
-                        <MappingList/>
+        <>
+            <header className="header">
+                <button className="button_logout buttonTryFree fadeIn" onClick={loggingOut} style={cssTrigger?{display:"none"}:{display:"visible"}}>Logout</button>
+            </header>
+            <div className="centerDiv fadeIn">
+                <div className="mainDiv">
+                    <div style={!emptyMessageCss?{display:"none"}:{display:"block", color:"#D64933"}}>
+                        <p>The input can not be a blank space</p>
                     </div>
-                    <button className="button_logout" onClick={loggingOut}>Logout</button>
+                    <div className="fadeIn" style={!cssTrigger?{display:"none"}:{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+                        <h1>Your session has expired, please login again</h1>
+                        <button onClick={goingBackHome}>Home</button>
+                    </div>
+                    <div style={cssTrigger?{visibility:"hidden"}:{visibility:"visible", width:"100%"}}>
+                        <div>
+                            {FormSubmitQuotes()}
+                            {MappingList()}
+                        </div>                        
+                    </div>
                 </div>
             </div>
-        </div>
-        
+        </>
     )
 }
 
