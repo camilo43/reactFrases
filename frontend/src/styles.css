@@ -342,12 +342,13 @@ li{
     margin-top: 4rem;
     justify-content: center;
     width: auto;
+    z-index: 90;
 }
 
 .google-icon-container{
     display: flex;
     position: absolute;
-    z-index: 100;
+    z-index: 1;
     align-self: center;
     width:17rem;
 }
@@ -362,13 +363,18 @@ li{
 } */
 
 .google-button{
-    background-color: white;
+    background-color: transparent;
     border: 1px solid black;
     border-radius: 20px;
     color: #000000;
     width: 21rem;
     height: 4rem;
     position: relative;
+    z-index: 100;
+}
+
+.google-button:hover{
+    background-color: transparent;
 }
 
 .google-link{

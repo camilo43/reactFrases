@@ -8,7 +8,7 @@ const Google_token = express.Router()
 
 function getGoogleAuthURL(){
     const options = {
-        redirect_uri:process.env.GOOGLE_REDIRECT,
+        redirect_uri:process.env.GOOGLE_REDIRECT_PROD,
         client_id: process.env.GOOGLE_ID_CLIENT,
         access_type:"offline",
         response_type:"code",
@@ -37,7 +37,7 @@ Google_token.get('/auth/google', async (req, res) => {
             code,
             client_id: process.env.GOOGLE_ID_CLIENT,
             client_secret: process.env.GOOGLE_SECRET,
-            redirect_uri: process.env.GOOGLE_REDIRECT,
+            redirect_uri: process.env.GOOGLE_REDIRECT_PROD,
             grant_type: "authorization_code"
         }
             return await axios.post(url, querystring.stringify(values), {
