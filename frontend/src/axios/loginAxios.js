@@ -11,7 +11,6 @@ const getUserInput_login = async () => {
             withCredentials: true,
             credentials: 'include'
         })
-        console.log("SERVER MSG", serverMessage)
         return serverMessage.data
     }catch(error){
         console.log("The page could not be loaded");        
@@ -19,7 +18,6 @@ const getUserInput_login = async () => {
 }
 
 const postUserInput_login = async (object) => {
-    
     try{ 
         const userData = await axios.post(`${url}/login`,object, {
             withCredentials: true,

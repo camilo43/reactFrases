@@ -10,12 +10,11 @@ Login_router.get("/", async(req, res, next) => {
 })   
 
 Login_router.post("/login", async(req, res, next) => {
-    console.time("Login Inicia")
     const dataUser = await req.body
     const userEmail = dataUser.email   
     const userPassword = dataUser.password
     const user = await SignUp_modelo_test.findOne({email:userEmail})
-   console.log(userEmail.match(/\S+@\S+\.com/))
+    console.log("======>>> USER", user)
     function tokenExpiration(){
         const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"30m"})        
         return signed

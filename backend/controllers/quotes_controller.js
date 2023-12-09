@@ -27,8 +27,6 @@ Quotes_router.get("/", async(req, res) => {
             const modelSignUp = await SignUp_modelo_test.findOne({email:decodedToken.email}) 
             const modelQuotes = await Quote_modelo_test.find({})
             const listQuotes = modelSignUp.quotes
-            console.log("LIST QUOTES", listQuotes)
-            console.log("MODEL QUOTES", modelQuotes)
             const modelExample2 = await SignUp_modelo_test.findOne({email:decodedToken.email}).populate("quotes") 
             const modelExample3 = await Quote_modelo_test.findOne({content:"e"}).populate("user")
             
@@ -54,7 +52,6 @@ Quotes_router.post("/", async(req, res) => {
   try{
     const body = await req.body 
     const newPost = await Quote_modelo_test({content:body.content})
-    console.log("NEW POST CONTENT", newPost)
     if(newPost){
       jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
         if(err){
@@ -67,7 +64,6 @@ Quotes_router.post("/", async(req, res) => {
           modelSignUp.quotes.push(newPost._id)
           await modelSignUp.save()
           await newPost.save()
-          console.log("MODEL QUOTES", modelQuotes)
           res.status(200).json(modelSignUp)
         } 
       }

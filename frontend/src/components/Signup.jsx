@@ -154,13 +154,17 @@ function Signup () {
     return(
         <>
          <div className="whitePageLoader" style={{display:itsVisible}}/>  
-            <header className='header'>
-                <button className="material-symbols-outlined home buttonHome" onClick={backHome}><span>Home</span></button>
+         <div className="backgroundColorPage fadeIn">
+            <header className="header headerColor">
+                <button className="home buttonHome" onClick={backHome}>
+                    Home
+                </button>
+                {/* <button className="material-symbols-outlined home buttonHome" onClick={backHome}><span>Home</span></button> */}
             </header>
-            <div className="centerDiv">
+            <div className="centerDiv ">
             <div className="loader" style={{display:itsVisible}}/> 
-            <div>
-                <h2>Signup</h2>
+            <div className="signUpContent ">
+                <h2 className="signUpText">Signup</h2>
                 <h3 style={{color:"#b60000"}}>{displayErrorMessage}</h3>
                 <form onSubmit={onSubmitForm}>
                     <label>Email: </label>
@@ -182,6 +186,7 @@ function Signup () {
                     <button onSubmit={onSubmitForm} type="submit">Submit</button>
                 </form>
                 </div>
+            </div>
         </div>
         </>
         

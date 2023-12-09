@@ -11,7 +11,6 @@ const quotesGetLogOut = async () => {
       withCredentials: true,
       credentials: 'include'
     }) 
-    console.log("quotesGetLogOut", loggingOut.data)
     return loggingOut.data   
   }catch(error){
     console.log("Logging out process could not be completed", error)
@@ -29,7 +28,6 @@ const quotesGet = async () => {
   }catch(error){
     console.log("Quotes could not be listed. More details:", userData)
   }
-   
 }
 
 const quotesInput = async (object) => {
@@ -46,7 +44,6 @@ const quotesInput = async (object) => {
 }
   
 const deleteQuotes = async (itemId) => {
-  console.log("TESTING DELETE")
   try{
     const itemIdString = itemId.id
     const deletingElement = await axios.delete(`${url}/api/quotes/${itemIdString}`, {
@@ -54,7 +51,6 @@ const deleteQuotes = async (itemId) => {
     withCredentials: true,
     credentials: 'include'
   })
-  console.log("AXIOS DELETE", deletingElement.data)
   return deletingElement.data
   }catch(error){
     console.log("The quote could not be deleted. More details: ")

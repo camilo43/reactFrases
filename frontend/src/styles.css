@@ -28,16 +28,15 @@ body{
 
 h1{
     font-family: "Inria Serif', regular;";
-    font-weight: 400;
+    font-weight: 500;
     text-align: center;
-    font-size: 3.8rem ;
+    font-size: 5rem ;
 }
 
 h2{
     font-size: 3rem;
     font-family:"Inria Serif', regular;";
     font-weight: 400;
-    font-style: italic;
     color: #D64933;
 }
 
@@ -104,6 +103,7 @@ input:focus{
     display:flex;
     padding-left: 3rem;
     padding-right: 3rem;
+    padding-top: 4rem;
     justify-content:center;
     align-items:center;
     flex-direction: column;
@@ -167,7 +167,7 @@ input:focus{
 }
 
 .buttonHome:hover:after{
-    content: "Back";
+    /* content: "Back"; */
     color: black;
     font-family: Helvetica;
     
@@ -322,10 +322,10 @@ li{
     to {height: 100vh; opacity: 1; background-color: #92DCE5;}
   }
 
-  .fadeIn{
-    animation-name: fadeInAnimation;
-    animation-duration: 1s;
-  }
+.fadeIn{
+  animation-name: fadeInAnimation;
+  animation-duration: 1s;
+}
 
 @keyframes fadeInAnimation{
     from {
@@ -338,24 +338,36 @@ li{
 
 .google-button-main-container{
     display: flex;
-    margin-top: 2rem;
+    position: relative;
+    margin-top: 4rem;
     justify-content: center;
+    width: auto;
 }
 
 .google-icon-container{
     display: flex;
     position: absolute;
     z-index: 100;
-    padding:5px;
-    margin-left: -25rem;
-    align-items: center;
+    align-self: center;
+    width:17rem;
 }
+
+.google-icon{
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+/* .google-icon-container{
+   background-color: #D64933;
+} */
 
 .google-button{
     background-color: white;
     border: 1px solid black;
+    border-radius: 20px;
     color: #000000;
-    width: 30rem;
+    width: 21rem;
+    height: 4rem;
     position: relative;
 }
 
@@ -366,71 +378,101 @@ li{
     width: 100%;
     height: 100%;
     align-items: center;
-    justify-content: center;
+    margin-left: 4.5rem;
 }
 
 
 /* ----------------      MEDIA      ------------------- */
-/* Estilos para pantallas más grandes que 720px */
-@media(min-width: 720px){
-    .loader {
-        position: absolute;
-    }
-    
-    .mainDiv{
-        width:50%;
-    }
+/* MIN = Estilos para pantallas más grandes que 720px */
+/* MAX = Estilos para pantallas más pequeñas que 529px */
 
-    .centerDiv{
-        position:relative;
-        height:70vh;
-        width:100vw;
-        display:flex;
-        padding-left: 10%;
-        padding-right: 10%;
-        justify-content:center;
-        align-items:center;
+@media screen and (max-width: 422px){
+
+    html{
+        font-size: 50%;
     }
 
     .buttonTryFree{
-        margin-right: 30%;
+        margin-right: 10%;
         margin-bottom: 2%;
     }
 
     .buttonHome{
-        margin-left: 30%;
+        margin-left: 10%;
         margin-bottom: 2%;
     }
 }
 
-@media(max-width: 1038px){
-    .loader {
-        position: absolute;
+@media screen and (min-width: 422px){
+    html{
+        font-size: 50%;
     }
-    
-    .centerDiv{
-        position:relative;
-        height:70vh;
-        width:100vw ;
-        display:flex;
-        padding-left: 10%;
-        padding-right: 10%;
-        justify-content:center;
-        align-items:center;
-    }
+
     .buttonTryFree{
-        margin-right: 5%;
+        margin-right: 15%;
         margin-bottom: 2%;
     }
 
     .buttonHome{
-        margin-left: 5%;
+        margin-left: 15%;
         margin-bottom: 2%;
     }
+
+    /* .centerDiv{
+        padding-left: 5%;
+        padding-right: 5%;
+        justify-content:center;
+        align-items:center;
+    } */
+
+    /* .loader {
+        position: absolute;
+        border: 0.5rem solid #bababa; 
+        border-top: 0.5rem solid #253d4e; 
+        border-radius: 50%;
+        width: 5rem;
+        height: 5rem;
+        z-index: 100;
+        animation: spin 2s linear infinite;
+      } */
+      
+
+    /* .textBox{
+        width: 100%;
+        height: 5rem;
+        padding: 1rem 1rem;
+        box-sizing: border-box;
+        border: 0.2rem solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        resize: none;
+    } */
+    
+    /* h1{
+        font-family: "Merriweather";
+        text-align: center;
+        font-size: 2.4rem ;
+    }
+    
+    h2{
+        font-size: 2.2rem;
+        font-family: "Inria Serif', regular;";
+        font-weight: 400;
+        font-style: italic;
+    }
+
+    body{
+        font-size: 1.3rem;
+    } */
+
+    /* .ulBox{
+        width: 20rem;
+        height: 100vh;
+    } */
+
 }
 
-/* Estilos para pantallas más pequeñas que 529px */
-@media(max-width: 529px){
+@media screen and (min-width: 529px){
     .loader {
         position: absolute;
     }
@@ -447,7 +489,7 @@ li{
         height: 100vh;
     } */
     
-    h1{
+    /* h1{
         font-family: "Merriweather";
         text-align: center;
         font-size: 2.4rem ;
@@ -462,67 +504,106 @@ li{
 
     body{
         font-size: 1.3rem;
-    }
+    } */
 
 
 }
 
-@media(max-width: 422px){
+@media screen and (min-width: 720px){
+    html{
+        font-size: 50%;
+    }
+
+    .buttonTryFree{
+        margin-right: 25%;
+        margin-bottom: 2%;
+    }
+
+    .buttonHome{
+        margin-left: 25%;
+        margin-bottom: 2%;
+    }
+
+    /* .loader {
+        position: absolute;
+    }
+    
+    .mainDiv{
+        width:50%;
+    }
 
     .centerDiv{
-        padding-left: 5%;
-        padding-right: 5%;
+        position:relative;
+        height:70vh;
+        width:100vw;
+        display:flex;
+        padding-left: 10%;
+        padding-right: 10%;
         justify-content:center;
         align-items:center;
+    } */
+
+}
+
+@media screen and (min-width: 1038px){
+    html{
+        font-size: 60%;
     }
 
-    .loader {
+    .buttonTryFree{
+        margin-right: 30%;
+        margin-bottom: 2%;
+    }
+
+    .buttonHome{
+        margin-left: 30%;
+        margin-bottom: 2%;
+    }
+
+    /* .loader {
         position: absolute;
-        border: 0.5rem solid #bababa; /* Light grey */
-        border-top: 0.5rem solid #253d4e; /* Blue */
-        border-radius: 50%;
-        width: 5rem;
-        height: 5rem;
-        z-index: 100;
-        animation: spin 2s linear infinite;
-      }
-      
-
-    .textBox{
-        width: 100%;
-        height: 5rem;
-        padding: 1rem 1rem;
-        box-sizing: border-box;
-        border: 0.2rem solid #ccc;
-        border-radius: 4px;
-        background-color: #f8f8f8;
-        resize: none;
     }
     
-    h1{
-        font-family: "Merriweather";
-        text-align: center;
-        font-size: 2.4rem ;
+    .centerDiv{
+        position:relative;
+        height:70vh;
+        width:100vw ;
+        display:flex;
+        padding-left: 10%;
+        padding-right: 10%;
+        justify-content:center;
+        align-items:center;
+    } */
+   
+}
+
+@media screen and (min-width: 1200px){
+    html{
+        font-size: 60%;
     }
-    
-    h2{
-        font-size: 2.2rem;
-        font-family: "Inria Serif', regular;";
-        font-weight: 400;
-        font-style: italic;
+    .buttonTryFree{
+        margin-right: 30%;
+        margin-bottom: 2%;
     }
 
-    body{
-        font-size: 1.3rem;
-    }
-
-    .ulBox{
-        width: 20rem;
-        height: 100vh;
-    }
-
-    button{
-        font-size: 1.5rem;
-             
+    .buttonHome{
+        margin-left: 30%;
+        margin-bottom: 2%;
     }
 }
+
+@media screen and (min-width: 1800px){
+    html{
+        font-size: 80%;
+    }
+    .buttonTryFree{
+        margin-right: 30%;
+        margin-bottom: 2%;
+    }
+
+    .buttonHome{
+        margin-left: 30%;
+        margin-bottom: 2%;
+    }
+}
+

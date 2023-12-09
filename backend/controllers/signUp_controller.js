@@ -10,7 +10,6 @@ SignUp_router.post("/signup", async(req, res, next) => {
     const dataUser = await req.body
     const findRepeatedUser = await SignUp_modelo_test.findOne({userName:dataUser.userName})
     const findRepeatedEmail = await SignUp_modelo_test.findOne({email:dataUser.email})
-    console.log("REPETED USER", findRepeatedEmail)
     
     try{
         if(!dataUser.email){
@@ -62,7 +61,7 @@ SignUp_router.post("/signup", async(req, res, next) => {
             })
         }
     }catch(e){
-        console.log("ERRRROOORRR")    
+        console.log("There is a problem with the data entered when signing up")    
     }    
     })
 
@@ -94,7 +93,6 @@ SignUp_router.post("/auth", async(req, res) => {
 SignUp_router.get("/auth/autenticado", async(req,res)=>{
     try{
         const verificando = req.cookies.token
-        console.log("VERIFICANDO TOKEN", verificando)
        
         if(verificando){ 
             jwt.verify(verificando, process.env.KEY, async (err, decodedToken) => {                
