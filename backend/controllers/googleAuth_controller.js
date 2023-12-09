@@ -83,7 +83,8 @@ Google_token.get('/auth/google', async (req, res) => {
                 const decoded = jwt.verify(req.cookies["token"], process.env.KEY);
                 console.log("decoded", decoded);
                 if(decoded){
-                    res.redirect("http://localhost:3000/auth")
+                    //res.redirect("http://localhost:3000/auth")
+                    res.redirect("https://www.camilovega.site/auth")
                 }else{
                     console.error("There is a problem with the authentication. Ref: token not valid")
                 }
