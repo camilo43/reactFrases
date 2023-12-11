@@ -18,10 +18,13 @@ function getGoogleAuthURL(){
             "https://www.googleapis.com/auth/userinfo.email"
         ].join(" ")
     }
+    console.log(`${process.env.GOOGLE_AUTH}?${querystring.stringify(options)}`)
     return(`${process.env.GOOGLE_AUTH}?${querystring.stringify(options)}`)
 }
 
+
 Google_authentication.post("/", async(req, res, next) => {
+  console.log("Sending the GOOGLE URL", getGoogleAuthURL())
     return res.send(getGoogleAuthURL())
 }
 )
