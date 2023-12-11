@@ -8,7 +8,7 @@ function Logout () {
     }, 3000);
    
     return(
-        <div className="centerDiv">
+        <div className="centerDiv fadeIn">
             <h1>Thanks for visiting our site</h1>
         </div>
     )
