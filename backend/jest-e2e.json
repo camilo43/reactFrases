@@ -1,0 +1,10 @@
+{
+    "transform": {},
+    "extensionsToTreatAsEsm": [".jsx", ".ts"],
+    "moduleFileExtensions":["js"],
+    "rootDir": ".",
+    "testEnvironment": "node",
+    "testRegex": ".e2e.js$",
+    "collectCoverage": true,
+    "coverageReporters": ["html", "text"] 
+}

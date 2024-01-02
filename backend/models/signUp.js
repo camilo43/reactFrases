@@ -17,10 +17,14 @@ const newSignUp = new mongoose.Schema({
          }
      },
     password:{
-         type:String,
-         required:true,
-         unique:true
-     },
+        type:String,
+        required:function() {
+            return !this.googleId;
+          },
+        sparse: true
+        },
+    googleId: String,
+    
     quotes:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Quote_model'

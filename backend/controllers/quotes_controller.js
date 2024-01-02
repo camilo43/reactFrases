@@ -6,16 +6,16 @@ import jwt from 'jsonwebtoken'
 
 const Quotes_router = express.Router()
  
-    Quotes_router.get("/user/logout", async(req, res) => {
-      try{
-        res.clearCookie('token')
-        res.status(200).send("LoggedOut")
-      }catch(error){
-        console.log("Logout process could not be completed", error)
-    }
-  })
+Quotes_router.get("/user/logout", async(req, res) => {
+  try{
+    res.clearCookie('token')
+    res.status(200).send("LoggedOut")
+  }catch(error){
+    console.log("Logout process could not be completed", error)
+  }
+})
 
-Quotes_router.get("/", async(req, res) => {
+Quotes_router.get("/api/quotes", async(req, res) => {
   const tokenCookie = req.cookies.token
   // await SignUp_model.deleteOne({id:"652b6518c15b387972e66b33"})
     try{
@@ -47,7 +47,7 @@ Quotes_router.get("/", async(req, res) => {
   }
 )
 
-Quotes_router.post("/", async(req, res) => {
+Quotes_router.post("/api/quotes", async(req, res) => {
   const tokenCookie = req.cookies.token
   try{
     const body = await req.body 
@@ -74,7 +74,7 @@ Quotes_router.post("/", async(req, res) => {
   }
 })
 
-Quotes_router.delete("/:itemId", async(req, res) => {
+Quotes_router.delete("/api/quotes/:itemId", async(req, res) => {
   const itemId = req.params.itemId;  
   const tokenCookie = req.cookies.token
   

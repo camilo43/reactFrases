@@ -15,6 +15,16 @@ function Signup () {
     const [itsVisible, setItsVisible] = useState("none")
     const navigate = useNavigate()
 
+    const inputRef = useRef(null);
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter' && inputRef.current) {
+            event.preventDefault();
+            onSubmitForm(event)
+            inputRef.current.blur();
+        };
+    }
+
     const nameOnChange = (event) => {
         setName(event.target.value)
     }
@@ -50,8 +60,8 @@ function Signup () {
     //Navigate has to be used inside a BrowserRouter.
     //onSubmitForm now writes the URL in the browser and also returns values
     const onSubmitForm = async (event) => { 
-        console.log("Entra a SUBMIT")     
         event.preventDefault()
+        console.log("Entra a SUBMIT")
         changingVisibility()
         
         if(!email){
@@ -166,24 +176,24 @@ function Signup () {
             <div className="signUpContent ">
                 <h2 className="signUpText">Signup</h2>
                 <h3 style={{color:"#b60000"}}>{displayErrorMessage}</h3>
-                <form onSubmit={onSubmitForm}>
+                <form onSubmit={onSubmitForm} onKeyDown={handleKeyDown}>
                     <label>Email: </label>
-                    <input type="text" value={email} onChange={emailOnChange}></input>
+                    <input type="text" value={email} onChange={emailOnChange} ref={inputRef}></input>
                     <p style={cssVisibilityEmail()}>{errorEmail}</p>
                     <label>User name: </label>
-                    <input type="text" value={name} onChange={nameOnChange}></input>
+                    <input type="text" value={name} onChange={nameOnChange} ref={inputRef}></input>
                     <p style={cssVisibilityUser()}>{errorUserName}</p>
                     <label>Password: </label>
-                    <input type="password" value={password} onChange={passwordOnChange}></input>
+                    <input type="password" value={password} onChange={passwordOnChange} ref={inputRef}></input>
                     <p style={cssVisibility()}>{errorInfo}</p>
                     <br></br>
                     <br></br>
                     <label>Confirm password: </label>
-                    <input type="password" value={confirmedPassword} onChange={confirmPassword}></input>
+                    <input type="password" value={confirmedPassword} onChange={confirmPassword} ref={inputRef}></input>
                     <p style={{color:"#b60000"}}>{differentPassword}</p>
                     <br></br>
                     <br></br>
-                    <button onSubmit={onSubmitForm} type="submit">Submit</button>
+                    <button onClick={onSubmitForm} type="submit">Submit</button>
                 </form>
                 </div>
             </div>

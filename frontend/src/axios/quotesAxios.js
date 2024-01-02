@@ -1,17 +1,16 @@
 import axios from "axios" 
 // axios.defaults.withCredentials = true;
-// const url = "http://localhost:3002"
+const url = "http://localhost:3002"
 // const url = "https://backendfrases.onrender.com/"
 // const url = "https://backendprojects.site"
-const url = "https://www.api.camilovega.site"
+// const url = "https://www.api.camilovega.site"
 
 const quotesGetLogOut = async () => {
   try{
-    const loggingOut = await axios.get(`${url}/api/quotes/user/logout`, {
+    return await axios.get(`${url}/user/logout`, {
       withCredentials: true,
       credentials: 'include'
     }) 
-    return loggingOut.data   
   }catch(error){
     console.log("Logging out process could not be completed", error)
   }

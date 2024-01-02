@@ -68,19 +68,19 @@ SignUp_router.post("/signup", async(req, res, next) => {
 SignUp_router.post("/auth", async(req, res) => {
     const dataUser = req.body
     const toBeSigned = {
-        // userName:dataUser.userName,
+        userName:dataUser.userName,
         email:dataUser.email
     }
-
+    
     if(dataUser){
         try{
-            const token = jwt.sign(toBeSigned, process.env.KEY, {expiresIn:"30m"})           
+            const token = jwt.sign(toBeSigned, process.env.KEY, {expiresIn:"5m"})           
             res.set('Content-Type', 'application/json');
             res.cookie("token", token, {
                 httpOnly:true,
                 SameSite: 'none',
                 secure: true}
-                ).status(200).send("COOKIE sent") 
+                ).json({ token: token, message: "COOKIE sent" });
             
         }catch(error){
             console.log(`The token could not be signed. Check axios.SignUp_router`)
@@ -93,16 +93,21 @@ SignUp_router.post("/auth", async(req, res) => {
 SignUp_router.get("/auth/autenticado", async(req,res)=>{
     try{
         const verificando = req.cookies.token
-       
+
+        console.log(">>1 VERIFICANDO====>>>", verificando)
+
         if(verificando){ 
             jwt.verify(verificando, process.env.KEY, async (err, decodedToken) => {                
                 if (err) {
                   console.error('An error happened while verifying the token: check SignUp_router');
-                } else {                   
-                    const findingUserName = await SignUp_modelo_test.findOne({email:decodedToken.email}) 
+                } else {         
+                    console.log(">>2 DECODED TOKEN====>>>", decodedToken)          
+                    const findingUserName = await SignUp_modelo_test.findOne({email:decodedToken.email})
+                    
                     res.status(200).json(findingUserName)
                 }
             })
+            console.log(">>3 VERIFY====>>>", verify)
             return verify
         }else{
             return Error

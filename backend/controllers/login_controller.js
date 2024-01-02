@@ -16,7 +16,7 @@ Login_router.post("/login", async(req, res, next) => {
     const user = await SignUp_modelo_test.findOne({email:userEmail})
     console.log("======>>> USER", user)
     function tokenExpiration(){
-        const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"30m"})        
+        const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"5m"})        
         return signed
     }
     if(userEmail.match(/\S+@\S+\.com/)){
