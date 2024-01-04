@@ -62,7 +62,13 @@ describe("App testing", () => {
           .send(userData)
           .expect(200)
         
-        expect(response.text).toBe('COOKIE sent');
+        expect(response.text).toBe("COOKIE sent");
+        if(response.text === "COOKIE sent"){
+          const postingQuote = await api
+          .post("/api/quotes")
+
+          console.log("QUOTES POST CHECK>>>>", postingQuote)      
+        }
     }, 20000);
 
     test('Unsuccessful login', async () => {

@@ -43,11 +43,9 @@ SignUp_router.post("/signup", async(req, res, next) => {
                     }
                     
                     try{
-                        console.log("==========>>>>>> ENTRA AL TRY")
                         const newUser = new SignUp_modelo_test(userData_HashedPassword);
                         await newUser.save()
                     }catch(e){
-                        console.log("HAY ERORES+++<<<", e)
                         res.status(422).json({ error: "Invalid email" })
                     }
                     
@@ -94,20 +92,16 @@ SignUp_router.get("/auth/autenticado", async(req,res)=>{
     try{
         const verificando = req.cookies.token
 
-        console.log(">>1 VERIFICANDO====>>>", verificando)
-
         if(verificando){ 
             jwt.verify(verificando, process.env.KEY, async (err, decodedToken) => {                
                 if (err) {
                   console.error('An error happened while verifying the token: check SignUp_router');
-                } else {         
-                    console.log(">>2 DECODED TOKEN====>>>", decodedToken)          
+                } else {    
                     const findingUserName = await SignUp_modelo_test.findOne({email:decodedToken.email})
                     
                     res.status(200).json(findingUserName)
                 }
             })
-            console.log(">>3 VERIFY====>>>", verify)
             return verify
         }else{
             return Error

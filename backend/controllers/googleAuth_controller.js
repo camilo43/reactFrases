@@ -6,6 +6,7 @@ import { SignUp_modelo_test } from "../models/signUp.js"
 
 const Google_authentication = express.Router()
 const Google_token = express.Router()
+const urlFront= process.env.REACT_APP_URL_FRONTEND
 
 function getGoogleAuthURL(){
     const options = {
@@ -43,19 +44,21 @@ Google_token.get("/auth/google", async (req, res) => {
           redirect_uri: process.env.GOOGLE_REDIRECT,
           grant_type: "authorization_code"
       }
-          return await axios.post(url, querystring.stringify(values), {
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded",
-                },
-              })
-              .then((res) => {return res.data})
-              .catch((error) => {
-                console.error(`Failed to fetch auth tokens`);
-                throw new Error(error.message);
-              });
+      const { id_token, access_token } = await getTokens()
+      const response = await axios.post(url, querystring.stringify(values), {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          })
+        try{
+          return response.data
+        }catch(error){
+          console.error("Error fetching auth tokens:", error.message);
+          return null;
+      }
       }
 
-      const { id_token, access_token } = await getTokens()
+      //const { id_token, access_token } = await getTokens()
       const googleUser = await axios
           .get(
             `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${access_token}`,
@@ -72,7 +75,6 @@ Google_token.get("/auth/google", async (req, res) => {
         googleId: googleUser.data.id
       })
 
-      console.log("USER GOOGLE=====>>>", userGoogle)
       const token = jwt.sign(googleUser.data, process.env.KEY);
         try{
           res.cookie("token", token, {
@@ -83,22 +85,19 @@ Google_token.get("/auth/google", async (req, res) => {
         }catch{
           console.log("SOMETHING WENT WRONG WITH THE GOOGLE TOKEN")
         } 
-      
-      // res.status(200).json({
-      //   getTokens: getTokens
-      // })
 
       if(googleUser&&token){
           try {
             const checkingRepeatedUser = await SignUp_modelo_test.findOne({email:googleUser.data.email})
             if(checkingRepeatedUser){
-              res.redirect("http://localhost:3000/auth/autenticado")
+              res.redirect(`${urlFront}/auth/autenticado`)
+              // res.redirect("http://localhost:3000/auth/autenticado")
                // res.redirect("https://www.camilovega.site/auth")
             }else{
               try{
                 await userGoogle.save()
-                console.log("IN GOOGLE AUTH=====>>> USER REPEATED", userGoogle)
-                res.redirect("http://localhost:3000/auth/autenticado")
+                res.redirect(`${urlFront}/auth/autenticado`)
+                // res.redirect("http://localhost:3000/auth/autenticado")
                  // res.redirect("https://www.camilovega.site/auth")
                 }
               catch(error){
@@ -112,8 +111,6 @@ Google_token.get("/auth/google", async (req, res) => {
           }
       }
   });
-   
-  
 
 export { Google_authentication, Google_token }
 

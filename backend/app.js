@@ -19,7 +19,8 @@ function createApp(){
 
   const app = express()
   
-  app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
+  app.use(cors({ credentials: true, origin: process.env.REACT_APP_URL_FRONTEND}))
+  // app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
   // app.use(cors({ credentials: true, origin: 'https://frontendfrases.onrender.com' }))
   // app.use(cors({ credentials: true, origin: 'https://www.camilovega.site',methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'}))
   // app.use(cors({ credentials: true, origin: 'http://localhost:3000' ,methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'}))
@@ -33,7 +34,8 @@ function createApp(){
   // });
   
   app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Origin', process.env.REACT_APP_URL_FRONTEND);
+  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   // res.setHeader('Access-Control-Allow-Origin', 'https://frontendfrases.onrender.com');
   // res.setHeader('Access-Control-Allow-Origin', 'https://www.camilovega.site');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');

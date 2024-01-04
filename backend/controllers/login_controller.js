@@ -14,12 +14,11 @@ Login_router.post("/login", async(req, res, next) => {
     const userEmail = dataUser.email   
     const userPassword = dataUser.password
     const user = await SignUp_modelo_test.findOne({email:userEmail})
-    console.log("======>>> USER", user)
     function tokenExpiration(){
         const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"5m"})        
         return signed
     }
-    if(userEmail.match(/\S+@\S+\.com/)){
+    if(userEmail.match(/\S+@\S+\.com/)){        
         try{
             if(user){
                 if(bcrypt.compareSync(userPassword,user.password)){  
