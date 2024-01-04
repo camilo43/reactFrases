@@ -1,11 +1,12 @@
 # dependencies
-/backend/node_modules/.cache/mongodb-memory-server/
+
 /node_modules
 /.pnp
 .pnp.js
 
 # testing
 /coverage
+/backend/node_modules/.cache/mongodb-memory-server/mongod-x64-darwin-6.0.9
 
 # production
 /build
