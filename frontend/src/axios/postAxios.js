@@ -1,6 +1,7 @@
 import axios from "axios" 
 axios.defaults.withCredentials = true;
-const url = "http://localhost:3002"
+const url = process.env.REACT_APP_URL_BACKEND
+// const url = "http://localhost:3002"
 // const url = "https://backendfrases.onrender.com/"
 // const url = "https://backendprojects.site"
 // const url = "https://www.api.camilovega.site"
@@ -11,7 +12,6 @@ const postUserInput = async (object) => {
             withCredentials: true,
             credentials: 'include'
           })
-          console.log("SIGNUP userData.data", userData.data)
         return userData.data
     }catch (error){
         console.error("The process can not be completed. More details: ", error.response.data.error)
@@ -24,8 +24,7 @@ const getUserInput = async (object) => {
         const response = await axios.post(`${url}/auth`, object, {
             withCredentials: true,
             credentials: 'include'
-          })
-        console.log("AXIOS /AUTH===>", response.data) 
+          }) 
         return response.data
 
     }catch(error){
@@ -39,7 +38,6 @@ const getUserAuthenticated = async () => {
             withCredentials: true,
             credentials: 'include'
           })
-          console.log("RESPONSE AXIOS AUTH GOOGLE", response)
           return response.data
     }catch(error){           
         console.log("There was a problem when authenticating. More details: ", error);

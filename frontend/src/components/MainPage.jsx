@@ -14,14 +14,7 @@ function MainPage () {
     const redirectLogin = () => {
         navigate("/login")
     }
-
-    useEffect(() => {
-        if (openModal) {
-          // Aquí puedes realizar lógica después de que openModal cambie a true
-          console.log("Modal abierto");
-        }
-      }, [openModal]);
-
+    
     const changingVisibility = (control=true) => {
         if(control === true){
             setItsVisible("block")

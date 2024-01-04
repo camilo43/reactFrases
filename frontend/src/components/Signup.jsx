@@ -48,7 +48,6 @@ function Signup () {
     }
     
     const changingVisibility = (control=true) => {
-       console.log("HA ENTRADO A CHANGE VIS", control)
         if(control === true){
             setItsVisible("block")
         }else{
@@ -61,7 +60,6 @@ function Signup () {
     //onSubmitForm now writes the URL in the browser and also returns values
     const onSubmitForm = async (event) => { 
         event.preventDefault()
-        console.log("Entra a SUBMIT")
         changingVisibility()
         
         if(!email){
@@ -82,7 +80,6 @@ function Signup () {
               
             try{
                 const checkingUserCredentials = await postUserInput(userInput_signUp)
-                console.log("CHEKING", checkingUserCredentials)
 
                 if(checkingUserCredentials == "Invalid email"){
                     changingVisibility(false)

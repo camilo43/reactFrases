@@ -18,7 +18,6 @@ function  Login ({loaderVisibility}) {
     const inputRef = useRef(null);
 
     const handleKeyDown = (event) => {
-        console.log("==============>>>>>>>>>>>>EVENT", event)
         if (event.key === 'Enter' && inputRef.current) {
             event.preventDefault();
             inputRef.current.blur();
@@ -32,22 +31,19 @@ function  Login ({loaderVisibility}) {
           code,
         });
     
-        console.log("RESPUESTA TOKENS", response.data);
-        // Aquí puedes manejar los tokens como lo necesites
       } catch (error) {
         console.error('Error al enviar el código al backend:', error);
       }
     }
     
       useEffect(() => {
-        // Obtener el código de la URL
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
     
         if (code) {
           enviarCodigoAlBackend(code);
         }
-      }, []); // Se ejecuta solo al montar el componente
+      }, []); 
 
    //************************ */
    
@@ -88,7 +84,6 @@ function  Login ({loaderVisibility}) {
                         setEmailError("")
                     }
                     loaderVisibility(false)
-                    setControlDisplay(true)
                     setPassword("") 
                     setTimeout(() => {
                         setEmailError("")
@@ -98,7 +93,6 @@ function  Login ({loaderVisibility}) {
                 }else{
                     setEmailError(postUserLogin)
                     loaderVisibility(false)
-                    setControlDisplay(true) 
                     setEmail("")
                     setPassword("")
                     setTimeout(() => {
@@ -120,10 +114,9 @@ function  Login ({loaderVisibility}) {
             console.log("EMAIL AND PASSWORD ARE MANDATORY FIELDS")
         }
     } 
-    
+    console.log("EMAIL ERROR", emailError)
     const redirectingGoogle = async () => {
         const urlAuth = await google_gettingTokens()
-        console.log(urlAuth)
         return urlAuth
     }
     
@@ -137,14 +130,20 @@ function  Login ({loaderVisibility}) {
                 <form onSubmit={formOnSubmit} onKeyDown={handleKeyDown}>
                     <label>Email </label>
                     <input onChange={emailOnChange}  ref={inputRef} value={email} type="email"></input>
+                        <div style={emailError === ""?{display:"none"}:{display:"block", color:"#D64933", fontWeight:"500"}}>
+                            <h4>{emailError}</h4>
+                        </div>
                     <br></br>
                     <br></br>
                     <label>Password </label>
                     <input onChange={passwordOnChange} ref={inputRef} value={password} type="password"></input>
-                    <br></br>
-                    <br></br>
+                        <div style={passwordError === ""?{display:"none"}:{display:"block", color:"#D64933"}}>
+                            <h4>{passwordError}</h4>
+                        </div>
+                        <br></br>
+                        <br></br>
                    <div style={controlDisplay==true? {display:"inline", color:"#D64933"} : {display:"none"}}>
-                        <h3>The user does not exist, please Sign Up</h3>
+                        <h4>The user does not exist, please Sign Up</h4>
                    </div>
                     <button onClick={formOnSubmit} type="submit">Submit</button>
                 </form>

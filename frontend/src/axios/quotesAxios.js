@@ -1,6 +1,7 @@
 import axios from "axios" 
 // axios.defaults.withCredentials = true;
-const url = "http://localhost:3002"
+const url = process.env.REACT_APP_URL_BACKEND
+// const url = "http://localhost:3002"
 // const url = "https://backendfrases.onrender.com/"
 // const url = "https://backendprojects.site"
 // const url = "https://www.api.camilovega.site"
@@ -35,8 +36,7 @@ const quotesInput = async (object) => {
             // params:object,
             withCredentials: true,
             credentials: 'include'
-          })   
-         console.log("USER POSTED")
+          }) 
     }catch(error){
       console.log("The quote could not be posted. More details: ", error)
     }

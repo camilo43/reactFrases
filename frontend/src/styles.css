@@ -31,6 +31,7 @@ h1{
     font-weight: 500;
     text-align: center;
     font-size: 5rem ;
+    margin-top: 9rem;
 }
 
 h2{
@@ -42,6 +43,18 @@ h2{
 
 h3{
     text-align: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+h4{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+br{
+    line-height: 1.5rem;
+    content: "\00a0";
 }
 
 button{
@@ -83,6 +96,7 @@ input:focus{
     border: 0.1rem solid #000000;
     border-radius: 0.5rem;
 }
+
 
 .centerDiv{
     position:relative;
@@ -379,6 +393,7 @@ li{
 
 .google-link{
     text-decoration: none;
+    color: #000000;
     display: flex;
     margin-top: auto;
     width: 100%;

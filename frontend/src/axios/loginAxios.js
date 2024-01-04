@@ -1,6 +1,7 @@
 import axios from "axios" 
 // axios.defaults.withCredentials = true;
-const url = "http://localhost:3002"
+const url = process.env.REACT_APP_URL_BACKEND
+// const url = "http://localhost:3002"
 // const url = "https://backendfrases.onrender.com/"
 // const url = "https://www.backendprojects.site"
 // const url = "https://www.api.camilovega.site"
@@ -23,7 +24,7 @@ const postUserInput_login = async (object) => {
             withCredentials: true,
             credentials: 'include'
         })
-        console.log("URL", url)
+        
         return userData.data
     }catch(error){
         console.log("The login process could not be completed.", error.response.data.error); 

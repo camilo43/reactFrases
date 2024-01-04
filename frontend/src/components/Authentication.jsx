@@ -10,7 +10,6 @@ function Authenticated() {
     useEffect(() => {
       const fetchData = async () => {
         const pruebaFunc = await getUserAuthenticated();
-        console.log("PRUENA FUNC", pruebaFunc)
         pruebaFunc? setIsAuthenticated(true) : setIsAuthenticated(false);
         try{
           if(pruebaFunc.userName){

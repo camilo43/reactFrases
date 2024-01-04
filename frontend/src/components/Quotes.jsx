@@ -83,8 +83,6 @@ function Quotes () {
 
      const MappingList = () => {
         return listQuotes.map((quote,index) => {
-            console.count("ESTE ES EL CONUNT DEL map")
-            console.log("TIGGER", triggerBoolean)
             if(quote==null){
                 setListQuotes([])
             }else{
