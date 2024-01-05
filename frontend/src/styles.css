@@ -314,6 +314,8 @@ li{
 .mainDiv{
     width:70%;
     top:0;
+    position: absolute;
+    margin-top: 10rem;
 }
 
   @keyframes spin {
