@@ -1,5 +1,4 @@
 import express from "express"
-import mongoose from "mongoose"
 import { Quote_modelo_test } from "../models/quote.js"
 import { SignUp_modelo_test } from "../models/signUp.js"
 import jwt from 'jsonwebtoken'
