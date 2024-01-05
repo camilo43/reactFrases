@@ -44,7 +44,7 @@ Google_token.get("/auth/google", async (req, res) => {
           redirect_uri: process.env.GOOGLE_REDIRECT,
           grant_type: "authorization_code"
       }
-      const { id_token, access_token } = await getTokens()
+      
       const response = await axios.post(url, querystring.stringify(values), {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
@@ -58,7 +58,7 @@ Google_token.get("/auth/google", async (req, res) => {
       }
       }
 
-      //const { id_token, access_token } = await getTokens()
+      const { id_token, access_token } = await getTokens()
       const googleUser = await axios
           .get(
             `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${access_token}`,

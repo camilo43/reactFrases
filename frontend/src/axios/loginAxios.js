@@ -26,6 +26,7 @@ const postUserInput_login = async (object) => {
             credentials: 'include'
         })
         
+        console.log(">>>>>>>>> userData", userData.data)
         return userData.data
     }catch(error){
         console.log("The login process could not be completed.", error.response.data.error); 

@@ -73,6 +73,7 @@ function  Login ({loaderVisibility}) {
         if(userLogin.email && userLogin.password){
             loaderVisibility()
             const postUserLogin= await postUserInput_login(userLogin)
+            console.log(">>>>>>>>> postUserLogin", postUserLogin)
             
             if(postUserLogin != "COOKIE sent"){
                 if(postUserLogin == "Invalid email" || postUserLogin == "The password is wrong"){
