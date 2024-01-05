@@ -122,7 +122,7 @@ function  Login ({loaderVisibility}) {
     }
     
     return(
-        <div>
+        <div className="divLogin_immediateChild">
             <div>
                 <h2>Login</h2> 
                 <div style={!emptyAuthentification?{display:"none"}:{display:"block", color:"#D64933"}}>
@@ -158,7 +158,7 @@ function  Login ({loaderVisibility}) {
                     {/* <button className="google-button"><a className="google-link" href="https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&client_id=14549060393-rdlcf6ftfu8qiommco6tt4sla1of4vqf.apps.googleusercontent.com&prompt=consent&redirect_uri=https%3A%2F%2Fwww.api.camilovega.site%2Fauth%2Fgoogle&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email">Sign in with Google</a></button> */}
                    
                 </div>
-                <p style={{maxWidth:"350px", paddingTop:"30px", lineHeight:"25px"}}>Do you want to add your own quote? If you're not a member yet, <a href={"#"} style={{color:"black"}} onClick={redirectSignUp}>register</a> for free and share it with the world</p>
+                <p className="membershipInvitation">Do you want to add your own quote? If you're not a member yet, <a href={"#"} style={{color:"black"}} onClick={redirectSignUp}>register</a> for free and share it with the world</p>
                
             </div> 
         </div>

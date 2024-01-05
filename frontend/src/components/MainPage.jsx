@@ -38,7 +38,7 @@ function MainPage () {
              <div className="centerDiv fadeIn">
                 <div className="loader" style={{display:itsVisible}}/> 
                 <div className="divLogin">
-                    <h1>Create a quote and save it</h1>
+                    <h1 className="mainTitle">Create a quote and save it</h1>
                     <Login loaderVisibility={changingVisibility} ></Login>
                     <br></br>
                 </div>
