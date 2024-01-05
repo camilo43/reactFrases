@@ -6,6 +6,7 @@ const url = process.env.REACT_APP_URL_BACKEND
 // const url = "https://www.backendprojects.site"
 // const url = "https://www.api.camilovega.site"
 
+console.log("THIS IS THE URL", url)
 const getUserInput_login = async () => {
     try{        
         const serverMessage = await axios.get(`${url}/`, {
