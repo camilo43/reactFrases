@@ -313,6 +313,7 @@ li{
   }
 .mainDiv{
     width:70%;
+    top:0;
 }
 
   @keyframes spin {
