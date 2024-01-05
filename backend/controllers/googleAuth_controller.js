@@ -20,7 +20,7 @@ function getGoogleAuthURL(){
             "https://www.googleapis.com/auth/userinfo.email"
         ].join(" ")
     }
-    // console.log(`${process.env.GOOGLE_AUTH}?${querystring.stringify(options)}`)
+    console.log(`${process.env.GOOGLE_AUTH}?${querystring.stringify(options)}`)
     return(`${process.env.GOOGLE_AUTH}?${querystring.stringify(options)}`)
 }
 
