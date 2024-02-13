@@ -130,7 +130,7 @@ function  Login ({loaderVisibility}) {
                 </div>
                 <form onSubmit={formOnSubmit} onKeyDown={handleKeyDown}>
                     <label>Email </label>
-                    <input onChange={emailOnChange}  ref={inputRef} value={email} type="email"></input>
+                    <input placeholder="example@email.com" onChange={emailOnChange}  ref={inputRef} value={email} type="email"></input>
                         <div style={emailError === ""?{display:"none"}:{display:"block", color:"#D64933", fontWeight:"500"}}>
                             <h4>{emailError}</h4>
                         </div>

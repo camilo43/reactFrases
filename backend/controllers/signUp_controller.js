@@ -45,16 +45,16 @@ SignUp_router.post("/signup", async(req, res, next) => {
                     try{
                         const newUser = new SignUp_modelo_test(userData_HashedPassword);
                         await newUser.save()
-                    }catch(e){
-                        res.status(422).json({ error: "Invalid email" })
-                    }
-                    
-                    const signedCondition = tokenExpiration()
-                    res.cookie("token", signedCondition ,{
+                        
+                        const signedCondition = tokenExpiration()
+                        res.cookie("token", signedCondition ,{
                         httpOnly:true,
                         SameSite: 'none',
                         secure: true}
-                        ).status(200).send(dataUser)             
+                        ).status(200).send(dataUser) 
+                    }catch(e){
+                        res.status(422).json({ error: "Invalid email" })
+                    }                                
                 }
             })
         }

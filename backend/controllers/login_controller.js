@@ -11,8 +11,7 @@ Login_router.get("/", async(req, res, next) => {
 
 Login_router.post("/login", async(req, res, next) => {
     const dataUser = await req.body
-    console.log(">>>>> DATA-USER", dataUser)
-
+   
     const userEmail = dataUser.email   
     const userPassword = dataUser.password
     const user = await SignUp_modelo_test.findOne({email:userEmail})
@@ -20,7 +19,6 @@ Login_router.post("/login", async(req, res, next) => {
         const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"5m"})        
         return signed
     }
-    console.log(">>>>> USER-EMAIL", userEmail)
 
     if(userEmail.match(/\S+@\S+\.com/)){        
         try{

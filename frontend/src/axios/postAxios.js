@@ -3,7 +3,6 @@ axios.defaults.withCredentials = true;
 const url = process.env.REACT_APP_URL_BACKEND
 // const url = "http://localhost:3002"
 // const url = "https://backendfrases.onrender.com/"
-// const url = "https://backendprojects.site"
 // const url = "https://www.api.camilovega.site"
 
 const postUserInput = async (object) => {

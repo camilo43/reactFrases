@@ -175,7 +175,7 @@ function Signup () {
                 <h3 style={{color:"#b60000"}}>{displayErrorMessage}</h3>
                 <form onSubmit={onSubmitForm} onKeyDown={handleKeyDown}>
                     <label>Email: </label>
-                    <input type="text" value={email} onChange={emailOnChange} ref={inputRef}></input>
+                    <input placeholder="example@email.com" type="text" value={email} onChange={emailOnChange} ref={inputRef}></input>
                     <p style={cssVisibilityEmail()}>{errorEmail}</p>
                     <label>User name: </label>
                     <input type="text" value={name} onChange={nameOnChange} ref={inputRef}></input>
