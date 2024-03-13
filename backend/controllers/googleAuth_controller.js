@@ -30,7 +30,7 @@ Google_authentication.post("/auth/google", async(req, res, next) => {
 }
 )
 
-//-------------PRUEBA GOOGLE TOKENS -------- *** ** *** **
+//------------- GOOGLE TOKENS -------- *** ** *** **
 
 Google_token.get("/auth/google", async (req, res) => {
   // await SignUp_model_test.deleteOne({email: 'cvprogramacv@gmail.com'})

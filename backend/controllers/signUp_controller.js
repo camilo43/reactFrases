@@ -90,10 +90,10 @@ SignUp_router.post("/auth", async(req, res) => {
 
 SignUp_router.get("/auth/authenticated", async(req,res)=>{
     try{
-        const verifyCookieToken = req.cookies.token
+        const verifyCookiesToken = req.cookies.token
 
-        if(verifyCookieToken){ 
-            jwt.verify(verifyCookieToken, process.env.KEY, async (err, decodedToken) => {                
+        if(verifyCookiesToken){ 
+            jwt.verify(verifyCookiesToken, process.env.KEY, async (err, decodedToken) => {                
                 if (err) {
                   console.error('An error happened while verifying the token: check SignUp_router');
                 } else {    
