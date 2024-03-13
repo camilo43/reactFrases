@@ -41,5 +41,5 @@ newSignUp.set('toJSON', {
     }
   })
 
-const SignUp_modelo_test = mongoose.model("SignUp_model", newSignUp)
-export { SignUp_modelo_test }
+const SignUp_model_test = mongoose.model("SignUp_model", newSignUp)
+export { SignUp_model_test as SignUp_model_test }

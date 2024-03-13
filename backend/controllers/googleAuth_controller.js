@@ -2,7 +2,7 @@ import express from "express"
 import querystring from "query-string"
 import jwt from "jsonwebtoken"
 import axios from "axios"
-import { SignUp_modelo_test } from "../models/signUp.js"
+import { SignUp_model_test } from "../models/signUp.js"
 
 const Google_authentication = express.Router()
 const Google_token = express.Router()
@@ -30,7 +30,7 @@ Google_authentication.post("/auth/google", async(req, res, next) => {
 }
 )
 
-//-------------PRUEBA GOOGLE TOKENS -------- *** ** *** **
+//------------- GOOGLE TOKENS -------- *** ** *** **
 
 Google_token.get("/auth/google", async (req, res) => {
   // await SignUp_modelo_test.deleteOne({email: 'cvprogramacv@gmail.com'})
@@ -69,7 +69,7 @@ Google_token.get("/auth/google", async (req, res) => {
             }
           )           
      
-      const userGoogle = new SignUp_modelo_test({
+      const userGoogle = new SignUp_model_test({
         userName: googleUser.data.name,
         email: googleUser.data.email,
         googleId: googleUser.data.id
@@ -88,16 +88,16 @@ Google_token.get("/auth/google", async (req, res) => {
 
       if(googleUser&&token){
           try {
-            const checkingRepeatedUser = await SignUp_modelo_test.findOne({email:googleUser.data.email})
+            const checkingRepeatedUser = await SignUp_model_test.findOne({email:googleUser.data.email})
             if(checkingRepeatedUser){
-              res.redirect(`${urlFront}/auth/autenticado`)
-              // res.redirect("http://localhost:3000/auth/autenticado")
+              res.redirect(`${urlFront}/auth/authenticated`)
+              // res.redirect("http://localhost:3000/auth/authenticated")
                // res.redirect("https://www.camilovega.site/auth")
             }else{
               try{
                 await userGoogle.save()
-                res.redirect(`${urlFront}/auth/autenticado`)
-                // res.redirect("http://localhost:3000/auth/autenticado")
+                res.redirect(`${urlFront}/auth/authenticated`)
+                // res.redirect("http://localhost:3000/auth/authenticated")
                  // res.redirect("https://www.camilovega.site/auth")
                 }
               catch(error){

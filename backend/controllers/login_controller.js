@@ -1,4 +1,4 @@
-import { SignUp_modelo_test } from "../models/signUp.js";
+import { SignUp_model_test } from "../models/signUp.js";
 import express from "express"
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
@@ -14,7 +14,7 @@ Login_router.post("/login", async(req, res, next) => {
    
     const userEmail = dataUser.email   
     const userPassword = dataUser.password
-    const user = await SignUp_modelo_test.findOne({email:userEmail})
+    const user = await SignUp_model_test.findOne({email:userEmail})
     function tokenExpiration(){
         const signed = jwt.sign({email:userEmail}, process.env.KEY, {expiresIn:"5m"})        
         return signed

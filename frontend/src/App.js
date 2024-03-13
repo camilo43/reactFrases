@@ -16,7 +16,7 @@ function App() {
        <Route path="/login" element={<Login/>}></Route>
        <Route path="/signup" element={<Signup/>}></Route>
        <Route path="/auth" element={<Auth/>}></Route>
-       <Route path="/auth/autenticado" element={<Authenticated/>}></Route>
+       <Route path="/auth/authenticated" element={<Authenticated/>}></Route>
        <Route path="/api/quotes" element={<Quotes/>}></Route>
        <Route path="/api/quotes/user" element={<Quotes/>}></Route>
        <Route path="/api/quotes/user/logout" element={<Logout/>}></Route>

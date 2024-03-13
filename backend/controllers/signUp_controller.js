@@ -1,4 +1,4 @@
-import {  SignUp_modelo_test } from "../models/signUp.js";
+import {  SignUp_model_test as SignUp_model_test } from "../models/signUp.js";
 import express, { response } from "express"
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
@@ -8,8 +8,8 @@ const SignUp_router = express.Router()
 
 SignUp_router.post("/signup", async(req, res, next) => {
     const dataUser = await req.body
-    const findRepeatedUser = await SignUp_modelo_test.findOne({userName:dataUser.userName})
-    const findRepeatedEmail = await SignUp_modelo_test.findOne({email:dataUser.email})
+    const findRepeatedUser = await SignUp_model_test.findOne({userName:dataUser.userName})
+    const findRepeatedEmail = await SignUp_model_test.findOne({email:dataUser.email})
     
     try{
         if(!dataUser.email){
@@ -43,7 +43,7 @@ SignUp_router.post("/signup", async(req, res, next) => {
                     }
                     
                     try{
-                        const newUser = new SignUp_modelo_test(userData_HashedPassword);
+                        const newUser = new SignUp_model_test(userData_HashedPassword);
                         await newUser.save()
                         
                         const signedCondition = tokenExpiration()
@@ -88,16 +88,16 @@ SignUp_router.post("/auth", async(req, res) => {
     }
 })
 
-SignUp_router.get("/auth/autenticado", async(req,res)=>{
+SignUp_router.get("/auth/authenticated", async(req,res)=>{
     try{
-        const verificando = req.cookies.token
+        const verifying = req.cookies.token
 
-        if(verificando){ 
-            jwt.verify(verificando, process.env.KEY, async (err, decodedToken) => {                
+        if(verifying){ 
+            jwt.verify(verifying, process.env.KEY, async (err, decodedToken) => {                
                 if (err) {
                   console.error('An error happened while verifying the token: check SignUp_router');
                 } else {    
-                    const findingUserName = await SignUp_modelo_test.findOne({email:decodedToken.email})
+                    const findingUserName = await SignUp_model_test.findOne({email:decodedToken.email})
                     
                     res.status(200).json(findingUserName)
                 }
@@ -107,7 +107,7 @@ SignUp_router.get("/auth/autenticado", async(req,res)=>{
             return Error
         }
     }catch(error){
-        console.log("The user could not be authenticated. Please check SignUp_router.get('/auth/autenticado(...)'")
+        console.log("The user could not be authenticated. Please check SignUp_router.get('/auth/authenticated(...)'")
     }
 })
 

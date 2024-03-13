@@ -1,6 +1,6 @@
 import express from "express"
-import { Quote_modelo_test } from "../models/quote.js"
-import { SignUp_modelo_test } from "../models/signUp.js"
+import { Quote_model_test } from "../models/quote.js"
+import { SignUp_model_test } from "../models/signUp.js"
 import jwt from 'jsonwebtoken'
 
 const Quotes_router = express.Router()
@@ -23,17 +23,17 @@ Quotes_router.get("/api/quotes", async(req, res) => {
           res.clearCookie('token')
           res.status(400).send("Expired token")
         }else{
-            const modelSignUp = await SignUp_modelo_test.findOne({email:decodedToken.email}) 
-            const modelQuotes = await Quote_modelo_test.find({})
+            const modelSignUp = await SignUp_model_test.findOne({email:decodedToken.email}) 
+            const modelQuotes = await Quote_model_test.find({})
             const listQuotes = modelSignUp.quotes
-            const modelExample2 = await SignUp_modelo_test.findOne({email:decodedToken.email}).populate("quotes") 
-            const modelExample3 = await Quote_modelo_test.findOne({content:"e"}).populate("user")
+            const modelExample2 = await SignUp_model_test.findOne({email:decodedToken.email}).populate("quotes") 
+            const modelExample3 = await Quote_model_test.findOne({content:"e"}).populate("user")
             
               if(!listQuotes){
                 res.status(200).json("")
               }else{               
                 const mapQuotes = await Promise.all(listQuotes.map((e)=>{
-                  const mappedQuotes =  Quote_modelo_test.findById(e.toString()) 
+                  const mappedQuotes =  Quote_model_test.findById(e.toString()) 
                   return mappedQuotes
               }))
             res.status(200).json(mapQuotes)
@@ -50,16 +50,16 @@ Quotes_router.post("/api/quotes", async(req, res) => {
   const tokenCookie = req.cookies.token
   try{
     const body = await req.body 
-    const newPost = await Quote_modelo_test({content:body.content})
+    const newPost = await Quote_model_test({content:body.content})
     if(newPost){
       jwt.verify(tokenCookie, process.env.KEY, async (err, decodedToken) => {
         if(err){
           res.clearCookie('token')
           res.status(400).send("Expired token")
         }else{
-          // const modelExample = await SignUp_modelo_test.findOne({email:decodedToken.email}).populate("populateQuotes").exec()
-          const modelSignUp = await SignUp_modelo_test.findOne({email:decodedToken.email}).populate("quotes").exec()
-          const modelQuotes = await Quote_modelo_test.find({})
+          // const modelExample = await SignUp_model_test.findOne({email:decodedToken.email}).populate("populateQuotes").exec()
+          const modelSignUp = await SignUp_model_test.findOne({email:decodedToken.email}).populate("quotes").exec()
+          const modelQuotes = await Quote_model_test.find({})
           modelSignUp.quotes.push(newPost._id)
           await modelSignUp.save()
           await newPost.save()
@@ -84,16 +84,16 @@ Quotes_router.delete("/api/quotes/:itemId", async(req, res) => {
         res.clearCookie('token')
         res.status(400).send("Expired token")
       }else{
-        await SignUp_modelo_test.updateOne({quotes: itemId}, {$pull:{quotes: itemId}})
-        await Quote_modelo_test.deleteOne({_id:itemId})
-        const modelExample = await SignUp_modelo_test.findOne({email:decodedToken.email}) 
+        await SignUp_model_test.updateOne({quotes: itemId}, {$pull:{quotes: itemId}})
+        await Quote_model_test.deleteOne({_id:itemId})
+        const modelExample = await SignUp_model_test.findOne({email:decodedToken.email}) 
         const listQuotes = modelExample.quotes           
         if(!listQuotes){
           res.status(200).json("")
         }else{
           
           const mapQuotes = await Promise.all(listQuotes.map((e)=>{
-            const mappedQuotes =  Quote_modelo_test.findById(e.toString())                 
+            const mappedQuotes =  Quote_model_test.findById(e.toString())                 
             return mappedQuotes
           }))
       res.status(200).json(mapQuotes)          
