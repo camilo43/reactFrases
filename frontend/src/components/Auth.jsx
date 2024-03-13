@@ -11,7 +11,7 @@ function Auth () {
         await getUserAuthenticated()
         const users = await getUserAuthenticated()
         await getUserInput(users)
-        navigate("/auth/autenticado")
+        navigate("/auth/authenticated")
     }, 5000);
     
     return(

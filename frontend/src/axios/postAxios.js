@@ -33,7 +33,7 @@ const getUserInput = async (object) => {
 
 const getUserAuthenticated = async () => { 
     try{
-        const response = await axios.get(`${url}/auth/autenticado`, {
+        const response = await axios.get(`${url}/auth/authenticated`, {
             withCredentials: true,
             credentials: 'include'
           })

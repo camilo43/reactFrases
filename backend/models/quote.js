@@ -29,6 +29,6 @@ noteSchema.set('toJSON', {
     }
   })
   
-const Quote_modelo_test = mongoose.model("Quote_model", noteSchema)
+const Quote_model_test = mongoose.model("Quote_model", noteSchema)
 
-export { Quote_modelo_test }
+export { Quote_model_test }
